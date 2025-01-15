@@ -1,0 +1,185 @@
+---
+title: CasieBounce
+layout: default
+description: Info page about CasieBounce.
+highlight: true
+form: true
+script: casiebounce.js
+---
+
+<div class="row top">
+	<div class="left">
+		<img src="/assets/images/minecraft/casiebounce.webp" alt="CasieBounce" width="300" height="300"/>
+	</div>
+	<div class="right text">
+		<h1>CasieBounce</h1>
+		<p>
+			<a href="https://www.spigotmc.org/resources/.90967/" class="shield" title="Spigot Download" target="_blank"><img src="https://img.shields.io/spiget/downloads/90967?label=Download&logo=spigotmc&logoColor=FFFFFF" alt="Downloads" height="18px" width="auto"></a>
+			<a href="https://www.spigotmc.org/resources/.90967/updates/" class="shield" title="Spigot Updates" target="_blank"><img src="https://img.shields.io/spiget/version/90967?label=Version&logo=spigotmc&logoColor=FFFFFF" alt="Version" height="18px" width="auto"></a>
+			<a href="https://www.spigotmc.org/resources/.90967/reviews/" class="shield" title="Spigot Reviews" target="_blank"><img src="https://img.shields.io/spiget/stars/90967?label=Rating&logo=spigotmc&logoColor=FFFFFF" alt="Rating" height="18px" width="auto"></a>
+			<a href="https://github.com/CasieBarieDev/CasieBounce" class="shield" title="Github" target="_blank"><img src="https://img.shields.io/github/license/casiebariedev/CasieBounce?label=GitHub&logo=github" alt="Github" height="18px" width="auto"></a>
+			<a href="https://trello.com/b/f83jne7k/%E2%9C%A8-casiebounce-%E2%9C%A8" class="shield" title="Trello" target="_blank"><img src="https://img.shields.io/badge/Trello-%20-51e898?logo=trello&logoColor=white" alt="Trello" height="18px" width="auto"></a>
+			<a href="https://bstats.org/plugin/bukkit/CasieBounce/13216" class="shield" title="bStats" target="_blank"><img alt="bStats Servers" src="https://img.shields.io/bstats/servers/13216?color=pink&label=Servers&logo=bricks&logoColor=FFFFFF" height="18px" width="auto"></a>
+			<a href="https://bstats.org/plugin/bukkit/CasieBounce/13216" class="shield" title="bStats" target="_blank"><img alt="bStats Players" src="https://img.shields.io/bstats/players/13216?color=hotpink&label=Players&logo=bricks&logoColor=FFFFFF" height="18px" width="auto"></a>
+			<br><br><br>
+		</p>
+		<p>The innovative plugin that adds a whole new dimension to movement and exploration!<br><br></p>
+		<p class="gray">
+			Designed for fun and excitement, CasieBounce allows players to experience the thrill of bouncing across terrains, leaping to incredible heights, and exploring the world like never before. Whether you’re building a parkour challenge, creating a fun mini-game, or just want to add some extra flair to your server, CasieBounce is the perfect addition.
+		</p>
+	</div>
+</div>
+<span id="down-button"><span></span></span>
+<div class="row" id="scrollto">
+	<div class="left text">
+		<h2>Setup</h2>
+		<ol>
+			<li>
+				Download the plugin from <a class="white" href="https://www.spigotmc.org/resources/.90967/" target="_blank" title="Spigot Page">Spigot <i class="fa-solid fa-arrow-up-right-from-square"></i></a>.
+				<ul class="gray">
+					<li>Optional: Download <a href="https://dev.bukkit.org/projects/worldguard" target="_blank" title="WorldGuard">WorldGuard <i class="fa-solid fa-arrow-up-right-from-square"></i></a>.</li>
+					<li>Optional: Download <a href="https://www.spigotmc.org/resources/placeholderapi.6245/" target="_blank" title="PlaceholderAPI">PlaceholderAPI <i class="fa-solid fa-arrow-up-right-from-square"></i></a>.</li>
+				</ul>
+			</li>
+			<li>Put the '.jar' file in your 'plugins' folder.</li>
+			<li>Restart your server to initialize the plugin.</li>
+			<li>
+				Using WorldGuard (Optional)
+				<ul class="gray">
+					<li>In the config file, set 'WorldGuardFlags' to <code class="language-java">true</code>.</li>
+					<li>Restart your server again to register the flags!</li>
+					<li>You can now use the following flags to adjust region-specific settings: '<code class="copy">cb-bounceforce</code>, <code class="copy">cb-deathmessage</code>, <code class="copy">cb-falldamage</code>, <code class="copy">cb-bouncesound</code>, <code class="copy">cb-bounceblocks</code>, <code class="copy">cb-stopwhencrouch</code>, <code class="copy">cb-requirepermission</code>, <code class="copy">cb-isblockblacklist</code>'.</li>
+					<li>Any unspecified settings will default to the global config values.</li>
+				</ul>
+			</li>
+			<li>Adjust the settings in the configuration file to your preferences.</li>
+			<li>Use <code class="copy">/cb ReloadConfig</code> to apply changes. Any errors will be displayed in the console.</li>
+			<li class="secondary">HAPPY BOUNCING!</li>
+		</ol>
+	</div>
+	<div class="empty"></div>
+</div>
+<div class="row">
+	<div class="empty"></div>
+	<div class="right text">
+		<h2>Commands</h2>
+		<ul class="gray">
+			<li><b><code class="copy">/cb ReloadConfig</code></b><ul class="none"><li>Reloads the configuration file to apply any changes.</li></ul></li>
+			<li><b><code class="copy">/cb Info</code></b><ul class="none"><li>Displays an informational message about the plugin.</li></ul></li>
+			<li><b><code class="copy">/cb GetErrors</code></b><ul class="none"><li>Checks the configuration for errors and displays them if found.</li></ul></li>
+			<li><b><code class="copy">/cb GetRegionSettings</code></b><ul class="none"><li>Shows the bounce settings for the region you are currently standing in.</li></ul></li>
+			<li><b><code class="copy">/cb ResetData</code></b><ul class="none"><li>Deletes player data or region data from the database.</li></ul></li>
+		</ul>
+	</div>
+</div>
+<div class="row">
+	<div class="left text">
+		<h2>Permissions</h2>
+		<ul class="gray">
+			<li><b><code class="copy">cb.bounce</code></b><ul class="none"><li>Grants the player permission to bounce in all regions where 'RequirePermission' is set to <code class="lang-java">true</code>.</li></ul></li>
+			<li><b><code class="copy">cb.bounce.‹region›</code></b><ul class="none"><li>Grants the player permission to bounce specifically in the ‹region› where 'RequirePermission' is set to <code class="lang-java">true</code>.</li></ul></li>
+			<li><b><code class="copy">cb.admin</code></b><ul class="none"><li>Grants the player access to all administrative commands.</li></ul></li>
+		</ul>
+	</div>
+	<div class="empty"></div>
+</div>
+<div class="row">
+	<div class="empty"></div>
+	<div class="right text">
+		<h2>Configuartion</h2>
+		<h3>General Settings</h3>
+		<ul class="gray">
+			<li><b>WorldGuardFlags: </b><code class="lang-java">Boolean</code><ul class="none"><li>Toggles the use of WorldGuard flags.</li><li>Once enabled, a full server restart is required to register the flags in WorldGuard.</li></ul></li>
+		</ul>
+		<br>
+		<h3>Default Settings</h3>
+		<p>These settings will get used when WorldGuard is not enabled or when the setting is not specified in the region:<br><br></p>
+		<ul class="gray">
+			<li><b>BounceForce: </b><code class="lang-java">Double</code><ul class="none"><li>Determines the amount of force applied when bouncing.</li></ul></li>
+			<li><b>BounceSound: </b><code class="lang-java">String</code><ul class="none"><li>Specifies the sound to play when bouncing.</li><li>Use <code>CUSTOM:</code> at the start for custom sounds.</li><li>Set to <code class="copy">NONE</code> to disable the sound.</li></ul></li>
+			<li><b>BouncePrize: </b><code class="lang-java">String</code><ul class="none"><li>Defines a prize for players each time they bounce.</li><li>Format: <code>MONEY@{VALUE}</code> or <code>ITEM@{VALUE}</code> or <code>PERMISSION@{VALUE}</code>.</li><li>Set to <code class="copy">NONE</code> to disable</li></ul></li>
+			<li><b>StopWhenCrouch: </b><code class="lang-java">Boolean</code><ul class="none"><li>Specifies whether bouncing stops when crouching.</li></ul></li>
+			<li><b>FallDamage: </b><code class="lang-java">Boolean</code><ul class="none"><li>Enables or disables fall damage while bouncing.</li></ul></li>
+			<li><b>DeathMessage: </b><code class="lang-java">String</code><ul class="none"><li>Sets the death message displayed when a player dies due to bouncing.</li><li><code>&</code> and <code>#hex</code> codes are supported)</li></ul></li>
+			<li><b>RequirePermission: </b><code class="lang-java">Boolean</code><ul class="none"><li>Whether players need the permission <code class="copy">cb.bounce</code> to bounce.</li></ul></li>
+			<li><b>BounceBlocks: </b><code class="lang-java">List</code><ul class="none"><li>A list of blocks where players can bounce.</li></ul></li>
+			<li><b>IsBlockBlacklist: </b><code class="lang-java">Boolean</code><ul class="none"><li>Defines whether the BounceBlocks list acts as a blacklist.</li><li>When <code class="lang-java">true</code> players can bounce on every block except those in the BounceBlocks list.</li></ul></li>
+		</ul>
+	</div>
+</div>
+<div class="row bottom">
+	<div class="left text">
+		<h2>Placeholders</h2>
+		<p>If you have <a href="https://www.spigotmc.org/resources/placeholderapi.6245/" target="_blank" title="PlaceholderAPI" class="white">PlaceholderAPI <i class="fa-solid fa-arrow-up-right-from-square"></i></a> installed, you can enhance your server experience by accessing detailed bounce statistics through placeholders.<br><br></p>
+		<p class="gray">With these placeholders, you can display bounce-related data in creative and dynamic ways. For example, you can create leaderboards to highlight top bouncers, making it simple to track and celebrate player achievements across your server.<br><br></p>
+		<br>
+		<form>
+			<h3>Generator</h3>
+			<div class="form">
+				<select class="input" id="version">
+					<option disabled>v7.0+</option>
+					<option>v6.0 - v6.3</option>
+				</select>
+				<label for="version">Plugin Version</label>
+			</div>
+			<div class="form">
+				<select class="input" id="type">
+					<option>Total</option>
+					<option>Player</option>
+					<option>Leaderboard</option>
+				</select>
+				<label for="type">Type</label>
+			</div>
+			<div class="form">
+				<select class="input" id="format">
+					<option>Name</option>
+					<option>Number</option>
+					<option>Both</option>
+				</select>
+				<label for="format">Format</label>
+			</div>
+			<div class="form">
+				<label for="name-format">Name Format</label>
+				<select class="input" id="name-format">
+					<option>Username</option>
+					<option>Displayname</option>
+				</select>
+			</div>
+			<div class="form-inline">
+				<div class="form">
+					<input class="input checkbox" type="checkbox" id="rounded">
+					<label for="rounded">Rounded</label>
+				</div>
+				<p></p>
+				<div class="form">
+					<input class="input checkbox" type="checkbox" id="with-region">
+					<label for="with-region">With Region</label>
+				</div>
+			</div>
+			<div class="form-inline">
+				<div class="form">
+					<input class="input" type="text" id="region-name" pattern="[A-Za-z0-9]+">
+					<label for="region-name">Region Name</label>
+				</div>
+				<p>:</p>
+				<div class="form">
+					<input class="input" type="text" id="world-name" pattern="[A-Za-z0-9]+">
+					<label for="world-name">World Name</label>
+				</div>
+			</div>
+			<div class="form">
+				<input class="input" type="number" id="position" min="1" max="99999999">
+				<label for="position">Position</label>
+			</div>
+		</form>
+	</div>
+	<div class="right">
+		<div class="text result-container">
+			<h3>RESULT</h3>
+			<p class="gray" id="result">NONE</p>
+			<br>
+			<h3>PREVIEW</h3>
+			<p class="gray" id="preview">NONE</p>
+		</div>
+	</div>
+</div>

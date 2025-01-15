@@ -1,0 +1,28 @@
+title: CasieBarie Development
+email: casiebarie@gmail.com
+description: >-
+  This website serves as the official online portfolio and information hub for CasieBarie Development, showcasing my projects, services, and expertise.
+baseurl: ""
+url: "https://www.casiebarie.dev"
+github_username:  CasieBarie
+
+sass:
+  sass_dir: _sass
+  style: compressed
+
+navigation:
+  - title: HOME
+    url: /
+    fa: fa fa-house
+  - title: MINECRAFT PROJECTS
+    url: /minecraft/
+    fa: fa-solid fa-cubes
+  - title: DISCORD BOTS
+    url: /discord/
+    fa: fa-brands fa-discord
+  - title: OTHER PROJECTS
+    url: /other/
+    fa: fa-solid fa-bars-progress
+  - title: ABOUT ME
+    url: /aboutme
+    fa: fa-solid fa-user-large

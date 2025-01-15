@@ -1,0 +1,19 @@
+---
+---
+
+ul li {margin: 15px 0;}
+
+.languages i {
+  font-size: 3.7vw;
+  margin: 0 .2em;
+  text-wrap: nowrap;
+
+// scss-lint:disable ColorVariable
+  &.fa-java {color: #ed8b00;}
+  &.fa-python {color: #4584b6;}
+  &.fa-database {color: #b7d331;}
+  &.fa-html5 {color: #e34f26;}
+  &.fa-css3-alt {color: #264de4;}
+  &.fa-sass {color: #d06da1;}
+  &.fa-js {color: #f0db4f;}
+}

@@ -1,0 +1,194 @@
+---
+---
+
+@use "variables" as *;
+
+#footer {
+  cursor: default;
+  background-color: $footer-bg-color;
+  padding-bottom: 50px;
+  margin-top: -5px;
+
+  .socials {
+    text-align: center;
+    padding-bottom: 10px;
+    color: $gray-color;
+
+    a {
+      font-size: 34px;
+      color: inherit;
+      width: 40px;
+      height: 40px;
+      display: inline-block;
+      text-align: center;
+      margin: 0 8px;
+      opacity: 0.75;
+      transition: all 0.5s;
+      animation: shine 5s infinite linear;
+
+      .tooltip {
+        position: absolute;
+        top: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        opacity: 0;
+        visibility: hidden;
+        font-size: 0.5em;
+        font-weight: bold;
+        transition: all 0.3s ease;
+      }
+
+      &:hover .tooltip {
+        opacity: 1;
+        visibility: visible;
+        top: -30px;
+      }
+    }
+
+    // Set animation delay for each social icon
+    @for $i from 1 through 6 {
+      a:nth-child(#{$i}) {
+        animation-delay: #{0.1 * $i}s;
+      }
+    }
+
+    // Color and shadow effects on hover for each social icon
+    a:nth-child(1):hover,
+    a:nth-child(1):hover .tooltip {
+      color: #e6edf3;
+      text-shadow: 0 0 10px #e6edf3, 0 0 20px #e6edf3, 0 0 30px #e6edf3;
+    }
+    a:nth-child(2):hover,
+    a:nth-child(2):hover .tooltip {
+      color: #db8522;
+      text-shadow: 0 0 10px #db8522, 0 0 20px #db8522, 0 0 30px #db8522;
+    }
+    a:nth-child(3):hover,
+    a:nth-child(3):hover .tooltip {
+      color: #cc181e;
+      text-shadow: 0 0 10px #cc181e, 0 0 20px #cc181e, 0 0 30px #cc181e;
+    }
+    a:nth-child(4):hover,
+    a:nth-child(4):hover .tooltip {
+      color: #ec0075;
+      text-shadow: 0 0 10px #ec0075, 0 0 20px #ec0075, 0 0 30px #ec0075;
+    }
+    a:nth-child(5):hover,
+    a:nth-child(5):hover .tooltip {
+      color: #51e898;
+      text-shadow: 0 0 10px #51e898, 0 0 20px #51e898, 0 0 30px #51e898;
+    }
+    a:nth-child(6):hover,
+    a:nth-child(6):hover .tooltip {
+      color: #5865F2;
+      text-shadow: 0 0 10px #5865F2, 0 0 20px #5865F2, 0 0 30px #5865F2;
+    }
+  }
+
+  .donate {
+    margin: 0 auto 20px;
+    width: 140px;
+    height: 40px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(to right,#77530a,#ffd277,#77530a,#77530a,#ffd277,#77530a) left;
+    background-size: 250%;
+    color: #ffd277;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-position 1s;
+    overflow: hidden;
+    text-align: center;
+    animation: shinen 3s infinite linear;
+
+    i {
+      color: #009cde;
+      font-size: large;
+      margin: 10px;
+      transition: text-shadow .3s;
+    }
+
+    span {
+      color: #ffd277;
+      font-weight: bold;
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 97%;
+      height: 90%;
+      border-radius: 8px;
+      transition: background-size 1s;
+      background-color: rgba(0, 0, 0, 0.842);
+      background-size: 200%;
+    }
+
+    &:hover span i {
+      text-shadow: 0 0 10px #009cde, 0 0 20px #009cde, 0 0 30px #009cde;
+    }
+  }
+
+  //Copyright fade text & made with
+  .copyright {
+    font-family: sans-serif;
+    font-weight: bolder;
+    margin-top: 10px;
+    font-size: 17px;
+    color: $gray-color;
+
+    .wrap div {
+      position: absolute;
+      left: 0;
+      right: 0;
+      margin: auto;
+      text-align: center;
+      width: fit-content;
+    }
+
+    .two {opacity: 0;}
+
+    .one,
+    .two {
+      transition: opacity 0.5s linear;
+    }
+
+    .two span {
+      text-decoration: underline;
+      &:hover {cursor: pointer;}
+    }
+
+    .wrap:hover {
+      cursor: no-drop;
+      .one { opacity: 0; }
+      .two { opacity: 1; }
+    }
+  }
+
+  .madewith {
+    font-family: sans-serif;
+    font-size: 10px;
+    color: $gray-color;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 25px auto;
+    text-align: center;
+    width: fit-content;
+
+    a {color: $gray-color;}
+  }
+}
+
+// Keyframes for animations
+@keyframes shine {
+  0%, 20%, 100% { transform: scale(1); }
+  10% { transform: scale(1.2); }
+}
+
+@keyframes shinen {
+  from { background-position: left; }
+  to { background-position: right; }
+}

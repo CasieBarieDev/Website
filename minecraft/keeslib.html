@@ -1,0 +1,178 @@
+---
+title: KeesLib
+layout: default
+description: A simple library for my plugins.
+highlight: true
+form: true
+---
+
+<div class="row top">
+	<div class="left">
+		<img src="/assets/images/minecraft/keeslib.webp" alt="Logo" width="300" height="300"/>
+	</div>
+	<div class="right text">
+		<h1>KeesLib</h1>
+		<p>
+			<a href="https://central.sonatype.com/artifact/dev.casiebarie/KeesLib" class="shield" target="_blank" title="Maven Release"><img alt="Maven Release" src="https://img.shields.io/maven-central/v/dev.casiebarie/KeesLib?logo=apachemaven&label=Maven%20Central" height="18px" width="auto"></a>
+			<a href="https://javadoc.io/doc/dev.casiebarie/KeesLib" class="shield" target="_blank" title="Javadocs"><img alt="Javadocs" src="https://img.shields.io/badge/Javadocs-%20-A33333?logo=readthedocs&logoColor=FFFFFF" height="18px" width="auto"></a>
+			<a href="https://github.com/CasieBarieDev/KeesLib/releases" class="shield" target="_blank" title="Github"><img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/CasieBarieDev/KeesLib?color=red&label=Size&logo=Github" height="18px" width="auto"></a>
+			<a href="https://github.com/CasieBarieDev/KeesLib/blob/main/LICENSE" class="shield" target="_blank" title="Licence"><img alt="GitHub" src="https://img.shields.io/github/license/CasieBarieDev/KeesLib?label=License&logo=Github" height="18px" width="auto"></a><br><br>
+			<br>This is a library I use for my plugins to make my life easier. But you can use it too! How? Just take a look!<br><br>
+		</p>
+		<p class="gray">The library includes handy methods for checking Bukkit versions and verifying if certain dependencies are enabled on the server. Plus, it features an excellent UpdateChecker!"</p>
+	</div>
+</div>
+<span id="down-button"><span></span></span>
+<div class="row" id="scrollto">
+	<div class="left text">
+		<h2>Setup</h2>
+		<form>
+			<div class="form">
+				<select class="input valid" id="buildlangselect">
+					<option value="build1" selected>Maven</option>
+					<option value="build2">Gradle</option>
+					<option value="build3">Gradle (short)</option>
+					<option value="build4">Gradle (Kotlin)</option>
+					<option value="build5">sbt</option>
+					<option value="build6">ivy</option>
+					<option value="build7">grape</option>
+					<option value="build8">leiningen</option>
+					<option value="build9">buildr</option>
+				</select>
+				<label for="buildlangselect">Dependency Manager</label>
+			</div>
+			<div class="snippet" id="build1">
+				<pre><code class="language-xml copy">
+					&lt;dependency&gt;
+						&lt;groupId&gt;dev.casiebarie&lt;/groupId&gt;
+						&lt;artifactId&gt;KeesLib&lt;/artifactId&gt;
+						&lt;version&gt;{VERSION}&lt;/version&gt;
+					&lt;/dependency&gt;
+				</code></pre>
+			</div>
+			<div class="snippet" id="build2">
+				<pre><code class="language-gradle copy">implementation group: 'dev.casiebarie', name: 'KeesLib', version: '{VERSION}'</code></pre>
+			</div>
+			<div class="snippet" id="build3">
+				<pre><code class="language-gradle copy">implementation 'dev.casiebarie:KeesLib:{VERSION}'</code></pre>
+			</div>
+			<div class="snippet" id="build4">
+				<pre><code class="language-gradle copy">implementation("dev.casiebarie:KeesLib:{VERSION}")</code></pre>
+			</div>
+			<div class="snippet" id="build5">
+				<pre><code class="language-scala copy">libraryDependencies += "dev.casiebarie" % "KeesLib" % "{VERSION}"</code></pre>
+			</div>
+			<div class="snippet" id="build6">
+				<pre><code class="language-xml copy">&lt;dependency org="dev.casiebarie" name="KeesLib" rev="{VERSION}"/&gt;</code></pre>
+			</div>
+			<div class="snippet" id="build7">
+				<pre><code class="language-groovy copy">
+					@Grapes(
+						@Grab(group='dev.casiebarie', module='KeesLib', version='{VERSION}')
+					)
+				</code></pre>
+			</div>
+			<div class="snippet" id="build8">
+				<pre><code class="language-clojure copy">[dev.casiebarie/KeesLib "{VERSION}"]</code></pre>
+			</div>
+			<div class="snippet" id="build9">
+				<pre><code class="language-ruby copy">'dev.casiebarie:KeesLib:jar:{VERSION}'</code></pre>
+			</div>
+		</form>
+	</div>
+	<div class="empty"></div>
+</div>
+<div class="row">
+	<div class="empty"></div>
+	<div class="right text">
+		<h2>Import</h2>
+		<p>To get started, you need to import the library and provide your main class that extends JavaPlugin.</p><br>
+		<pre><code class="language-java copy">
+			import dev.casiebarie.keeslib.KeesLib;
+			...
+			KeesLib keeslib = new KeesLib(JavaPlugin plugin);
+		</code></pre>
+	</div>
+</div>
+<div class="row">
+	<div class="center-left text">
+		<h2>Methods</h2>
+		<ul class="gray">
+			<li>
+				<pre><code class="language-java copy">.createLogger()</code></pre>
+				<ul class="none"><li>Changes the prefix of the plugin logger to the value 'Prefix:' in the 'plugin.yml'</li><li>With ChatColor support.</li><li>You have to override the default logger with this.</li></ul>
+			</li>
+			<li>
+				<pre><code class="language-java copy">.hasPlaceholerAPI()</code></pre>
+				<ul class="none"><li>Returns <code class="lang-java">true</code> when <a href="https://www.spigotmc.org/resources/6245/" target="_blank">PlaceholderAPI <i class="fa-solid fa-arrow-up-right-from-square"></i></a> is enabled in the server.</li></ul>
+			</li>
+			<li>
+				<pre><code class="language-java copy">.hasVault(Boolean economy, Boolean permissions, Boolean chat)</code></pre>
+				<ul class="none"><li>Returns <code class="lang-java">true</code> if <a href="https://www.spigotmc.org/resources/34315/" target="_blank">Vault <i class="fa-solid fa-arrow-up-right-from-square"></i></a> is enabled and all the servicemanagers are registered.</li></ul>
+			</li>
+			<li>
+				<pre><code class="language-java copy">.hex(String msg)</code></pre>
+				<ul class="none"><li>Translates all the #HEX codes in the message to ChatColor codes.</li></ul>
+			</li>
+			<li>
+				<pre><code class="language-java copy">.isLegacy(Double lowestVersion, Double highestVersion)</code></pre>
+				<ul class="none"><li>Checks if the server is running a legacy version and disables the plugin if the server version is lower than the specified lowestVersion.</li><li>If the server version exceeds the highestVersion, a warning message will be displayed.</li></ul>
+			</li>
+			<li>
+				<pre><code class="language-java copy">.roundNumber(Number number)</code></pre>
+				<ul class="none"><li>Rounds the given number and returns it as a formatted string.</li><li>For example, 3748 would be converted to 3.7K.</li></ul>
+			</li>
+		</ul>
+	</div>
+</div>
+<div class="row bottom">
+	<div class="left text">
+		<h2>Update Checker</h2>
+		<p>This library also has a fancy Update Checker. The ultimate tool for ensuring your plugin users are always up-to-date with the latest features, bug fixes, and improvements.</p><br>
+		<p class="gray">Initialise the update checker and specify your Spigot resourceId: <pre><code class="lang-java copy">new keeslib.updateChecker(Integer recourceId)</code></pre><br>
+		<p class="gray">You can customize your update checker using these methods:</p><br>
+		<ul>
+			<li><pre><code class="lang-java copy">.setPluginName(String name)</code></pre></li>
+			<li><pre><code class="lang-java copy">.setBorderColor(ChatColor color)</code></pre></li>
+			<li><pre><code class="lang-java copy">.setTextColor(ChatColor color)</code></pre></li>
+			<li><pre><code class="lang-java copy">.setNameColor(ChatColor color)</code></pre></li>
+			<li><pre><code class="lang-java copy">.setNewVersionColor(ChatColor color)</code></pre></li>
+			<li><pre><code class="lang-java copy">.setCurrentVersionColor(ChatColor color)</code></pre></li>
+			<li><pre><code class="lang-java copy">.setUrlColor(ChatColor color)</code></pre></li>
+			<li><pre><code class="lang-java copy">.setBorderCharacter(Character character)</code></pre></li>
+			<li><pre><code class="lang-java copy">.setPermission(String permission)</code></pre></li>
+			<li><pre><code class="lang-java copy">.setUpdateFrequency(Long frequency, TimeUnit timeUnit)</code></pre></li>
+		</ul>
+		<p class="gray">After the customization you start the updatechecker by calling: <pre><code class="lang-java copy">.startChecking();</code></pre>
+	</div>
+	<div class="right">
+		<img src="/assets/images/minecraft/uc.webp" class="modal-image" alt="Updatechecker Preview" width="873" height="325"/>
+		<div class="modal">
+			<img class="modal-content" alt="" src="">
+			<div class="modal-caption"></div>
+		</div>
+	</div>
+</div>
+
+<script>
+	if (document.readyState !== 'loading') {snipped();
+	} else {document.addEventListener('DOMContentLoaded', function () {snipped();});}
+	function snipped() {
+		const snippet = $('.snippet');
+		snippet.hide();
+		$('#build1').show();
+		$('#buildlangselect').change(function () {
+			$('.snippet').hide();
+			const a = $(this).val();
+			$("#" + a).show();
+		});
+
+		$.getJSON("https://api.github.com/repos/CasieBarieDev/KeesLib/releases/latest", function (data) {
+			$.each(snippet, function() {
+				const code = $(this).find('code');
+				code.text(code.text().replace('{VERSION}', data["tag_name"]));
+				Prism.highlightElement(code[0]);
+			});
+		});
+	}
+</script>

@@ -1,0 +1,71 @@
+---
+title: About Me
+layout: default
+description: Some information about me.
+form: true
+script: aboutme.js
+---
+
+<div class="row top">
+	<div class="left">
+		<img src="/assets/images/aboutme/profilepic.webp" alt="Myself" width="1800" height="1800"/>
+	</div>
+	<div class="right text">
+		<h1>About Me</h1>
+		<p>Hello! I'm Cas Barnard, a <span id="age" content="calcage()"></span>-year-old software developer from the Netherlands, driven by a passion for technology and innovation. My journey into the world of coding started at a young age, and I've been captivated by the endless possibilities it offers ever since.</p><br>
+		<p class="gray">If you want to know more about me you can ask below or join the <a href="https://discord.gg/ZptCBHeHyg" target="_blank" title="Discord Server">Discord Server <i class="fa-solid fa-arrow-up-right-from-square"></i></a>.</p>
+	</div>
+</div>
+<span id="down-button"><span></span></span>
+<div class="row" id="scrollto">
+	<div class="left text">
+		<h2>Personal Life</h2>
+		<p>Outside of coding, I work as an all-round technician at business events, DJ shows, and small festivals. This job lets me combine my love for technology with the excitement of live events, making sure everything runs smoothly and looks great.</p><br>
+		<p class="gray">When I'm not working or coding, I enjoy spending time with friends. Whether we're out exploring or just relaxing together, these moments are always special. I also like editing videos for my friends, turning our fun memories into something we can look back on and enjoy.</p><br>
+		<p class="gray">In my free time, I love walking my dog, Billy. It’s a nice way to relax and enjoy the outdoors. I also have a wonderful girlfriend who supports me and shares many of my interests.</p><br>
+		<p class="gray">Another hobby of mine is swimming. It keeps me active and helps clear my mind, so I feel refreshed and ready to focus on my coding projects.</p>
+	</div>
+	<div class="right">
+		<img src="/assets/images/aboutme/billy.webp" alt="Billy" width="410" height="410"/>
+	</div>
+</div>
+<div class="row bottom">
+	<div class="center text">
+		<h2>Contact Me</h2>
+		<form action="https://formspree.io/f/meqdywyz" method="post">
+			<div class="form">
+				<input class="input" type="text" id="name" name="Name" maxlength="32" required>
+				<span class="count">0/32</span>
+				<label for="name"><span class="required">* </span>Name</label>
+			</div>
+			<div class="form-inline">
+				<div class="form">
+					<input class="input" type="email" id="email" name="Email" maxlength="320" required>
+					<label for="email"><span class="required">* </span>Email</label>
+				</div>
+				<p>OR</p>
+				<div class="form">
+					<input class="input" type="text" id="discord" name="Discord" pattern="^[a-z0-9_]{2,32}" required>
+					<label for="discord"><span class="required">* </span>Discord</label>
+				</div>
+			</div>
+			<div class="form">
+				<select class="input" id="topics" name="Topic" required>
+					<option value="" selected disabled hidden></option>
+					<option value="Minecraft Plugins">Minecraft Plugins</option>
+					<option value="Discord Bots">Discord Bots</option>
+					<option value="Other Projects">Other Projects</option>
+					<option value="This Website">This Website</option>
+					<option value="About Me (CasieBarie)">About Me (CasieBarie)</option>
+				</select>
+				<label for="topics"><span class="required">* </span>Topic</label>
+			</div>
+			<div class="form">
+				<textarea class="input" id="message" name="Message" cols="30" rows="6" maxlength="500" required></textarea>
+				<span class="count">0/500</span>
+				<label for="message"><span class="required">* </span>Message</label>
+			</div>
+			<button id="submit-btn" type="button">Send Message</button>
+		</form>
+	</div>
+</div>
