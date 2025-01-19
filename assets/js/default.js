@@ -12,7 +12,7 @@ function toggle() {
 }
 
 $('#down-button').on("click", function() {
-    $('#scrollto')[0].scrollIntoView({
+    $('.scrollto')[0].scrollIntoView({
         behavior: 'smooth'
     });
 });
