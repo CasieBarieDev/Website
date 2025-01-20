@@ -8,6 +8,7 @@
          url('casiebarie.svg#casiebarie') format('svg');
     font-weight: normal;
     font-style: normal;
+    font-display: block;
 }
 [class*='icon-']:before{
 	display: inline-block;
