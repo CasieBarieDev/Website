@@ -16,12 +16,13 @@ function checkForm() {
 
 function validateInput() {
     const $this = $(this);
+    const value = $this.val() || '';
     const isValid = this.checkValidity();
 
-    if($this.val().trim() !== '') {$this.toggleClass('valid', isValid).toggleClass('invalid', !isValid);
+    if(value.trim() !== '') {$this.toggleClass('valid', isValid).toggleClass('invalid', !isValid);
     } else {$this.removeClass('valid invalid');}
 
-    $this.siblings('.count').text(`${$this.val().length}/${$this.attr('maxlength') || ''}`);
+    $this.siblings('.count').text(`${value.length}/${$this.attr('maxlength') || ''}`);
     checkForm();
 }
 
