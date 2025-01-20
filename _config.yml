@@ -13,16 +13,16 @@ sass:
 navigation:
   - title: HOME
     url: /
-    fa: fa fa-house
+    fa: icon-house
   - title: MINECRAFT PROJECTS
     url: /minecraft/
-    fa: fa-solid fa-cubes
+    fa: icon-cubes
   - title: DISCORD BOTS
     url: /discord/
-    fa: fa-brands fa-discord
+    fa: icon-discord
   - title: OTHER PROJECTS
     url: /other/
-    fa: fa-solid fa-bars-progress
+    fa: icon-bars-progress
   - title: ABOUT ME
     url: /aboutme
-    fa: fa-solid fa-user-large
+    fa: icon-user-large

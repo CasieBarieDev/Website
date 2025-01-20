@@ -11,6 +11,7 @@
 	<meta name="description" content="{{ page.description }}">
 	<link href="{{ 'assets/images/mascot.webp' | relative_url }}" rel="icon">
 	<link href="{{ 'assets/css/default.css' | relative_url }}" rel="stylesheet">
+	<link href="{{ 'assets/font/casiebarie.css' | relative_url }}" rel="stylesheet">
 	{% if page.stylesheet %}
 		<link href="{{ page.stylesheet | prepend: 'assets/css/' | relative_url }}" rel="stylesheet"/>
 	{% endif %}
@@ -20,8 +21,8 @@
 	{% if page.form %}
 		<link href="{{ 'assets/css/form.css' | relative_url }}" rel="stylesheet"/>
 	{% endif %}
-	<script src="https://kit.fontawesome.com/0c4268d390.js" crossorigin="anonymous"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js" type="text/javascript"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js" type="text/javascript" rel="preconnect"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js" type="text/javascript" rel="dns-prefetch"></script>
 	{% include analytics.html %}
 </head>
 <body>
