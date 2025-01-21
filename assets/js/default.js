@@ -46,18 +46,20 @@ document.querySelectorAll('.modal-image').forEach(image => {
     });
 });
 
-document.querySelectorAll('.copy').forEach(copyElement => {
-    const text = copyElement.cloneNode(true);
-    text.querySelectorAll('*').forEach(child => child.remove());
-    const textContent = text.textContent;
-    copyElement.setAttribute('title', 'Copy');
-    copyElement.style.cursor = 'pointer';
-    copyElement.addEventListener('click', () => {
-        navigator.clipboard.writeText(textContent)
-            .then(() => {copyElement.style.cursor = 'auto';})
-            .catch(err => {console.error('Failed to copy text:', err);}
-        );
-    });
+function copy() {
+    document.querySelectorAll('.copy').forEach(copyElement => {
+        const text = copyElement.cloneNode(true);
+        text.querySelectorAll('*').forEach(child => child.remove());
+        const textContent = text.textContent;
+        copyElement.setAttribute('title', 'Copy');
+        copyElement.style.cursor = 'pointer';
+        copyElement.addEventListener('click', () => {
+            navigator.clipboard.writeText(textContent)
+                .then(() => {copyElement.style.cursor = 'auto';})
+                .catch(err => {console.error('Failed to copy text:', err);}
+                );
+        });
 
-    copyElement.addEventListener('mouseout', () => {copyElement.style.cursor = 'pointer';});
-});
+        copyElement.addEventListener('mouseout', () => {copyElement.style.cursor = 'pointer';});
+    });
+} copy()
