@@ -7,7 +7,7 @@ $.each(plugin, function () {
     })
 
     $.getJSON("https://api.spiget.org/v2/resources/" + self.data('spigotid'), function (data) {
-        self.find(".downloads").html("⠀" + data["downloads"] + "<i class=\"fa-solid fa-download\"></i>");
+        self.find(".downloads").html("⠀" + data["downloads"] + "<i class=\"icon-download\"></i>");
     })
 
     $.getJSON("https://api.spiget.org/v2/resources/" + self.data('spigotid'), function (data) {
