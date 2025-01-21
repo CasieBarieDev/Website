@@ -1,23 +1,23 @@
-$primary-color: rgb(16, 105, 173);        // Bold, vibrant blue; stands out on dark and light backgrounds.
-$secondary-color: rgb(194, 43, 106);     // Strong magenta; contrasts nicely on light and dark.
-$close-color: rgb(217, 56, 56);          // Red for warnings/actions; maintains good contrast.
+$primary-color: rgb(16, 105, 173);
+$secondary-color: rgb(194, 43, 106);
+$close-color: rgb(217, 56, 56);
 
 // Font colors
-$font-color: rgb(255, 255, 255);              // High contrast on dark backgrounds.
-$font-color-highlight: rgb(220, 220, 220);    // Muted white for subtler emphasis.
-$font-color-gray: rgb(180, 180, 180);         // Neutral gray for secondary text.
-$font-color-gray-highlight: rgb(140, 140, 140); // Darker gray for subtle details.
-$font-color-invert: rgb(20, 20, 20);          // Dark text for light backgrounds.
-$font-color-invert-highlight: rgb(70, 70, 70); // Slightly lighter dark text for emphasis.
-$font-color-title: rgb(255, 255, 255);        // White for titles; works well on dark backgrounds.
+$font-color: rgb(255, 255, 255);
+$font-color-highlight: rgb(230, 230, 230);
+$font-color-gray: rgb(200, 200, 200);
+$font-color-gray-highlight: rgb(160, 160, 160);
+$font-color-invert: rgb(15, 15, 15);
+$font-color-invert-highlight: rgb(60, 60, 60);
+$font-color-title: rgb(255, 255, 255);
 
 // Background colors
-$bg-color-1: rgb(24, 24, 24);    // Dark background.
-$bg-color-2: rgb(56, 56, 56);    // Lighter dark background for sections.
-$gray-color: rgb(100, 100, 100); // Mid-tone gray; good for dividers/muted backgrounds.
-$footer-bg-color: rgb(0, 0, 0);  // Pure black; contrasts with all text.
+$bg-color-1: rgb(24, 24, 24);
+$bg-color-2: rgb(60, 60, 60);
+$gray-color: rgb(140, 140, 140);
+$footer-bg-color: rgb(0, 0, 0);
 
 // Layout spacing
-$list-padding: 1em;       // Padding for lists.
-$item-spacing: .6em;     // Spacing between items.
-$mobile-padding: .6em;   // Padding for mobile devices.
+$list-padding: 1em;
+$item-spacing: .6em;
+$mobile-padding: .6em;
