@@ -14,15 +14,17 @@ function toggle() {
     }
 }
 
-document.getElementById('down-button').addEventListener('click', () => {
-    document.querySelector('.scrollto').scrollIntoView({ behavior: 'smooth' });
-});
+const downButton = document.getElementById('down-button');
+if(downButton !== null) {
+    downButton.addEventListener('click', () => {
+       document.querySelector('.scrollto').scrollIntoView({behavior: "smooth"});
+    });
 
-window.addEventListener('scroll', () => {
-    const downButton = document.getElementById('down-button');
-    if(window.scrollY >= 10) {downButton.style.opacity = '0';
-    } else {downButton.style.opacity = '1';}
-});
+    window.addEventListener('scroll', () => {
+       if(window.scrollY >= 10) {downButton.style.opacity = '0';
+       } else {downButton.style.opacity = '1';}
+    });
+}
 
 document.querySelectorAll('form, input, select, textarea').forEach(el => {
     el.setAttribute('autocomplete', 'off');
