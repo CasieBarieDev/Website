@@ -1,60 +1,63 @@
-let $body = $('body'), scrollTop, scrollEnabled = true;
+let scrollTop, scrollEnabled = true;
+const body = document.body;
+
 function toggle() {
     if(scrollEnabled) {
-        scrollTop = $(window).scrollTop();
-        $body.addClass('fixed-position').css({top: -1 * scrollTop});
+        scrollTop = window.scrollY;
+        body.classList.add('fixed-position');
+        body.style.top = `-${scrollTop}px`;
         scrollEnabled = false;
     } else {
-        $body.removeClass('fixed-position');
-        $(window).scrollTop(scrollTop);
+        body.classList.remove('fixed-position');
+        window.scrollTo(0, scrollTop);
         scrollEnabled = true;
     }
 }
 
-$('#down-button').on("click", function() {
-    $('.scrollto')[0].scrollIntoView({
-        behavior: 'smooth'
-    });
+document.getElementById('down-button').addEventListener('click', () => {
+    document.querySelector('.scrollto').scrollIntoView({ behavior: 'smooth' });
 });
 
-$(window).scroll(function () {
-    const downbutton = $('#down-button');
-    if($(window).scrollTop() >= 10){
-        downbutton.css('opacity', '0');
-    } else {
-        downbutton.css('opacity', '1');
-    }
-})
+window.addEventListener('scroll', () => {
+    const downButton = document.getElementById('down-button');
+    if(window.scrollY >= 10) {downButton.style.opacity = '0';
+    } else {downButton.style.opacity = '1';}
+});
 
-document.querySelectorAll('form').forEach(form => {form.setAttribute('autocomplete', 'off');});
-document.querySelectorAll('input, select, textarea').forEach(input => {input.setAttribute('autocomplete', 'off');});
+document.querySelectorAll('form, input, select, textarea').forEach(el => {
+    el.setAttribute('autocomplete', 'off');
+});
 
-$('.modal-image').each(function() {
-    const $image = $(this);
-    const $modal = $image.next('.modal');
-    const $modalImg = $modal.find('.modal-content');
-    const $caption = $modal.find('.modal-caption');
-    $modalImg.attr('src', $image.attr('src'));
-    $caption.text($image.attr('alt'));
-    $image.on('click', function() {
-        $modal.show();
+document.querySelectorAll('.modal-image').forEach(image => {
+    const modal = image.nextElementSibling;
+    const modalImg = modal.querySelector('.modal-content');
+    const caption = modal.querySelector('.modal-caption');
+    modalImg.src = image.src;
+    caption.textContent = image.alt;
+
+    image.addEventListener('click', () => {
+        modal.style.display = 'block';
         toggle();
     });
-    $modal.on('click', function() {
-        $modal.hide();
+
+    modal.addEventListener('click', () => {
+        modal.style.display = 'none';
         toggle();
     });
 });
 
-function copy() {
-    $('.copy').each(function() {
-        const $this = $(this);
-        const text = $this.clone().children().remove().end().text();
-        $this.attr("title", "Copy").css("cursor", "pointer").click(function() {
-            navigator.clipboard.writeText(text).then(() => {});
-            $this.css("cursor", "auto");
-        }).mouseout(function() {
-            $this.css("cursor", "pointer");
-        });
+document.querySelectorAll('.copy').forEach(copyElement => {
+    const text = copyElement.cloneNode(true);
+    text.querySelectorAll('*').forEach(child => child.remove());
+    const textContent = text.textContent;
+    copyElement.setAttribute('title', 'Copy');
+    copyElement.style.cursor = 'pointer';
+    copyElement.addEventListener('click', () => {
+        navigator.clipboard.writeText(textContent)
+            .then(() => {copyElement.style.cursor = 'auto';})
+            .catch(err => {console.error('Failed to copy text:', err);}
+        );
     });
-} copy();
+
+    copyElement.addEventListener('mouseout', () => {copyElement.style.cursor = 'pointer';});
+});

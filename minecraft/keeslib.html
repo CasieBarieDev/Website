@@ -155,24 +155,30 @@ form: true
 </div>
 
 <script>
-	if (document.readyState !== 'loading') {snipped();
-	} else {document.addEventListener('DOMContentLoaded', function () {snipped();});}
+	if(document.readyState !== 'loading') {snipped();
+	} else {document.addEventListener('DOMContentLoaded', snipped);}
+
 	function snipped() {
-		const snippet = $('.snippet');
-		snippet.hide();
-		$('#build1').show();
-		$('#buildlangselect').change(function () {
-			$('.snippet').hide();
-			const a = $(this).val();
-			$("#" + a).show();
+		const snippets = document.querySelectorAll('.snippet');
+		snippets.forEach(snippet => snippet.style.display = 'none');
+		document.getElementById('build1').style.display = 'block';
+		document.getElementById('buildlangselect').addEventListener('change', function () {
+			snippets.forEach(snippet => snippet.style.display = 'none');
+			const selected = document.getElementById(this.value);
+			if(selected) {selected.style.display = 'block';}
 		});
 
-		$.getJSON("https://api.github.com/repos/CasieBarieDev/KeesLib/releases/latest", function (data) {
-			$.each(snippet, function() {
-				const code = $(this).find('code');
-				code.text(code.text().replace('{VERSION}', data["tag_name"]));
-				Prism.highlightElement(code[0]);
-			});
-		});
+		fetch("https://api.github.com/repos/CasieBarieDev/KeesLib/releases/latest")
+			.then(response => response.json())
+			.then(data => {
+				snippets.forEach(snippet => {
+					const code = snippet.querySelector('code');
+					if(code) {
+						code.textContent = code.textContent.replace('{VERSION}', data.tag_name);
+						Prism.highlightElement(code);
+					}
+				});
+			}
+		);
 	}
 </script>

@@ -1,26 +1,38 @@
-const plugin = $('[data-spigotid]');
-$.each(plugin, function () {
-    const self = $(this);
+document.querySelectorAll('[data-spigotid]').forEach((element) => {
+    const spigotId = element.dataset.spigotid;
 
-    $.getJSON("https://api.spiget.org/v2/resources/" + self.data('spigotid') + "/versions/latest", function (data) {
-        self.find(".version").text("v" + data["name"] + "⠀");
-    })
+    fetch(`https://api.spiget.org/v2/resources/${spigotId}/versions/latest`).then(response => response.json())
+        .then(data => {
+            const versionElement = element.querySelector('.version');
+            if(versionElement) {versionElement.textContent = `v${data.name}⠀`;}
+        }
+    );
 
-    $.getJSON("https://api.spiget.org/v2/resources/" + self.data('spigotid'), function (data) {
-        self.find(".downloads").html("⠀" + data["downloads"] + "<i class=\"icon-download\"></i>");
-    })
+    fetch(`https://api.spiget.org/v2/resources/${spigotId}`).then(response => response.json())
+        .then(data => {
+            const downloadsElement = element.querySelector('.downloads');
+            if(downloadsElement) {downloadsElement.innerHTML = `⠀${data.downloads} <i class="icon-download"></i>`;}
+        }
+    );
 
-    $.getJSON("https://api.spiget.org/v2/resources/" + self.data('spigotid'), function (data) {
-        const testedVersions = data["testedVersions"];
-        if(testedVersions.length === 1) {self.find(".desc").text("(" + testedVersions + ")");
-        } else {self.find(".desc").text("(" + testedVersions[0] + "-" + testedVersions[testedVersions.length - 1] + ")");}
-    })
+    fetch(`https://api.spiget.org/v2/resources/${spigotId}`).then(response => response.json())
+        .then(data => {
+            const testedVersions = data.testedVersions;
+            const descElement = element.querySelector('.desc');
+            if(descElement) {
+                if(testedVersions.length === 1) {descElement.textContent = `(${testedVersions})`;
+                } else {descElement.textContent = `(${testedVersions[0]}-${testedVersions[testedVersions.length - 1]})`;}
+            }
+        }
+    );
 });
 
-const library = $('[data-libraryname]');
-$.each(library, function () {
-    const self = $(this);
-    $.getJSON("https://api.github.com/repos/" + self.data('libraryname') + "/releases/latest", function (data) {
-        self.find(".version").text("v" + data["tag_name"] + " ")
-    })
-})
+document.querySelectorAll('[data-libraryname]').forEach((element) => {
+    const libraryName = element.dataset.libraryname;
+    fetch(`https://api.github.com/repos/${libraryName}/releases/latest`).then(response => response.json())
+        .then(data => {
+            const versionElement = element.querySelector('.version');
+            if(versionElement) {versionElement.textContent = `v${data.tag_name} `;}
+        }
+    );
+});

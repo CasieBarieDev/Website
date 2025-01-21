@@ -1,57 +1,61 @@
-document.getElementById('age').innerText = "" + calcAge();
+document.getElementById('age').innerText = calcAge() + "";
+
 function calcAge() {
     const ageDifMs = Date.now() - new Date('06/08/2004').getTime();
     const ageDate = new Date(ageDifMs);
     return Math.abs(ageDate.getUTCFullYear() - 1970);
 }
 
-const $inputs = $("input[name='Discord'], input[name='Email']");
-const $submitBtn = $('#submit-btn');
-const $allInputs = $('.form input, .form textarea, .form select');
+const allInputs = document.querySelectorAll('.form input, .form textarea, .form select');
+const submitBtn = document.getElementById('submit-btn');
+const discordInput = document.querySelector("input[name='Discord']");
+const emailInput = document.querySelector("input[name='Email']");
 
 function checkForm() {
-    const canSubmit = $allInputs.toArray().every(input => input.checkValidity() || !$(input).prop('required'));
-    $submitBtn.toggleClass('enabled', canSubmit);
+    const canSubmit = Array.from(allInputs).every(input => input.checkValidity() || !input.required);
+    submitBtn.classList.toggle('enabled', canSubmit);
 }
 
-function validateInput() {
-    const $this = $(this);
-    const value = $this.val() || '';
-    const isValid = this.checkValidity();
+function validateInput(event) {
+    const input = event.target;
+    const value = input.value || '';
+    const isValid = input.checkValidity();
 
-    if(value.trim() !== '') {$this.toggleClass('valid', isValid).toggleClass('invalid', !isValid);
-    } else {$this.removeClass('valid invalid');}
+    if(value.trim() !== '') {
+        input.classList.toggle('valid', isValid);
+        input.classList.toggle('invalid', !isValid);
+    } else {input.classList.remove('valid', 'invalid');}
 
-    $this.siblings('.count').text(`${value.length}/${$this.attr('maxlength') || ''}`);
+    const countElement = input.nextElementSibling;
+    if(countElement && countElement.classList.contains('count')) {countElement.textContent = `${value.length}/${input.maxLength || ''}`;}
     checkForm();
 }
 
-$inputs.on('input', function () {
-    const $email = $("input[name='Email']");
-    const $discord = $("input[name='Discord']");
-    const emailValid = $email.val().trim() !== '' && $email[0].checkValidity();
-    const discordValid = $discord.val().trim() !== '' && $discord[0].checkValidity();
-    $email.prop('required', !discordValid);
-    $discord.prop('required', !emailValid);
-    validateInput.call(this);
-});
+function validateEmailDiscord() {
+    const emailValid = emailInput.value.trim() !== '' && emailInput.checkValidity();
+    const discordValid = discordInput.value.trim() !== '' && discordInput.checkValidity();
+    emailInput.required = !discordValid;
+    discordInput.required = !emailValid;
+    validateInput({ target: this });
+}
 
-$allInputs.on('input', validateInput);
+allInputs.forEach(input => input.addEventListener('input', validateInput));
+emailInput.addEventListener('input', validateEmailDiscord);
+discordInput.addEventListener('input', validateEmailDiscord);
 
-$submitBtn.on('click', function () {
-    if($submitBtn.hasClass('enabled')) {
-        $('form')[0].submit();
+submitBtn.addEventListener('click', () => {
+    if(submitBtn.classList.contains('enabled')) {document.querySelector('form').submit();
     } else {
-        $submitBtn.css('animation', 'shake 0.2s');
-        if(navigator.vibrate) navigator.vibrate(300);
-        setTimeout(() => $submitBtn.css('animation', ''), 500);
+        submitBtn.style.animation = 'shake 0.2s';
+        if (navigator.vibrate) navigator.vibrate(300);
+        setTimeout(() => submitBtn.style.animation = '', 500);
     }
 });
 
-window.onbeforeunload = function () {
-    $('form')[0].reset();
-    $allInputs.each(function () { validateInput.call(this); });
+window.addEventListener('beforeunload', () => {
+    document.querySelector('form').reset();
+    allInputs.forEach(input => validateInput({ target: input }));
     checkForm();
-};
+});
 
-$allInputs.each(function () { validateInput.call(this); });
+allInputs.forEach(input => validateInput({ target: input }));
