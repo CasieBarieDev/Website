@@ -10,6 +10,12 @@
   align-items: center;
 }
 
+.description {
+  margin: auto;
+  max-width: max-content;
+  box-shadow: 10px 10px 20px black !important;
+}
+
 .glitch {
   font-size: 10em;
   font-weight: bold;
