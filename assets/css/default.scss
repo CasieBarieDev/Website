@@ -220,6 +220,7 @@ a {
   color: $font-color-gray;
   text-decoration: none;
   transition: color .3s ease-in-out;
+  display: inline-block;
 
   &.shield {
     margin: auto;
@@ -240,7 +241,6 @@ a {
 
   &:hover { color: $font-color-gray-highlight; }
   &.white:hover { color: $font-color-highlight; }
-
 }
 
 // Other elements
