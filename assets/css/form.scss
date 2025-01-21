@@ -131,7 +131,7 @@ form {
     border-radius: 9px;
     cursor: no-drop;
     width: 100%;
-    transition: border-color .3s;
+    transition: all .3s;
 
     &.enabled {
       color: $primary-color;
