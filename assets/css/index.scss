@@ -1,19 +1,46 @@
 ---
 ---
 
-ul li {margin: 15px 0;}
+.languages {
+  i {
+    font-size: clamp(8ex, 5vw, 7ex);
+    margin: 0 .2em;
+    text-wrap: nowrap;
+  }
 
-.languages i {
-  font-size: 3.7vw;
-  margin: 0 .2em;
-  text-wrap: nowrap;
+  a {
+    display: inline-block;
+    margin-top: 1em;
+    position: relative;
 
-// scss-lint:disable ColorVariable
-  &.icon-java {color: #ed8b00;}
-  &.icon-python {color: #4584b6;}
-  &.icon-database {color: #b7d331;}
-  &.icon-html5 {color: #e34f26;}
-  &.icon-css3-alt {color: #264de4;}
-  &.icon-sass {color: #d06da1;}
-  &.icon-js {color: #f0db4f;}
+    .tooltip {
+      border-radius: 5px;
+      font-size: 1em;
+      font-weight: bold;
+      left: 50%;
+      opacity: 0;
+      padding: 5px 8px;
+      position: absolute;
+      top: -10px;
+      transform: translateX(-50%);
+      transition: all .3s ease;
+      visibility: hidden;
+      white-space: nowrap;
+    }
+
+    &:hover .tooltip {
+      opacity: 1;
+      top: -1.8em;
+      visibility: visible;
+    }
+
+    // scss-lint:disable ColorVariable
+    &:has(.icon-java) {color: #ed8b00;}
+    &:has(.icon-python) {color: #4584b6;}
+    &:has(.icon-database) {color: #b7d331;}
+    &:has(.icon-html5) {color: #e34f26;}
+    &:has(.icon-css3-alt) {color: #264de4;}
+    &:has(.icon-sass) {color: #d06da1;}
+    &:has(.icon-js) {color: #f0db4f;}
+  }
 }
