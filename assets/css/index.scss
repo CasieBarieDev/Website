@@ -9,9 +9,10 @@
   }
 
   a {
+    color: inherit;
     display: inline-block;
     margin-top: 1em;
-    position: relative;
+    position: relative; // Prevents unexpected color overrides
 
     .tooltip {
       border-radius: 5px;
@@ -23,7 +24,7 @@
       position: absolute;
       top: -10px;
       transform: translateX(-50%);
-      transition: all .3s ease;
+      transition: opacity .3s ease, top .3s ease;
       visibility: hidden;
       white-space: nowrap;
     }
@@ -33,14 +34,13 @@
       top: -1.8em;
       visibility: visible;
     }
+  }
 
-    // scss-lint:disable ColorVariable
-    &:has(.icon-java) {color: #ed8b00;}
-    &:has(.icon-python) {color: #4584b6;}
-    &:has(.icon-database) {color: #b7d331;}
-    &:has(.icon-html5) {color: #e34f26;}
-    &:has(.icon-css3-alt) {color: #264de4;}
-    &:has(.icon-sass) {color: #d06da1;}
-    &:has(.icon-js) {color: #f0db4f;}
+  // Language-specific icon colors
+  $icon-colors: ("java": #ed8b00, "python": #4584b6, "database": #b7d331, "html5": #e34f26, "css3-alt": #264de4, "sass": #d06da1, "js": #f0db4f);
+  @each $name, $color in $icon-colors {
+    a:has(.icon-#{$name}) {
+      color: $color;
+    }
   }
 }

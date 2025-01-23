@@ -14,51 +14,41 @@ nav {
   #menu-active {
     display: none;
 
-    &:checked ~ .wrapper {
-      clip-path: circle(100%);
-    }
+    &:checked {
+      ~ .wrapper {
+        clip-path: circle(100%);
+      }
 
-    &:checked ~ .hamburger {
-      &:hover {
-        transform: scale(1.1);
+      ~ .hamburger {
+        &:hover {
+          transform: scale(1.1);
+
+          span {
+            background: $close-color;
+          }
+        }
 
         span {
-          background: $close-color;
+          &:nth-child(1) {transform: translateY(9px) rotate(45deg);}
+          &:nth-child(2) {opacity: 0;}
+          &:nth-child(3) {transform: translateY(-9px) rotate(-45deg);}
         }
       }
 
-      span {
-        &:nth-child(1) {
-          transform: translate(0px, -2px) rotate(45deg);
-        }
-
-        &:nth-child(2) {
-          opacity: 0;
-          transform: translateX(15px);
-        }
-
-        &:nth-child(3) {
-          transform: translate(-3px, 3px) rotate(-45deg);
-        }
+      ~ #body {
+        overflow: hidden;
       }
-    }
-
-    &:checked ~ #body {
-      overflow: hidden;
     }
   }
 
   .wrapper {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    transition: all 0.3s ease-in-out;
+    inset: 0;
     z-index: 99;
     opacity: .99;
     background: radial-gradient(circle, $bg-color-2 -25%, $bg-color-1 50%);
     clip-path: circle(0em at calc(100% - 3em) 3em);
+    transition: clip-path .3s ease-in-out;
 
     ul {
       position: absolute;
@@ -70,40 +60,42 @@ nav {
 
       li {
         margin: 1.75vw 0;
-        transition: all 0.5s ease-in-out;
         font-size: clamp(1ex, 7vw, 10ex);
         text-wrap: nowrap;
+        transition: transform .5s ease-in-out;
 
         &:has(a:hover) {
           transform: scale(1.1);
 
-          a span:after {
+          a span::after {
             transform: scaleX(1);
             transform-origin: bottom left;
           }
         }
 
         a {
+          text-decoration: none;
+          position: relative;
+
           span {
             color: $font-color;
-            text-decoration: none;
-            position: relative;
 
             &::after {
               content: "";
               position: absolute;
               width: 101%;
-              transform: scaleX(0);
-              height: 0.12em;
-              bottom: 0.05em;
-              left: -0.01em;
+              height: .12em;
+              bottom: .05em;
+              left: -.01em;
               background-color: $primary-color;
+              transform: scaleX(0);
               transform-origin: bottom right;
-              transition: transform 0.25s ease-out;
+              transition: transform .25s ease-out;
             }
 
             &.current {
-              text-decoration: underline $secondary-color;
+              text-decoration: underline;
+              text-decoration-color: $secondary-color;
             }
           }
         }
@@ -117,30 +109,35 @@ nav {
   }
 
   .hamburger {
-    display: block;
-    border: none;
-    cursor: pointer;
     position: fixed;
-    right: 1em;
     top: 1.1em;
+    right: 1em;
     width: 4em;
     height: 4em;
     z-index: 100;
-    color: $font-color;
+    border: none;
     border-radius: 50%;
-    align-content: center;
-    transition: all 0.3s ease;
+    cursor: pointer;
+    color: $font-color;
+    background: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    transition: transform 0.3s ease;
 
     span {
       display: block;
       width: 33px;
       height: 4px;
-      margin: 0 auto 5px;
-      position: relative;
       background-color: $font-color;
       border-radius: 6px;
-      transform-origin: 0 0;
       transition: 0.4s;
+
+      &:nth-child(2) {
+        transition: transform .4s, opacity .2s;
+      }
     }
 
     &:hover span:nth-child(2) {

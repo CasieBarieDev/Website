@@ -22,9 +22,10 @@
       display: inline-block;
       text-align: center;
       margin: 0 8px;
-      opacity: 0.75;
-      transition: all 0.5s;
+      opacity: .75;
+      transition: all .5s;
       animation: shine 5s infinite linear;
+      position: relative;
 
       .tooltip {
         position: absolute;
@@ -33,9 +34,9 @@
         transform: translateX(-50%);
         opacity: 0;
         visibility: hidden;
-        font-size: 0.5em;
+        font-size: .5em;
         font-weight: bold;
-        transition: all 0.3s ease;
+        transition: opacity .3s ease, top .3s ease;
       }
 
       &:hover .tooltip {
@@ -45,43 +46,18 @@
       }
     }
 
-    // Set animation delay for each social icon
-    @for $i from 1 through 6 {
-      a:nth-child(#{$i}) {
-        animation-delay: #{0.1 * $i}s;
+    // Social icon colors using SCSS map
+    $social-colors: (1: #e6edf3, 2: #db8522, 3: #cc181e, 4: #ec0075, 5: #51e898, 6: #5865F2);
+    @each $i, $color in $social-colors {
+      a:nth-child(#{$i}):hover,
+      a:nth-child(#{$i}):hover .tooltip {
+        color: $color;
+        text-shadow: 0 0 10px $color, 0 0 20px $color, 0 0 30px $color;
       }
-    }
 
-    // Color and shadow effects on hover for each social icon
-    a:nth-child(1):hover,
-    a:nth-child(1):hover .tooltip {
-      color: #e6edf3;
-      text-shadow: 0 0 10px #e6edf3, 0 0 20px #e6edf3, 0 0 30px #e6edf3;
-    }
-    a:nth-child(2):hover,
-    a:nth-child(2):hover .tooltip {
-      color: #db8522;
-      text-shadow: 0 0 10px #db8522, 0 0 20px #db8522, 0 0 30px #db8522;
-    }
-    a:nth-child(3):hover,
-    a:nth-child(3):hover .tooltip {
-      color: #cc181e;
-      text-shadow: 0 0 10px #cc181e, 0 0 20px #cc181e, 0 0 30px #cc181e;
-    }
-    a:nth-child(4):hover,
-    a:nth-child(4):hover .tooltip {
-      color: #ec0075;
-      text-shadow: 0 0 10px #ec0075, 0 0 20px #ec0075, 0 0 30px #ec0075;
-    }
-    a:nth-child(5):hover,
-    a:nth-child(5):hover .tooltip {
-      color: #51e898;
-      text-shadow: 0 0 10px #51e898, 0 0 20px #51e898, 0 0 30px #51e898;
-    }
-    a:nth-child(6):hover,
-    a:nth-child(6):hover .tooltip {
-      color: #5865F2;
-      text-shadow: 0 0 10px #5865F2, 0 0 20px #5865F2, 0 0 30px #5865F2;
+      a:nth-child(#{$i}) {
+        animation-delay: #{.1 * $i}s;
+      }
     }
   }
 
@@ -91,7 +67,7 @@
     height: 40px;
     border: none;
     border-radius: 10px;
-    background: linear-gradient(to right,#77530a,#ffd277,#77530a,#77530a,#ffd277,#77530a) left;
+    background: linear-gradient(to right, #77530a, #ffd277, #77530a, #77530a, #ffd277, #77530a) left;
     background-size: 250%;
     color: #ffd277;
     position: relative;
@@ -131,7 +107,6 @@
     }
   }
 
-  //Copyright fade text & made with
   .copyright {
     font-family: sans-serif;
     font-weight: bolder;
@@ -151,19 +126,18 @@
     .two {opacity: 0;}
 
     .one,
-    .two {
-      transition: opacity 0.5s linear;
-    }
+    .two {transition: opacity .5s linear;}
 
     .two span {
       text-decoration: underline;
       &:hover {cursor: pointer;}
     }
 
-    .wrap:hover {
+    &:hover {
       cursor: no-drop;
-      .one { opacity: 0; }
-      .two { opacity: 1; }
+
+      .one {opacity: 0;}
+      .two {opacity: 1;}
     }
   }
 

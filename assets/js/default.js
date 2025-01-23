@@ -59,7 +59,7 @@ function copy() {
             navigator.clipboard.writeText(textContent)
                 .then(() => {copyElement.style.cursor = 'auto';})
                 .catch(err => {console.error('Failed to copy text:', err);}
-                );
+            );
         });
 
         copyElement.addEventListener('mouseout', () => {copyElement.style.cursor = 'pointer';});

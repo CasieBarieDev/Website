@@ -9,17 +9,17 @@
 	{% endif %}
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="{{ page.description }}">
-	<link href="{{ 'assets/images/mascot.webp' | relative_url }}" rel="icon">
-	<link href="{{ 'assets/css/default.css' | relative_url }}" rel="stylesheet">
-	<link href="{{ 'assets/font/casiebarie.css' | relative_url }}" rel="stylesheet">
+	<link href="/assets/images/mascot.webp" rel="icon">
+	<link href="/assets/css/default.css" rel="stylesheet">
+	<link href="/assets/font/casiebarie.css" rel="stylesheet">
 	{% if page.stylesheet %}
-		<link href="{{ page.stylesheet | prepend: 'assets/css/' | relative_url }}" rel="stylesheet"/>
+		<link href="{{ page.stylesheet | prepend: '/assets/css/' }}" rel="stylesheet"/>
 	{% endif %}
 	{% if page.highlight %}
-		<link href="{{ 'assets/css/highlight.css' | relative_url }}" rel="stylesheet"/>
+		<link href="/assets/css/highlight.css" rel="stylesheet"/>
 	{% endif %}
 	{% if page.form %}
-		<link href="{{ 'assets/css/form.css' | relative_url }}" rel="stylesheet"/>
+		<link href="/assets/css/form.css" rel="stylesheet"/>
 	{% endif %}
 	{% include analytics.html %}
 </head>
@@ -39,12 +39,12 @@
 	{% endfor %}
 </ul>
 
-<script src="{{ 'assets/js/default.js' | relative_url }}"></script>
+<script src="/assets/js/default.js"></script>
 {% if page.highlight %}
-<script src="{{ 'assets/js/highlight.js' | relative_url }}"></script>
+<script src="/assets/js/highlight.js"></script>
 {% endif %}
 {% if page.script %}
-<script src="{{ page.script | prepend: 'assets/js/' | relative_url }}"></script>
+<script src="{{ page.script | prepend: '/assets/js/' }}"></script>
 {% endif %}
 </body>
 </html>
