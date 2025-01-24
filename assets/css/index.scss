@@ -2,21 +2,14 @@
 ---
 
 .languages {
-  i {
-    font-size: clamp(8ex, 5vw, 7ex);
-    margin: 0 .2em;
-    text-wrap: nowrap;
-  }
-
   a {
-    color: inherit;
     display: inline-block;
-    margin-top: 1em;
+    margin: 1.5em .5em 1em 0;
     position: relative;
 
     .tooltip {
       border-radius: 5px;
-      font-size: 1em;
+      font-size: .7em;
       font-weight: bold;
       left: 50%;
       opacity: 0;
@@ -34,13 +27,17 @@
       top: -1.8em;
       visibility: visible;
     }
+
+    img {
+      border-radius: 0;
+      display: block;
+      height: 3em;
+      margin: 0 auto;
+      width: 3em;
+    }
   }
 
   // Language-specific icon colors
-  $icon-colors: ("java": #ed8b00, "python": #4584b6, "database": #b7d331, "html5": #e34f26, "css3-alt": #264de4, "sass": #d06da1, "js": #f0db4f);
-  @each $name, $color in $icon-colors {
-    a:has(.icon-#{$name}) {
-      color: $color;
-    }
-  }
+  $icon-colors: ("java": #ed8b00, "python": #4584b6, "html5": #e34f26, "css3": #1172b8, "js": #f0db4f, "spigot": #db8522, "jda": #5865f2, "jekyll": #d70000, "jquery": #78cff5, "sass": #d06da1, "sqlite": #4ea9e0, "maven": #c82038, "github": #e6edf3, "trello": #126ae4, "android": #95cf00, "unity": #ffffff, "arduino": #2e989c);
+  @each $name, $color in $icon-colors {a:has(.#{$name}) {color: $color;}}
 }
