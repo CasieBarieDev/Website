@@ -4,7 +4,7 @@ description: >-
   This website serves as the official online portfolio and information hub for CasieBarie Development, showcasing my projects, services, and expertise.
 baseurl: ""
 url: "https://www.casiebarie.dev"
-github_username:  CasieBarie
+github_username: CasieBarie
 
 sass:
   sass_dir: _sass
