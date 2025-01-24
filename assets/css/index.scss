@@ -12,7 +12,7 @@
     color: inherit;
     display: inline-block;
     margin-top: 1em;
-    position: relative; // Prevents unexpected color overrides
+    position: relative;
 
     .tooltip {
       border-radius: 5px;

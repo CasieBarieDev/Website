@@ -4,50 +4,50 @@
 @use "variables" as *;
 
 .title {
-  text-align: center;
+  align-items: center;
   display: flex;
   justify-content: center;
-  align-items: center;
+  text-align: center;
 }
 
 .description {
+  box-shadow: 10px 10px 20px black !important;
   margin: auto;
   max-width: max-content;
-  box-shadow: 10px 10px 20px black !important;
 }
 
 .glitch {
+  animation: glitch 725ms infinite;
   font-size: 10em;
   font-weight: bold;
-  text-transform: uppercase;
   position: relative;
   text-shadow: .05em 0 0 $primary-color, -.03em -.04em 0 $primary-color, .025em .04em 0 $secondary-color;
-  animation: glitch 725ms infinite;
+  text-transform: uppercase;
 
   span {
+    left: 0;
     position: absolute;
     top: 0;
-    left: 0;
 
     &:first-child {
       animation: glitch 500ms infinite;
       clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
-      transform: translate(-0.04em, -0.03em);
       opacity: .75;
+      transform: translate(-.04em, -.03em);
     }
 
     &:last-child {
       animation: glitch 375ms infinite;
       clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
-      transform: translate(.04em, .03em);
       opacity: .75;
+      transform: translate(.04em, .03em);
     }
   }
 }
 
 @keyframes glitch {
   0%, 15% {text-shadow: .05em 0 0 $primary-color, -.03em -.04em 0 $primary-color, .025em .04em 0 $secondary-color;}
-  16%, 49% {text-shadow: -.05em -.025em 0 $primary-color, 0.025em .035em 0 $primary-color, -.05em -.05em 0 $secondary-color;}
+  16%, 49% {text-shadow: -.05em -.025em 0 $primary-color, .025em .035em 0 $primary-color, -.05em -.05em 0 $secondary-color;}
   50%, 99% {text-shadow: .05em .035em 0 $primary-color, .03em 0 0 $primary-color, 0 -.04em 0 $secondary-color;}
   100% {text-shadow: -.05em 0 0 $primary-color, -.025em -.04em 0 $primary-color, -.04em -.025em 0 $secondary-color;}
 }

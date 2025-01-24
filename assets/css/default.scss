@@ -13,8 +13,8 @@
 
 // Scrollbar styling
 ::-webkit-scrollbar {
-  width: 1vh;
   height: 1vh;
+  width: 1vh;
 }
 ::-webkit-scrollbar-track {
   display: none;
@@ -26,35 +26,35 @@
 
 // Body styling
 body {
-  font-family: monospace;
-  overflow: hidden;
-  user-select: text;
+  background: black radial-gradient(circle, $bg-color-2 0%, $bg-color-1 50%);
+  box-sizing: border-box;
   color: $font-color;
+  font-family: monospace;
+  height: 100%;
+  overflow: hidden;
   overflow-anchor: none;
   //noinspection CssInvalidPropertyValue
   overflow-y: overlay;
-  box-sizing: border-box;
-  width: 100%;
-  height: 100%;
   text-decoration-skip-ink: none;
-  background: black radial-gradient(circle, $bg-color-2 0%, $bg-color-1 50%);
   text-shadow: $font-color-invert 1px 2px 3px;
+  user-select: text;
+  width: 100%;
 
   &.fixed-position {
-    position: fixed;
     overflow-y: scroll;
+    position: fixed;
   }
 
   &::before {
-    content: "";
+    background: #00000099;
+    content: '';
+    height: 100lvh;
+    left: 0;
+    pointer-events: none;
     position: fixed;
     top: 0;
-    left: 0;
     width: 100lvw;
-    height: 100lvh;
-    background: rgba(0, 0, 0, 0.6);
     z-index: 1;
-    pointer-events: none;
   }
 }
 
@@ -64,10 +64,10 @@ body {
 }
 
 #page {
-  margin-bottom: 10px;
-  min-height: calc(100vh - 10em);
   display: grid;
   grid-gap: 1em;
+  margin-bottom: 10px;
+  min-height: calc(100vh - 10em);
   place-items: center;
 }
 
@@ -77,62 +77,58 @@ body {
   transition: opacity .3s linear;
 
   &:hover span {
-    opacity: .8;
     cursor: pointer;
+    opacity: .8;
   }
 
   span {
-    position: absolute;
-    left: 50%;
-    width: 2em;
-    height: 2em;
-    margin-left: -1.6vh;
-    border-left: .3em solid $font-color-gray;
     border-bottom: .3em solid $font-color-gray;
-    transform: rotate(-45deg);
+    border-left: .3em solid $font-color-gray;
     box-sizing: border-box;
+    height: 2em;
+    left: 50%;
+    margin-left: -1.6vh;
+    position: absolute;
+    transform: rotate(-45deg);
+    width: 2em;
   }
 }
 
 .row {
-  width: 80%;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  grid-gap: .5em 2em;
-  padding: 0 2.5em;
-  border-radius: 30px;
   align-items: center;
+  border-radius: 30px;
+  display: grid;
+  grid-gap: .5em 2em;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  padding: 0 2.5em;
+  width: 80%;
 
   img {
-    width: 100%;
-    height: 100%;
     border-radius: 30px;
+    height: 100%;
+    width: 100%;
   }
 
-  &:has(.center) {
-    text-align: center;
-  }
+  i {font-size: .6em;}
+
+  &:has(.center) {text-align: center;}
 }
 
 // Additional classes
 .top {
   min-height: 100lvh;
-  .text {
-    box-shadow: 10px 10px 20px $primary-color;
-  }
+  .text {box-shadow: 10px 10px 20px $primary-color;}
 }
-.bottom { margin-bottom: 5%; }
+.bottom {margin-bottom: 5%;}
 
 .text {
-  border-radius: 30px;
-  padding: 1.3em;
-  font-size: clamp(1em, 2.5vw, 1.3em);
   backdrop-filter: blur(4px);
+  border-radius: 30px;
   box-shadow: 10px 10px 20px black;
+  font-size: clamp(1em, 2.5vw, 1.3em);
+  padding: 1.3em;
 
-  img {
-    max-width: 500px;
-  }
+  img {max-width: 500px;}
 }
 
 // Headings
@@ -159,11 +155,14 @@ h4 {
 }
 
 // Text colors
-p { word-wrap: normal; }
-p.gray { color: $font-color-gray; }
-b { color: $font-color; }
-.secondary {color: $secondary-color}
-.red {color: $close-color}
+p {
+  word-wrap: normal;
+  &.gray {color: $font-color-gray;}
+}
+
+b {color: $font-color;}
+.secondary {color: $secondary-color;}
+.red {color: $close-color;}
 
 // Lists
 ul {
@@ -174,18 +173,19 @@ ul {
     padding-left: 0;
   }
 }
+
 ol {
-  list-style-type: none;
   counter-reset: item;
+  list-style-type: none;
   padding-left: 1em;
 
   > li {
-    display: table;
     counter-increment: item;
+    display: table;
   }
 
-  > li:before {
-    content: counters(item, ".") ". ";
+  > li::before {
+    content: counters(item, '.') '. ';
     display: table-cell;
     padding-right: .6em;
   }
@@ -195,9 +195,10 @@ ol {
 
 li ol > li {margin: 0;}
 
-li ol > li:before {content: counters(item, ".") " ";}
+li ol > li::before {content: counters(item, '.') ' ';}
 
-ul, ol {
+ul,
+ol {
   li {margin-bottom: .6em;}
 
   ul {
@@ -215,20 +216,19 @@ ul, ol {
 // Links
 a {
   color: $font-color-gray;
+  display: inline-block;
   text-decoration: none;
   transition: color .3s ease-in-out;
-  display: inline-block;
 
   &.shield {
-    margin: auto;
     display: inline-block;
+    margin: auto;
     max-height: 29px;
 
+    img:hover {opacity: .7;}
     img {
       max-height: 28px;
       transition: opacity .3s;
-
-      &:hover {opacity: 0.7;}
     }
   }
 
@@ -238,34 +238,34 @@ a {
 }
 
 // Other elements
-.row i { font-size: .6em; }
-
 .copy {
   transition: opacity .3s;
 
   &:hover {opacity: .8;}
 }
 
-.modal-image:hover, .modal:hover {cursor: pointer;}
+.modal-image:hover,
+.modal:hover {cursor: pointer;}
 
 // Modal styling
 .modal {
+  background-color: rgba(0, 0, 0, 0.9);
   display: none;
-  position: fixed;
-  z-index: 50;
-  padding-top: 50px;
+  height: 100%;
   left: 0;
+  overflow: hidden;
+  padding-top: 50px;
+  position: fixed;
   top: 0;
   width: 100%;
-  height: 100%;
-  overflow: hidden;
-  background-color: rgba(0, 0, 0, 0.9);
+  z-index: 50;
 }
 
-.modal-content, .modal-caption {
+.modal-content,
+.modal-caption {
   animation: zoom .6s;
-  margin: auto;
   display: block;
+  margin: auto;
 }
 
 .modal-content {
@@ -275,10 +275,10 @@ a {
 }
 
 .modal-caption {
-  width: 80%;
+  color: $font-color-gray;
   max-width: 700px;
   text-align: center;
-  color: #ccc;
+  width: 80%;
 }
 
 @keyframes zoom {
@@ -288,53 +288,53 @@ a {
 
 // Collapsible
 .coll {
+  background: transparent;
+  border: 0;
   color: $font-color;
   cursor: pointer;
-  width: 100%;
-  border: none;
-  text-align: left;
-  outline: none;
+  display: block;
   font-size: clamp(3ex, 4vw, 5ex);
   font-weight: bold;
-  display: block;
+  outline: none;
+  text-align: left;
   text-decoration: underline $primary-color;
-  background: transparent;
+  width: 100%;
 
-  &.coll-active .coll-icon:after {transform: rotate(180deg);}
-  &.coll-active .coll-icon:before {transform: rotate(90deg) scale(0);}
+  &.coll-active .coll-icon::after {transform: rotate(180deg);}
+  &.coll-active .coll-icon::before {transform: rotate(90deg) scale(0);}
 
   .coll-icon {
-    font-weight: bold;
-    float: right;
-    margin-right: 1em;
     display: inline-block;
+    float: right;
+    font-weight: bold;
+    margin-right: 1em;
     position: relative;
 
-    &:before,
-    &:after {
-      content: "";
-      position: absolute;
-      width: 1em;
-      height: .16em;
-      top: calc(.5em - .08em);
+    &::before,
+    &::after {
       background-color: $font-color;
-      transition: .3s all;
       border-radius: .03em;
+      content: '';
+      height: .16em;
+      position: absolute;
+      top: calc(.5em - .08em);
+      transition: .3s all;
+      width: 1em;
     }
 
-    &:after {
+    &::after {
       transform: rotate(90deg);
     }
   }
 }
 
 .coll-content {
-  padding: 0 1.5em;
-  max-height: 0;
-  transition: max-height .3s ease-out, padding .3s ease-out;
-  text-align: left;
   border-radius: 25px;
+  max-height: 0;
   overflow: hidden;
+  padding: 0 1.5em;
+  text-align: left;
+  transition: max-height .3s ease-out, padding .3s ease-out;
 
   &.expanded {
     max-height: none;
@@ -342,8 +342,8 @@ a {
   }
 
   .coll-content-text {
-    padding: .5em 0;
     font-size: clamp(.9rem, 3.5vw, 1.1rem);
+    padding: .5em 0;
   }
 }
 
@@ -354,12 +354,12 @@ a {
     margin-bottom: 8px;
 
     .coll-icon {
-      margin-right: 0.5em;
+      margin-right: .5em;
 
-      &:before,
-      &:after {
-        width: .8em;
+      &::before,
+      &::after {
         height: .12em;
+        width: .8em;
       }
     }
   }
@@ -373,40 +373,40 @@ a {
 
 // Circle animations
 #circles {
-  top: 0;
-  left: 0;
-  width: 100%;
   height: 100%;
+  left: 0;
   overflow: hidden;
+  top: 0;
+  width: 100%;
   z-index: 1;
 
   li {
-    position: fixed;
-    display: block;
-    list-style: none;
-    width: 20px;
-    height: 20px;
-    background: rgba(255, 255, 255, 0.2);
     animation: animate 25s linear infinite;
+    background: rgba(255, 255, 255, .2);
     bottom: -21vh;
+    display: block;
+    height: 20px;
+    list-style: none;
+    position: fixed;
+    width: 20px;
   }
 
   // Customize individual li elements
-  li:nth-child(1) { left: 25%; width: 80px; height: 80px; animation-delay: 0s; }
-  li:nth-child(2) { left: 10%; width: 20px; height: 20px; animation-delay: 2s; animation-duration: 12s; }
-  li:nth-child(3) { left: 70%; width: 20px; height: 20px; animation-delay: 4s; }
-  li:nth-child(4) { left: 40%; width: 60px; height: 60px; animation-delay: 0s; animation-duration: 18s; }
-  li:nth-child(5) { left: 65%; width: 20px; height: 20px; animation-delay: 0s; }
-  li:nth-child(6) { left: 75%; width: 110px; height: 110px; animation-delay: 3s; }
-  li:nth-child(7) { left: 35%; width: 150px; height: 150px; animation-delay: 7s; }
-  li:nth-child(8) { left: 50%; width: 25px; height: 25px; animation-delay: 15s; animation-duration: 45s; }
-  li:nth-child(9) { left: 20%; width: 15px; height: 15px; animation-delay: 2s; animation-duration: 35s; }
-  li:nth-child(10) { left: 85%; width: 150px; height: 150px; animation-delay: 0s; animation-duration: 11s; }
+  li:nth-child(1) {animation-delay: 0s; height: 80px; left: 25%; width: 80px;}
+  li:nth-child(2) {animation-delay: 2s; animation-duration: 12s; height: 20px; left: 10%; width: 20px;}
+  li:nth-child(3) {animation-delay: 4s; height: 20px; left: 70%; width: 20px;}
+  li:nth-child(4) {animation-delay: 0s; animation-duration: 18s; height: 60px; left: 40%; width: 60px;}
+  li:nth-child(5) {animation-delay: 0s; height: 20px; left: 65%; width: 20px;}
+  li:nth-child(6) {animation-delay: 3s; height: 110px; left: 75%; width: 110px;}
+  li:nth-child(7) {animation-delay: 7s; height: 150px; left: 35%; width: 150px;}
+  li:nth-child(8) {animation-delay: 15s; animation-duration: 45s; height: 25px; left: 50%; width: 25px;}
+  li:nth-child(9) {animation-delay: 2s; animation-duration: 35s; height: 15px; left: 20%; width: 15px;}
+  li:nth-child(10) {animation-delay: 0s; animation-duration: 11s; height: 150px; left: 85%; width: 150px;}
 }
 
 @keyframes animate {
-  0%, 100% { transform: translateY(0) rotate(0deg); opacity: 1; border-radius: 0; }
-  100% { transform: translateY(-1000px) rotate(720deg); opacity: 0; border-radius: 50%; }
+  0%, 100% {border-radius: 0; opacity: 1; transform: translateY(0) rotate(0deg);}
+  100% {border-radius: 50%; opacity: 0; transform: translateY(-1000px) rotate(720deg);}
 }
 
 // Responsive adjustments
