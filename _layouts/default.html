@@ -14,9 +14,10 @@
 
 	<meta name="description" content="{{ page.description }}">
 	<meta name="author" content="CasieBarie">
+	<meta name="theme-color" content="#000000">
 
 	<link rel="license" href="https://github.com/CasieBarieDev/Website/blob/main/LICENSE">
-	<link href="https://www.casiebarie.dev/" rel="canonical">
+	<link href="https://www.casiebarie.dev{{ page.url }}" rel="canonical">
 	<link href="/assets/images/mascot.webp" rel="icon">
 
 	<link href="/assets/css/default.css" rel="stylesheet">
@@ -32,6 +33,16 @@
 		<link href="/assets/css/form.css" rel="stylesheet"/>
 	{% endif %}
 	{% include analytics.html %}
+
+	<script type="application/ld+json">
+		{
+			"@context": "https://schema.org",
+			"@type": "WebPage",
+			"name": "{% if page.title %}{{ site.title }} | {{ page.title }}{% else %}{{ site.title }}{% endif %}",
+			"description": "{{ page.description }}",
+			"url": "https://www.casiebarie.dev{{ page.url }}"
+		}
+	</script>
 </head>
 <body>
 <div id="body">
