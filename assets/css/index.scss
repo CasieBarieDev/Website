@@ -38,6 +38,6 @@
   }
 
   // Language-specific icon colors
-  $icon-colors: ("java": #ed8b00, "python": #4584b6, "html5": #e34f26, "css3": #1172b8, "js": #f0db4f, "spigot": #db8522, "jda": #5865f2, "jekyll": #d70000, "jquery": #78cff5, "sass": #d06da1, "sqlite": #4ea9e0, "maven": #c82038, "github": #e6edf3, "trello": #126ae4, "android": #95cf00, "unity": #ffffff, "arduino": #2e989c);
+  $icon-colors: ("java": #ed8b00, "python": #4584b6, "html5": #e34f26, "css3": #1172b8, "js": #f0db4f, "json": #939393, "spigot": #db8522, "jda": #5865f2, "jekyll": #d70000, "jquery": #78cff5, "sass": #d06da1, "sqlite": #4ea9e0, "intellij": #f43463, "maven": #c82038, "github": #e6edf3, "trello": #126ae4, "unity": #fff, "android": #95cf00, "arduino": #2e989c, "davinci": #38a8dd);
   @each $name, $color in $icon-colors {a:has(.#{$name}) {color: $color;}}
 }
