@@ -62,6 +62,7 @@ form {
     &:focus {
       outline: none;
       & ~ .count {display: block;}
+      & ~ label {color: $secondary-color !important;}
     }
 
     &.invalid {
