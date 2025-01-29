@@ -19,7 +19,7 @@ form: true
 			<a href="https://github.com/CasieBarieDev/KeesLib/blob/main/LICENSE" class="shield" target="_blank" title="Licence"><img alt="GitHub" src="https://img.shields.io/github/license/CasieBarieDev/KeesLib?label=License&logo=Github" height="18px" width="auto"></a><br><br>
 			<br>This is a library I use for my plugins to make my life easier. But you can use it too! How? Just take a look!<br><br>
 		</p>
-		<p class="gray">The library includes handy methods for checking Bukkit versions and verifying if certain dependencies are enabled on the server. Plus, it features an excellent UpdateChecker!"</p>
+		<p class="gray">The library includes handy methods for checking Bukkit versions and verifying if certain dependencies are enabled on the server. Plus, it features an excellent UpdateChecker!</p>
 	</div>
 </div>
 <span id="down-button"><span></span></span>
@@ -90,68 +90,52 @@ form: true
 		<pre><code class="language-java copy">
 			import dev.casiebarie.keeslib.KeesLib;
 			...
-			KeesLib keeslib = new KeesLib(JavaPlugin plugin);
+			KeesLib keeslib = new KeesLib(@Nonnull JavaPlugin plugin);
 		</code></pre>
 	</div>
 </div>
 <div class="row" id="methods">
-	<div class="center-left text">
+	<div class="left text">
 		<h2>Methods</h2>
 		<ul class="gray">
-			<li>
-				<pre><code class="language-java copy">.createLogger()</code></pre>
-				<ul class="none"><li>Changes the prefix of the plugin logger to the value 'Prefix:' in the 'plugin.yml'</li><li>With ChatColor support.</li><li>You have to override the default logger with this.</li></ul>
-			</li>
-			<li>
-				<pre><code class="language-java copy">.hasPlaceholerAPI()</code></pre>
-				<ul class="none"><li>Returns <code class="lang-java">true</code> when <a href="https://www.spigotmc.org/resources/6245/" target="_blank">PlaceholderAPI <i class="icon-arrow-up-right-from-square"></i></a> is enabled in the server.</li></ul>
-			</li>
-			<li>
-				<pre><code class="language-java copy">.hasVault(Boolean economy, Boolean permissions, Boolean chat)</code></pre>
-				<ul class="none"><li>Returns <code class="lang-java">true</code> if <a href="https://www.spigotmc.org/resources/34315/" target="_blank">Vault <i class="icon-arrow-up-right-from-square"></i></a> is enabled and all the servicemanagers are registered.</li></ul>
-			</li>
-			<li>
-				<pre><code class="language-java copy">.hex(String msg)</code></pre>
-				<ul class="none"><li>Translates all the #HEX codes in the message to ChatColor codes.</li></ul>
-			</li>
-			<li>
-				<pre><code class="language-java copy">.isLegacy(Double lowestVersion, Double highestVersion)</code></pre>
-				<ul class="none"><li>Checks if the server is running a legacy version and disables the plugin if the server version is lower than the specified lowestVersion.</li><li>If the server version exceeds the highestVersion, a warning message will be displayed.</li></ul>
-			</li>
-			<li>
-				<pre><code class="language-java copy">.roundNumber(Number number)</code></pre>
-				<ul class="none"><li>Rounds the given number and returns it as a formatted string.</li><li>For example, 3748 would be converted to 3.7K.</li></ul>
-			</li>
+			<li><pre><code class="language-java copy">.createLogger()</code></pre></li>
+			<li><pre><code class="language-java copy">.hasPlaceholerAPI()</code></pre></li>
+			<li><pre><code class="language-java copy">.hasVault(boolean economy, boolean permissions, boolean chat)</code></pre></li>
+			<li><pre><code class="language-java copy">.hex(@Nonnull String msg)</code></pre></li>
+			<li><pre><code class="language-java copy">.isLegacy(@Nonnull Double lowestVersion, Double highestVersion)</code></pre></li>
+			<li><pre><code class="language-java copy">.roundNumber(@Nonnull Number number)</code></pre></li>
 		</ul>
 	</div>
+	<div class="empty"></div>
 </div>
 <div class="row bottom" id="updatechecker">
-	<div class="left text">
-		<h2>Update Checker</h2>
-		<p>This library also has a fancy Update Checker. The ultimate tool for ensuring your plugin users are always up-to-date with the latest features, bug fixes, and improvements.</p><br>
-		<p class="gray">Initialise the update checker and specify your Spigot resourceId: <pre><code class="lang-java copy">new keeslib.updateChecker(Integer recourceId)</code></pre><br>
-		<p class="gray">You can customize your update checker using these methods:</p><br>
-		<ul>
-			<li><pre><code class="lang-java copy">.setPluginName(String name)</code></pre></li>
-			<li><pre><code class="lang-java copy">.setBorderColor(ChatColor color)</code></pre></li>
-			<li><pre><code class="lang-java copy">.setTextColor(ChatColor color)</code></pre></li>
-			<li><pre><code class="lang-java copy">.setNameColor(ChatColor color)</code></pre></li>
-			<li><pre><code class="lang-java copy">.setNewVersionColor(ChatColor color)</code></pre></li>
-			<li><pre><code class="lang-java copy">.setCurrentVersionColor(ChatColor color)</code></pre></li>
-			<li><pre><code class="lang-java copy">.setUrlColor(ChatColor color)</code></pre></li>
-			<li><pre><code class="lang-java copy">.setBorderCharacter(Character character)</code></pre></li>
-			<li><pre><code class="lang-java copy">.setPermission(String permission)</code></pre></li>
-			<li><pre><code class="lang-java copy">.setUpdateFrequency(Long frequency, TimeUnit timeUnit)</code></pre></li>
-		</ul>
-		<p class="gray">After the customization you start the updatechecker by calling: <pre><code class="lang-java copy">.startChecking();</code></pre>
-	</div>
-	<div class="right">
+	<div class="left">
 		<img src="/assets/images/minecraft/uc.webp" class="modal-image" alt="Updatechecker Preview" width="873" height="325"/>
 		<div class="modal">
 			<img class="modal-content" alt="" src="">
 			<div class="modal-caption"></div>
 		</div>
 	</div>
+	<div class="right text">
+		<h2>Update Checker</h2>
+		<p>This library also has a fancy Update Checker. The ultimate tool for ensuring your plugin users are always up-to-date with the latest features, bug fixes, and improvements.</p><br>
+		<p class="gray">Initialise the update checker and specify your Spigot resourceId: <pre><code class="lang-java copy">keeslib.updateChecker(@Nonnull Integer recourceId)</code></pre><br>
+		<p class="gray">You can customize your update checker using these methods:</p><br>
+		<ul>
+			<li><pre><code class="lang-java copy">.setPluginName(@Nonnull String name)</code></pre></li>
+			<li><pre><code class="lang-java copy">.setBorderColor(@Nonnull ChatColor color)</code></pre></li>
+			<li><pre><code class="lang-java copy">.setTextColor(@Nonnull ChatColor color)</code></pre></li>
+			<li><pre><code class="lang-java copy">.setNameColor(@Nonnull ChatColor color)</code></pre></li>
+			<li><pre><code class="lang-java copy">.setNewVersionColor(@Nonnull ChatColor color)</code></pre></li>
+			<li><pre><code class="lang-java copy">.setCurrentVersionColor(@Nonnull ChatColor color)</code></pre></li>
+			<li><pre><code class="lang-java copy">.setUrlColor(@Nonnull ChatColor color)</code></pre></li>
+			<li><pre><code class="lang-java copy">.setBorderCharacter(@Nonnull Character character)</code></pre></li>
+			<li><pre><code class="lang-java copy">.setPermission(@Nonnull String permission)</code></pre></li>
+			<li><pre><code class="lang-java copy">.setUpdateFrequency(@Nonnull Long frequency, @Nonnull TimeUnit timeUnit)</code></pre></li>
+		</ul>
+		<p class="gray">After the customization you start the updatechecker by calling: <pre><code class="lang-java copy">.startChecking();</code></pre>
+	</div>
+
 </div>
 
 <script>
