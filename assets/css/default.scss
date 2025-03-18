@@ -74,7 +74,7 @@ body {
 #down-button {
   position: relative;
   top: -5em;
-  transition: opacity .3s linear;
+  transition: all .3s;
 
   &:hover span {
     cursor: pointer;
@@ -87,6 +87,7 @@ body {
     box-sizing: border-box;
     height: 2em;
     left: 50%;
+    transition: all .3s;
     margin-left: -1.6vh;
     position: absolute;
     transform: rotate(-45deg);
