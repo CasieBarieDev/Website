@@ -4,10 +4,8 @@
 @use 'variables' as *;
 
 form {
-  background: rgba($bg-color-1, .4);
-  border-radius: 16px;
-  box-shadow: 10px 10px 20px black;
   font-size: 13px;
+  border-radius: 16px;
   margin: auto;
   max-width: 50em;
   padding: 20px 10px 10px;
