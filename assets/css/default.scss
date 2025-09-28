@@ -26,7 +26,7 @@
 
 // Body styling
 body {
-  background: black radial-gradient(circle, $bg-color-2 0%, $bg-color-1 50%);
+  background: black linear-gradient($bg-color-1 0%, $bg-color-1 100%) fixed;
   box-sizing: border-box;
   color: $font-color;
   font-family: monospace;
