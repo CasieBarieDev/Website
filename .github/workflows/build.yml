@@ -1,0 +1,82 @@
+name: Build
+
+on:
+  workflow_call:
+    inputs:
+      production:
+        description: "Build for production (minify, upload, etc.)"
+        required: true
+        type: boolean
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        id: checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Ruby
+        id: ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+          bundler-cache: true
+
+      - name: Setup GitHub Pages
+        id: pages
+        uses: actions/configure-pages@v5
+
+      - name: Build with Jekyll
+        id: jekyll
+        run: bundle exec jekyll build
+        env:
+          JEKYLL_ENV: ${{ inputs.production && 'production' || 'development' }}
+
+      - name: Minify JS/CSS/HTML
+        if: ${{ inputs.production }}
+        id: minify
+        run: |
+          npm install -g terser csso-cli html-minifier-terser
+          find ./_site -name '*.js' -exec terser {} --compress -o {} \;
+          find ./_site -name '*.css' -exec csso {} -o {} \;
+          find ./_site -name '*.html' -exec html-minifier-terser \
+            --collapse-boolean-attributes \
+            --minify-css \
+            --minify-js \
+            --minify-urls \
+            --remove-attribute-quotes \
+            --remove-comments \
+            {} -o {} \;
+
+      - name: Upload Artifact
+        if: ${{ inputs.production }}
+        id: upload
+        uses: actions/upload-pages-artifact@v3
+
+      - name: 🧾 Build Summary
+        if: always()
+        run: |
+          echo "# 📦 Build Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "$([[ '${{ steps.checkout.outcome }}' == 'success' ]] && echo '✅ Checkout Repository' || echo '❌ Checkout Repository')" >> $GITHUB_STEP_SUMMARY
+          echo "$([[ '${{ steps.ruby.outcome }}' == 'success' ]] && echo '✅ Setup Ruby' || echo '❌ Setup Ruby')" >> $GITHUB_STEP_SUMMARY
+          echo "$([[ '${{ steps.pages.outcome }}' == 'success' ]] && echo '✅ Setup GitHub Pages' || echo '❌ Setup GitHub Pages')" >> $GITHUB_STEP_SUMMARY
+          echo "$([[ '${{ steps.jekyll.outcome }}' == 'success' ]] && echo '✅ Jekyll Build' || echo '❌ Jekyll Build')" >> $GITHUB_STEP_SUMMARY
+          if [ "${{ inputs.production }}" = "true" ]; then
+            echo "$([[ '${{ steps.minify.outcome }}' == 'success' ]] && echo '✅ Minify Assets' || echo '❌ Minify Assets')" >> $GITHUB_STEP_SUMMARY
+            echo "$([[ '${{ steps.upload.outcome }}' == 'success' ]] && echo '✅ Upload Artifact' || echo '❌ Upload Artifact')" >> $GITHUB_STEP_SUMMARY
+          fi
+
+      - name: Fail if any step failed
+        if: |
+          failure() ||
+          steps.checkout.outcome != 'success' ||
+          steps.ruby.outcome != 'success' ||
+          steps.pages.outcome != 'success' ||
+          steps.jekyll.outcome != 'success' ||
+          (inputs.production && steps.minify.outcome != 'success') ||
+          (inputs.production && steps.upload.outcome != 'success')
+        run: |
+          echo "❌ One or more build steps failed."
+          exit 1
