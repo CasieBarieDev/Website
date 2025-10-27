@@ -119,6 +119,7 @@ PLATFORMS
 DEPENDENCIES
   http_parser.rb (~> 0.6.0)
   jekyll (~> 4.3.4)
+  jekyll-seo-tag (~> 2.8)
   jekyll-sitemap
   minima (~> 2.5)
   rubocop

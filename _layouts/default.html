@@ -7,50 +7,39 @@
 	<meta name="google" content="notranslate">
 
 	{% if page.title %}
-		<title>{{ site.title }} | {{ page.title }}</title>
+	<title>{{ site.title }} | {{ page.title }}</title>
 	{% else %}
-		<title>{{ site.title }}</title>
+	<title>{{ site.title }}</title>
 	{% endif %}
 
-	<meta name="description" content="{{ page.description }}">
-	<meta name="author" content="CasieBarie">
+	{% seo title=false %}
+
 	<meta name="theme-color" content="#000000">
-
 	<link rel="license" href="https://github.com/CasieBarieDev/Website/blob/main/LICENSE">
-	<link href="https://www.casiebarie.dev{{ page.url }}" rel="canonical">
-	<link href="/assets/images/mascot.webp" rel="icon">
+	<link rel="icon" href="/assets/images/mascot.webp">
 
-	<link href="/assets/css/default.css" rel="stylesheet">
-	<link href="/assets/font/casiebarie.css" rel="stylesheet">
+	<link rel="stylesheet" href="/assets/css/default.css">
+	<link rel="stylesheet" href="/assets/font/casiebarie.css">
 
 	{% if page.stylesheet %}
-		<link href="{{ page.stylesheet | prepend: '/assets/css/' }}" rel="stylesheet"/>
+	<link rel="stylesheet" href="{{ '/assets/css/' | append: page.stylesheet }}">
 	{% endif %}
 	{% if page.highlight %}
-		<link href="/assets/css/highlight.css" rel="stylesheet"/>
+	<link rel="stylesheet" href="/assets/css/highlight.css">
 	{% endif %}
 	{% if page.form %}
-		<link href="/assets/css/form.css" rel="stylesheet"/>
-		<script src="https://www.google.com/recaptcha/enterprise.js?render=6LeHyfYrAAAAAKSqIGfSItFsaG8tjpcv6JP_rmDh"></script>
+	<link rel="stylesheet" href="/assets/css/form.css">
+	<script src="https://www.google.com/recaptcha/enterprise.js?render=6LeHyfYrAAAAAKSqIGfSItFsaG8tjpcv6JP_rmDh" defer></script>
 	{% endif %}
-	{% include analytics.html %}
 
-	<script type="application/ld+json">
-		{
-			"@context": "https://schema.org",
-			"@type": "WebPage",
-			"name": "{% if page.title %}{{ site.title }} | {{ page.title }}{% else %}{{ site.title }}{% endif %}",
-			"description": "{{ page.description }}",
-			"url": "https://www.casiebarie.dev{{ page.url }}"
-		}
-	</script>
+	{% include analytics.html %}
 </head>
 <body>
 <div id="body">
 	{% include header.html %}
-	<div id="page">
+	<main id="page" role="main">
 		{{ page.content }}
-	</div>
+	</main>
 	{% include footer.html %}
 </div>
 <ul id="circles">

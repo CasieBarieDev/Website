@@ -1,7 +1,10 @@
 title: CasieBarie Development
-email: casiebarie@gmail.com
 description: >-
   Developer portfolio of CasieBarie. Explore Minecraft plugins, Discord bots, and creative projects.
+author:
+  name: Cas Barnard
+  email: casiebarie@gmail.com
+lang: en
 baseurl: ""
 url: "https://www.casiebarie.dev"
 github_username: CasieBarie
@@ -9,6 +12,7 @@ permalink: pretty
 
 plugins:
   - jekyll-sitemap
+  - jekyll-seo-tag
 
 sass:
   sass_dir: _sass
@@ -30,3 +34,14 @@ navigation:
   - title: ABOUT ME
     url: /aboutme
     fa: icon-user-large
+
+seo:
+  type: "website"
+  name: "CasieBarie Development"
+  description: "Developer portfolio of CasieBarie. Explore Minecraft plugins, Discord bots, and creative projects."
+  url: "https://www.casiebarie.dev"
+  logo: "/assets/images/mascot.webp"
+  twitter:
+    username: "CasieBarie"
+    card: "summary_large_image"
+  github: "CasieBarie"
