@@ -3,6 +3,8 @@
 
 @use 'variables' as *;
 
+.grecaptcha-badge { visibility: hidden; }
+
 form {
   font-size: 13px;
   border-radius: 16px;
@@ -13,6 +15,20 @@ form {
   h3 {
     margin-bottom: 1em;
     margin-left: .5em;
+  }
+
+  .form-status {
+    margin-top: 10px;
+    font-size: 0.9rem;
+    opacity: 0;
+    min-height: 1em;
+    transition: opacity 0.4s ease;
+  }
+
+  #captchamsg {
+    padding-top: 5px;
+    font-size: 0.5em;
+    text-align: left;
   }
 
   .form {
@@ -42,8 +58,15 @@ form {
     }
 
     .count {
-      display: none;
-      text-align: left;
+      display: inline-block;
+      text-align: right;
+      visibility: hidden;
+      padding-left: 20px;
+      color: $font-color-gray;
+
+      .active{
+        visibility: visible;
+      }
     }
   }
 
@@ -59,7 +82,7 @@ form {
 
     &:focus {
       outline: none;
-      & ~ .count {display: block;}
+      & ~ label .count {visibility: visible;}
       & ~ label {color: $secondary-color !important;}
     }
 
@@ -98,7 +121,7 @@ form {
       gap: unset;
       grid-template-columns: 1fr;
 
-      p {margin: 0 0 13px;}
+      .or {margin: 0 0 30px;}
     }
   }
 
