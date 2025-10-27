@@ -36,7 +36,7 @@ jobs:
         run: |
           echo "# 🚀 Deployment Summary" >> $GITHUB_STEP_SUMMARY
           echo "$([[ '${{ steps.deployment.outcome }}' == 'success' ]] && echo '✅ Deployment to GitHub Pages Successful' || echo '❌ Deployment Failed')" >> $GITHUB_STEP_SUMMARY
-          if [[ '${{ steps.deployment.outcome }}' == 'success' ]]; then
+          if [[ '${{ steps.deployment.outcome }}' != 'success' ]]; then
             echo "Deployment failed — exiting with error"
             exit 1
           fi
