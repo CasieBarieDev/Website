@@ -222,13 +222,17 @@ a {
   transition: color .3s ease-in-out;
 
   &.shield {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px; /* invisible spacing, minimal */
+    line-height: 0;
     margin: auto;
     max-height: 29px;
 
     img:hover {opacity: .7;}
     img {
-      max-height: 28px;
+      display: block;
       transition: opacity .3s;
     }
   }
@@ -289,17 +293,8 @@ a {
 
 // Collapsible
 .coll {
-  background: transparent;
-  border: 0;
-  color: $font-color;
   cursor: pointer;
-  display: block;
-  font-size: clamp(3ex, 4vw, 5ex);
-  font-weight: bold;
-  outline: none;
-  text-align: left;
-  text-decoration: underline $primary-color;
-  width: 100%;
+  padding-bottom: 0;
 
   &.coll-active .coll-icon::after {transform: rotate(180deg);}
   &.coll-active .coll-icon::before {transform: rotate(90deg) scale(0);}
