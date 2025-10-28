@@ -98,7 +98,7 @@ form {
 
     &:required ~ label .required {color: $close-color;}
 
-    option {
+    option, optgroup {
       background: $bg-color-1;
       color: $font-color;
     }

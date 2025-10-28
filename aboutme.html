@@ -52,11 +52,27 @@ script: aboutme.js
 			<div class="form">
 				<select class="input" id="topics" name="Topic" required>
 					<option value="" selected disabled hidden></option>
-					<option value="Minecraft Plugins">Minecraft Plugins</option>
-					<option value="Discord Bots">Discord Bots</option>
-					<option value="Other Projects">Other Projects</option>
+					<optgroup label="Minecraft Projects">
+						<option value="CasieBounce">CasieBounce</option>
+						<option value="CasieAttractionOperate">CasieAttractionOperate</option>
+						<option value="Ziplines">Ziplines</option>
+						<option value="KeesLib">KeesLib</option>
+					</optgroup>
+					<optgroup label="Discord Bots">
+						<option value="KeesieBernie">KeesieBernie</option>
+						<option value="InOsso">InOsso</option>
+						<option value="LucasBot">LucasBot</option>
+					</optgroup>
+					<optgroup label="Other Projects">
+						<option value="Zuipse!">Zuipse!</option>
+						<option value="Tic Tac Toe">Tic Tac Toe</option>
+						<option value="Hear The Painting">Hear The Painting</option>
+						<option value="LightTiles">LightTiles</option>
+						<option value="Secret Santa">Secret Santa</option>
+					</optgroup>
 					<option value="This Website">This Website</option>
 					<option value="About Me (CasieBarie)">About Me (CasieBarie)</option>
+					<option value="Other">Other</option>
 				</select>
 				<label for="topics"><span class="required">* </span>Topic</label>
 			</div>
