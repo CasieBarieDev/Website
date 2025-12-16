@@ -33,7 +33,7 @@ script: aboutme.js
 <div class="row bottom" id="contact">
 	<div class="center text">
 		<h2>Contact Me</h2>
-		<form>
+		<form spellcheck="false">
 			<label style="display: none"><input type="text" name="honeypot" style="display:none"></label>
 			<div class="form">
 				<input class="input" type="text" id="name" name="Name" maxlength="32" required>
@@ -78,7 +78,7 @@ script: aboutme.js
 				<label for="topics"><span class="required">* </span>Topic</label>
 			</div>
 			<div class="form">
-				<textarea class="input" id="message" name="Message" cols="30" rows="6" maxlength="500" required></textarea>
+				<textarea class="input" id="message" name="Message" cols="30" rows="6" maxlength="500" spellcheck="true" required></textarea>
 				<label for="message"><span class="required">* </span>Message</label>
 			</div>
 			<button id="submit-btn" type="button">Send Message</button>
