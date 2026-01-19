@@ -9,10 +9,13 @@ baseurl: ""
 url: "https://www.casiebarie.dev"
 github_username: CasieBarie
 permalink: pretty
+include:
+  - .well-known
 
 plugins:
   - jekyll-sitemap
   - jekyll-seo-tag
+  - jekyll-redirect-from
 
 sass:
   sass_dir: _sass

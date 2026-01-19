@@ -16,6 +16,7 @@ gem 'minima', '~> 2.5'
 # uncomment the line below. To upgrade, run `bundle update github-pages`.
 # gem "github-pages", group: :jekyll_plugins
 group :jekyll_plugins do
+  gem 'jekyll-redirect-from'
   gem 'jekyll-seo-tag', '~> 2.8'
   gem 'jekyll-sitemap'
 end

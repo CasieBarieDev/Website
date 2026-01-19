@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "dev.casiebarie.zuipse",
+      "sha256_cert_fingerprints": [
+        "40:3E:D0:0C:FF:F8:DA:E5:F6:EE:E3:DE:2A:7D:E7:E0:4F:5B:7D:2D:A2:FB:AD:C6:82:38:FE:47:36:24:E0:E8"
+      ]
+    }
+  }
+]
