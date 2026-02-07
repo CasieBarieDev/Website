@@ -33,7 +33,7 @@
 		<button class="donate" onclick="window.open('https://buymeacoffee.com/casiebarie','buymeacoffee', 'width=500,height=500,scrollbars=no,toolbar=no,location=no'); return false"><span><img src="/assets/icons/bmc.svg" width="16" height="16" alt="BuyMeACoffee">BUY ME A COFFEE<img src="/assets/icons/bmc.svg" width="16" height="16" alt="BuyMeACoffee"></span></button>
 		<div class="copyright">
 			<div class="wrap">
-				<div class="one">© 2021-2025 - CasieBarie</div>
+                <div class="one">© 2021-<span id="current-year"></span> - CasieBarie</div>
 				<div class="two">All Rights Reserved</div>
 			</div>
 		</div>
@@ -43,4 +43,5 @@
 			</div>
 		</div>
 	</div>
+    <script>document.getElementById("current-year").textContent = new Date().getFullYear().toString();</script>
 </footer>
