@@ -32,7 +32,6 @@ body {
   font-family: monospace;
   height: 100%;
   overflow-anchor: none;
-  //noinspection CssInvalidPropertyValue
   overflow-x: hidden;
   overflow-y: auto;
   text-decoration-skip-ink: none;
@@ -223,7 +222,7 @@ a {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 2px; /* invisible spacing, minimal */
+    padding: 2px;
     line-height: 0;
     margin: auto;
     max-height: 29px;
@@ -404,7 +403,3 @@ a {
   0%, 100% {border-radius: 0; opacity: 1; transform: translateY(0) rotate(0deg);}
   100% {border-radius: 50%; opacity: 0; transform: translateY(-1000px) rotate(720deg);}
 }
-
-// Responsive adjustments
-@media (max-width: 970px) {#down-button { display: none; }}
-@media (max-width: 800px) {.row .empty { display: none; }}

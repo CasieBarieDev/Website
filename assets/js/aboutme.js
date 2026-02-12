@@ -1,4 +1,4 @@
-document.getElementById("age").innerText = calcAge()+"";
+document.getElementById("age").innerText = calcAge() + "";
 
 function calcAge() {
     const diff = Date.now() - new Date("2004-06-08").getTime();
@@ -18,7 +18,7 @@ statusMsg.style.opacity = "0";
 statusMsg.style.transition = "opacity 0.4s ease";
 form.appendChild(statusMsg);
 
-// === COUNTERS ===
+// Setup counters
 function setupCounters() {
     const counters = new Map();
 
@@ -43,7 +43,7 @@ function setupCounters() {
 
 const counters = setupCounters();
 
-// === VALIDATION ===
+// Validation functions
 function checkForm() {
     const canSubmit = Array.from(inputs).every(i => i.checkValidity() || !i.required);
     submitBtn.classList.toggle("enabled", canSubmit);
@@ -80,7 +80,7 @@ inputs.forEach(i => i.addEventListener("input", validateInput));
 emailInput.addEventListener("input", validateEmailDiscord);
 discordInput.addEventListener("input", validateEmailDiscord);
 
-// === STATUS MESSAGE ===
+// Status message functions
 let statusClearTimeout = null;
 function showStatus(message, color) {
     if(statusClearTimeout) {clearTimeout(statusClearTimeout);}
@@ -94,14 +94,14 @@ function showStatus(message, color) {
     }, 5000);
 }
 
-// === RESET ===
+// Reset function
 function resetForm() {
     form.reset();
     inputs.forEach(i => validateInput({ target: i }));
     checkForm();
 }
 
-// === SUBMIT HANDLER ===
+// Submit handler
 submitBtn.addEventListener("click", async () => {
     if(!submitBtn.classList.contains("enabled")) {
         submitBtn.style.animation = 'shake 0.2s';
@@ -124,7 +124,7 @@ submitBtn.addEventListener("click", async () => {
         message: document.getElementById("message").value.trim(),
         honeypot: form.querySelector("[name='honeypot']").value,
         token
-    }; if(data.honeypot) {showStatus("❌ Failed to send message. Please try again.", "#ef4444)"); return;}
+    }; if(data.honeypot) {showStatus("❌ Failed to send message. Please try again.", "#ef4444"); return;}
 
     try {
         const res = await fetch(PROXY_URL, {
@@ -136,12 +136,12 @@ submitBtn.addEventListener("click", async () => {
         if(res.ok) {
             resetForm();
             showStatus("✅ Your message has been sent successfully!", "#22c55e");
-        } else if(res.status === 429) {showStatus("⚠️ You’re sending messages too fast. Try again later.", "#facc15");
-        } else if(res.status === 403) {showStatus("⚠️ reCAPTCHA failed. Try again later.", "#facc15");
-        } else {showStatus("❌ Failed to send message. Please try again.", "#ef4444");}
+        } else if(res.status === 429) {showStatus("⚠️ You’re sending messages too fast. Try again later.", "#facc15");}
+        else if(res.status === 403) {showStatus("⚠️ reCAPTCHA failed. Try again later.", "#facc15");}
+        else {showStatus("❌ Failed to send message. Please try again.", "#ef4444");}
     } catch(err) {
-        console.error("Network error caught:", err)
-        showStatus("❌ Network error. Please try again.", "#ef4444)");
+        console.error("Network error caught:", err);
+        showStatus("❌ Network error. Please try again.", "#ef4444");
     } finally {
         submitBtn.disabled = false;
         submitBtn.textContent = "Send Message";

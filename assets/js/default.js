@@ -26,9 +26,7 @@ if(downButton !== null) {
     });
 }
 
-document.querySelectorAll('form, input, select, textarea').forEach(el => {
-    el.setAttribute('autocomplete', 'off');
-});
+document.querySelectorAll('form, input, select, textarea').forEach(el => el.setAttribute('autocomplete', 'off'));
 
 document.querySelectorAll('.modal-image').forEach(image => {
     const modal = image.nextElementSibling;

@@ -20,7 +20,7 @@ jobs:
         id: ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.2'
+          ruby-version: '3.3.7'
           bundler-cache: true
 
       - name: Setup GitHub Pages
@@ -37,7 +37,7 @@ jobs:
         if: ${{ inputs.production }}
         id: minify
         run: |
-          npm install -g terser csso-cli html-minifier-terser
+          npm install -g terser csso-cli html-minifier-terser || exit 1
           find ./_site -name '*.js' -exec terser {} --compress -o {} \;
           find ./_site -name '*.css' -exec csso {} -o {} \;
           find ./_site -name '*.html' -exec html-minifier-terser \

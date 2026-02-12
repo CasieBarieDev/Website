@@ -82,7 +82,8 @@ const updateText = () => {
         if(elements.nameFormat.value === "Displayname") {previewText += "[OWNER] ";}
         previewText += "CasieBarie";
         if(elements.format.value === "Both") {previewText += ":";}
-    } if(elements.type.value !== "Total") {output += "-";}
+    }
+    if(elements.type.value !== "Total") {output += "-";}
     if(elements.rounded.checked) {
         output += "ROUNDED%";
         previewText += " 3.7k";
