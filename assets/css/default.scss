@@ -249,10 +249,10 @@ a {
   &:hover {opacity: .8;}
 }
 
+// Modal styling
 .modal-image:hover,
 .modal:hover {cursor: pointer;}
 
-// Modal styling
 .modal {
   background-color: rgba(0, 0, 0, 0.9);
   display: none;
@@ -274,9 +274,11 @@ a {
 }
 
 .modal-content {
-  max-height: 80%;
-  max-width: 80%;
-  object-fit: scale-down;
+  max-width: 95vw;
+  max-height: 95vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
 }
 
 .modal-caption {
