@@ -18,17 +18,18 @@
     justify-self: center;
     overflow: hidden;
     transition: transform .2s ease-in-out;
+    padding-bottom: 10px;
 
     &:hover {transform: translateY(5px);}
 
     .image {
-      background: $bg-color-1;
       height: 80%;
       max-height: 400px;
       overflow: hidden;
       z-index: 1;
+      padding: 20px 20px 5px 20px;
 
-      img {border-radius: initial;}
+      img {border-radius: 10px; max-height: 300px}
     }
 
     u {text-decoration-color: $secondary-color;}
