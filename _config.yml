@@ -43,7 +43,7 @@ seo:
   name: "CasieBarie Development"
   description: "Developer portfolio of CasieBarie. Explore Minecraft plugins, Discord bots, and creative projects."
   url: "https://www.casiebarie.dev"
-  logo: "/assets/images/mascot.webp"
+  logo: "/assets/images/logo.webp"
   twitter:
     username: "CasieBarie"
     card: "summary_large_image"
