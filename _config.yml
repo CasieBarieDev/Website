@@ -24,6 +24,8 @@ sass:
 navigation:
   - title: HOME
     url: /
+  - title: ZUIPSE!
+    url: /zuipse
   - title: MINECRAFT PROJECTS
     url: /minecraft/
   - title: DISCORD BOTS
