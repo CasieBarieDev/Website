@@ -3,7 +3,7 @@
 
 @use "variables" as *;
 
-nav {
+nav.site-nav {
   box-sizing: border-box;
   font-family: sans-serif;
   margin: 0;
@@ -19,7 +19,7 @@ nav {
 
       ~ .hamburger {
         &:hover {
-          transform: scale(1.1);
+          transform: scale(1.04);
 
           span {
             background: $close-color;
@@ -50,7 +50,7 @@ nav {
       left: 50%;
       list-style: none;
       position: absolute;
-      text-align: left;
+      text-align: center;
       top: 50%;
       transform: translate(-50%, -50%);
 
@@ -61,7 +61,7 @@ nav {
         transition: transform .5s ease-in-out;
 
         &:has(a:hover) {
-          transform: scale(1.1);
+          transform: scale(1.04);
 
           a span::after {
             transform: scaleX(1);
@@ -70,11 +70,16 @@ nav {
         }
 
         a {
+          align-items: center;
+          display: inline-flex;
+          justify-content: center;
+          line-height: 1.15;
           position: relative;
           text-decoration: none;
 
           span {
-            color: $font-color;
+            color: $font-color-highlight;
+            transition: color .2s ease;
 
             &::after {
               background-color: $primary-color;
@@ -90,15 +95,13 @@ nav {
             }
 
             &.current {
+              color: $font-color;
               text-decoration: underline;
               text-decoration-color: $secondary-color;
             }
           }
-        }
 
-        i {
-          color: $font-color-highlight;
-          min-width: 1.5em;
+          &:hover span {color: $font-color;}
         }
       }
     }
@@ -138,5 +141,100 @@ nav {
       background-color: $primary-color;
       transform: translateX(10px);
     }
+  }
+}
+
+/* Desktop override only */
+@media (min-width: 885px) {
+  nav.site-nav {
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+
+    .hamburger {display: none;}
+
+    .wrapper {
+      background: transparent;
+      border-bottom: 0;
+      clip-path: none;
+      inset: auto;
+      opacity: 1;
+      padding: 1rem 1.5rem;
+      position: static;
+      transition: background-color .25s ease;
+      z-index: auto;
+
+      ul.menu {
+        align-items: center;
+        display: flex;
+        gap: 2.35rem;
+        justify-content: center;
+        margin: 0;
+        padding: 0;
+        position: static;
+        transform: none;
+
+        li {
+          font-size: clamp(1rem, 1.7vw, 1.35rem);
+          margin: 0;
+          transition: none;
+
+          &:has(a:hover) {transform: none;}
+
+          a {
+            align-items: center;
+            display: inline-flex;
+            gap: .16em;
+            justify-content: center;
+            line-height: 1.15;
+            position: relative;
+
+            &::after {
+              background-color: $primary-color;
+              bottom: -.14em;
+              content: '';
+              height: .14em;
+              left: 0;
+              position: absolute;
+              transform: scaleX(0);
+              transform-origin: bottom right;
+              transition: transform .25s ease-out;
+              width: 100%;
+              z-index: 3;
+            }
+
+            &:hover::after {
+              transform: scaleX(1);
+              transform-origin: bottom left;
+            }
+
+            span {
+              display: inline-block;
+              position: relative;
+
+              &::after {content: none;}
+
+              &.current {
+                text-decoration: none;
+
+                &::before {
+                  background-color: $secondary-color;
+                  bottom: -.14em;
+                  content: '';
+                  height: .13em;
+                  left: 0;
+                  position: absolute;
+                  width: 100%;
+                  z-index: 1;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    &.scrolled .wrapper {background: rgba(0, 0, 0, .96);}
   }
 }

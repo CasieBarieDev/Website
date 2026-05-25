@@ -24,19 +24,14 @@ sass:
 navigation:
   - title: HOME
     url: /
-    fa: icon-house
   - title: MINECRAFT PROJECTS
     url: /minecraft/
-    fa: icon-cubes
   - title: DISCORD BOTS
     url: /discord/
-    fa: icon-discord
   - title: OTHER PROJECTS
     url: /other/
-    fa: icon-bars-progress
   - title: ABOUT ME
     url: /aboutme
-    fa: icon-user-large
 
 seo:
   type: "website"
