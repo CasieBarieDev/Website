@@ -58,7 +58,14 @@ function scrollToHashTarget() {
 function normalizedPath(url) {return url.pathname.replace(/\/index\.html$/, '/').replace(/\/$/, '') || '/';}
 function escapeAttribute(value) {return value.replace(/\\/g, '\\\\').replace(/"/g, '\\"');}
 function getPathDepth(path) {return path.split('/').filter(Boolean).length;}
-function getProjectCardImageForPath(path) {return document.querySelector(`.project[href="${escapeAttribute(path)}"] .image img`);}
+function getProjectCardImageForPath(path) {
+    const trimmedPath = path === '/' ? path : path.replace(/\/$/, '');
+    return document.querySelector([
+        `.project[href="${escapeAttribute(trimmedPath)}"] .image img`,
+        `.project[href="${escapeAttribute(`${trimmedPath}/`)}"] .image img`,
+        `.project[href="${escapeAttribute(`${trimmedPath}.html`)}"] .image img`
+    ].join(', '));
+}
 function getProjectHeroImage() {return document.querySelector('.row.top .left > img');}
 function clearPageTransitionDirection() {document.documentElement.removeAttribute('data-transition-direction');}
 

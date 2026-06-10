@@ -19,24 +19,33 @@
 	<link rel="icon" href="/assets/images/logo.webp">
 
 	<script>
-		(() => {
+		(function() {
 			if(!document.startViewTransition || !window.navigation || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {return;}
 
-			const normalizePath = path => path.replace(/\/index\.html$/, '/').replace(/\/$/, '') || '/';
-			const escapeAttribute = value => value.replace(/\\/g, '\\\\').replace(/"/g, '\\"');
-			const navPaths = [{% for item in site.navigation %}"{{ item.url | relative_url }}"{% unless forloop.last %}, {% endunless %}{% endfor %}].map(normalizePath);
-			const getParentPath = path => {
+			function normalizePath(path) {return path.replace(/\/index\.html$/, '/').replace(/\/$/, '') || '/';}
+			function escapeAttribute(value) {return value.replace(/\\/g, '\\\\').replace(/"/g, '\\"');}
+			const navElement = document.querySelector('nav.site-nav');
+			const navPaths = navElement === null ? [] : JSON.parse(navElement.dataset.navPaths).map(normalizePath);
+			function getParentPath(path) {
 				const segments = path.split('/').filter(Boolean);
 				if(segments.length <= 1) {return '/';}
 				return `/${segments.slice(0, -1).join('/')}`;
-			};
-			const getNavIndex = path => {
+			}
+			function getProjectSelector(path) {
+				const trimmedPath = path === '/' ? path : path.replace(/\/$/, '');
+				return [
+					`.project[href="${escapeAttribute(trimmedPath)}"] .image img`,
+					`.project[href="${escapeAttribute(`${trimmedPath}/`)}"] .image img`,
+					`.project[href="${escapeAttribute(`${trimmedPath}.html`)}"] .image img`
+				].join(', ');
+			}
+			function getNavIndex(path) {
 				const exactIndex = navPaths.indexOf(path);
 				if(exactIndex !== -1) {return exactIndex;}
 
 				let bestIndex = -1;
 				let bestLength = -1;
-				navPaths.forEach((navPath, index) => {
+				navPaths.forEach(function(navPath, index) {
 					if(navPath === '/') {return;}
 					if(path === navPath || path.startsWith(`${navPath}/`)) {
 						if(navPath.length > bestLength) {
@@ -46,28 +55,30 @@
 					}
 				});
 				return bestIndex;
-			};
-			const getPathDepth = path => path.split('/').filter(Boolean).length;
-			const isProjectPairPath = (fromPath, toPath) => {
+			}
+			function getPathDepth(path) {return path.split('/').filter(Boolean).length;}
+			function isProjectPairPath(fromPath, toPath) {
 				const fromDepth = getPathDepth(fromPath);
 				const toDepth = getPathDepth(toPath);
 				return (toDepth >= 2 && getParentPath(toPath) === fromPath) || (fromDepth >= 2 && getParentPath(fromPath) === toPath);
-			};
+			}
+			function applyIncomingTransitions(fromUrl) {
+				if(fromUrl === null || fromUrl === undefined) {return;}
 
-			try {
-				const fromEntry = navigation.activation?.from;
-				if(fromEntry === null || fromEntry === undefined) {return;}
-
-				const fromPath = normalizePath(new URL(fromEntry.url).pathname);
+				const fromPath = normalizePath(new URL(fromUrl).pathname);
 				const currentPath = normalizePath(window.location.pathname);
 				const fromNavIndex = getNavIndex(fromPath);
 				const currentNavIndex = getNavIndex(currentPath);
+
+				document.documentElement.classList.remove('project-transition');
+				document.documentElement.removeAttribute('data-transition-direction');
+				const existingStyle = document.getElementById('project-transition-style');
+				if(existingStyle !== null) {existingStyle.remove();}
+
 				if(fromNavIndex !== -1 && currentNavIndex !== -1 && fromNavIndex !== currentNavIndex) {document.documentElement.dataset.transitionDirection = currentNavIndex > fromNavIndex ? 'left' : 'right';}
 				if(!isProjectPairPath(fromPath, currentPath)) {return;}
 
-				const selector = getParentPath(currentPath) === fromPath
-					? '.row.top .left > img'
-					: getParentPath(fromPath) === currentPath ? `.project[href="${escapeAttribute(fromPath)}"] .image img` : null;
+				const selector = getParentPath(currentPath) === fromPath ? '.row.top .left > img' : getParentPath(fromPath) === currentPath ? getProjectSelector(fromPath) : null;
 				if(selector === null) {return;}
 
 				document.documentElement.classList.add('project-transition');
@@ -75,7 +86,16 @@
 				style.id = 'project-transition-style';
 				style.textContent = `${selector}{view-transition-name:project-image;}`;
 				document.head.appendChild(style);
+			}
+
+			try {applyIncomingTransitions(navigation.activation && navigation.activation.from ? navigation.activation.from.url : null);
 			} catch(err) {}
+
+			window.addEventListener('pagereveal', function(event) {
+				const revealFromUrl = event.activation && event.activation.from ? event.activation.from.url : (navigation.activation && navigation.activation.from ? navigation.activation.from.url : null);
+				try {applyIncomingTransitions(revealFromUrl);
+				} catch(err) {}
+			});
 		})();
 	</script>
 
