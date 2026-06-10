@@ -6,6 +6,7 @@ const scrollPadding = 12;
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 const projectTransitionName = 'project-image';
 const projectTransitionStyleId = 'project-transition-style';
+const samePageReloadToTopKey = 'same-page-reload-to-top';
 
 function lockScroll() {
     scrollTop = window.scrollY;
@@ -53,6 +54,28 @@ function scrollToHashTarget() {
     const hashTarget = document.getElementById(hashId);
     if(hashTarget === null) {return;}
     scrollToTarget(hashTarget, false);
+}
+
+function reloadFromTop() {
+    try {
+        sessionStorage.setItem(samePageReloadToTopKey, '1');
+    } catch(err) {}
+    window.location.reload();
+}
+
+function isPrimaryNavigationClick(event, link) {
+    if(
+        event.defaultPrevented ||
+        event.button !== 0 ||
+        event.metaKey ||
+        event.ctrlKey ||
+        event.shiftKey ||
+        event.altKey ||
+        link.target.length > 0 ||
+        link.hasAttribute('download')
+    ) {return false;}
+
+    return true;
 }
 
 function normalizedPath(url) {return url.pathname.replace(/\/index\.html$/, '/').replace(/\/$/, '') || '/';}
@@ -110,6 +133,23 @@ window.addEventListener('pageswap', async event => {
     try {await event.viewTransition.finished;
     } finally {clearProjectTransitionNames();}
 });
+
+document.addEventListener('click', event => {
+    const link = event.target.closest('a');
+    if(link === null || !isPrimaryNavigationClick(event, link)) {return;}
+
+    const targetUrl = new URL(link.href, window.location.href);
+    const currentUrl = new URL(window.location.href);
+    if(targetUrl.origin !== currentUrl.origin) {return;}
+
+    const samePath = normalizedPath(targetUrl) === normalizedPath(currentUrl);
+    const sameSearch = targetUrl.search === currentUrl.search;
+    const sameHash = targetUrl.hash === currentUrl.hash;
+    if(samePath && sameSearch && sameHash) {
+        event.preventDefault();
+        reloadFromTop();
+    }
+}, true);
 
 const downButton = document.getElementById('down-button');
 if(downButton !== null) {

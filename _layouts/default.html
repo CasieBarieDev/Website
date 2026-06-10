@@ -18,6 +18,17 @@
 	<link rel="license" href="https://github.com/CasieBarieDev/Website/blob/main/LICENSE">
 	<link rel="icon" href="/assets/images/logo.webp">
 	<meta name="nav-paths" content='[{% for item in site.navigation %}{{ item.url | relative_url | jsonify }}{% unless forloop.last %},{% endunless %}{% endfor %}]'>
+	<script>
+		(function() {
+			try {
+				if(sessionStorage.getItem('same-page-reload-to-top') === '1') {
+					sessionStorage.removeItem('same-page-reload-to-top');
+					if('scrollRestoration' in window.history) {window.history.scrollRestoration = 'manual';}
+					window.scrollTo(0, 0);
+				}
+			} catch(err) {}
+		})();
+	</script>
 
 	<script>
 		(function() {
