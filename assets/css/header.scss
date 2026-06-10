@@ -150,6 +150,7 @@ nav.site-nav {
     left: 0;
     position: fixed;
     top: 0;
+    view-transition-name: site-nav;
     width: 100%;
 
     .hamburger {display: none;}

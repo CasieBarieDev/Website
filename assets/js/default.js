@@ -3,6 +3,9 @@ const body = document.body;
 const menuToggle = document.getElementById('menu-active');
 const siteNav = document.querySelector('nav.site-nav');
 const scrollPadding = 12;
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+const projectTransitionName = 'project-image';
+const projectTransitionStyleId = 'project-transition-style';
 
 function lockScroll() {
     scrollTop = window.scrollY;
@@ -52,6 +55,53 @@ function scrollToHashTarget() {
     scrollToTarget(hashTarget, false);
 }
 
+function normalizedPath(url) {return url.pathname.replace(/\/index\.html$/, '/').replace(/\/$/, '') || '/';}
+function escapeAttribute(value) {return value.replace(/\\/g, '\\\\').replace(/"/g, '\\"');}
+function getPathDepth(path) {return path.split('/').filter(Boolean).length;}
+function getProjectCardImageForPath(path) {return document.querySelector(`.project[href="${escapeAttribute(path)}"] .image img`);}
+function getProjectHeroImage() {return document.querySelector('.row.top .left > img');}
+function clearPageTransitionDirection() {document.documentElement.removeAttribute('data-transition-direction');}
+
+function getParentPath(path) {
+    const segments = path.split('/').filter(Boolean);
+    if(segments.length <= 1) {return '/';}
+    return `/${segments.slice(0, -1).join('/')}`;
+}
+
+function isProjectPairPath(fromPath, toPath) {
+    const fromDepth = getPathDepth(fromPath);
+    const toDepth = getPathDepth(toPath);
+    return (toDepth >= 2 && getParentPath(toPath) === fromPath) || (fromDepth >= 2 && getParentPath(fromPath) === toPath);
+}
+
+function clearProjectTransitionNames() {
+    document.getElementById(projectTransitionStyleId)?.remove();
+    document.documentElement.classList.remove('project-transition');
+    document.querySelectorAll('.row.top .left img, .project .image img').forEach(element => {element.style.viewTransitionName = '';});
+}
+
+window.addEventListener('pageswap', async event => {
+    if(reducedMotion.matches || event.viewTransition === null || event.activation === null || event.activation.from === null) {return;}
+
+    clearProjectTransitionNames();
+    clearPageTransitionDirection();
+
+    const currentPath = normalizedPath(new URL(event.activation.from.url));
+    const targetPath = normalizedPath(new URL(event.activation.entry.url));
+    if(!isProjectPairPath(currentPath, targetPath)) {return;}
+
+    const outgoingProjectImage = getProjectCardImageForPath(targetPath);
+    const heroImage = getProjectHeroImage();
+    const transitionImage = outgoingProjectImage ?? (heroImage !== null && getParentPath(currentPath) === targetPath ? heroImage : null);
+    if(transitionImage === null) {return;}
+
+    document.documentElement.classList.add('project-transition');
+    transitionImage.style.viewTransitionName = projectTransitionName;
+
+    try {await event.viewTransition.finished;
+    } finally {clearProjectTransitionNames();}
+});
+
 const downButton = document.getElementById('down-button');
 if(downButton !== null) {
     downButton.addEventListener('click', () => {
@@ -66,15 +116,11 @@ if(downButton !== null) {
 
 window.addEventListener('scroll', updateHeaderState);
 window.addEventListener('resize', syncMenuStateForViewport);
-window.addEventListener('hashchange', () => {
-    scrollToHashTarget();
-});
+window.addEventListener('hashchange', () => {scrollToHashTarget();});
 updateHeaderState();
 syncMenuStateForViewport();
 
-if(window.location.hash.length > 1) {
-    window.requestAnimationFrame(() => scrollToHashTarget());
-}
+if(window.location.hash.length > 1) {window.requestAnimationFrame(() => scrollToHashTarget());}
 
 document.querySelectorAll('form, input, select, textarea').forEach(el => el.setAttribute('autocomplete', 'off'));
 

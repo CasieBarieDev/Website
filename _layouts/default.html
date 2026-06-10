@@ -18,6 +18,67 @@
 	<link rel="license" href="https://github.com/CasieBarieDev/Website/blob/main/LICENSE">
 	<link rel="icon" href="/assets/images/logo.webp">
 
+	<script>
+		(() => {
+			if(!document.startViewTransition || !window.navigation || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {return;}
+
+			const normalizePath = path => path.replace(/\/index\.html$/, '/').replace(/\/$/, '') || '/';
+			const escapeAttribute = value => value.replace(/\\/g, '\\\\').replace(/"/g, '\\"');
+			const navPaths = [{% for item in site.navigation %}"{{ item.url | relative_url }}"{% unless forloop.last %}, {% endunless %}{% endfor %}].map(normalizePath);
+			const getParentPath = path => {
+				const segments = path.split('/').filter(Boolean);
+				if(segments.length <= 1) {return '/';}
+				return `/${segments.slice(0, -1).join('/')}`;
+			};
+			const getNavIndex = path => {
+				const exactIndex = navPaths.indexOf(path);
+				if(exactIndex !== -1) {return exactIndex;}
+
+				let bestIndex = -1;
+				let bestLength = -1;
+				navPaths.forEach((navPath, index) => {
+					if(navPath === '/') {return;}
+					if(path === navPath || path.startsWith(`${navPath}/`)) {
+						if(navPath.length > bestLength) {
+						    bestIndex = index;
+							bestLength = navPath.length;
+						}
+					}
+				});
+				return bestIndex;
+			};
+			const getPathDepth = path => path.split('/').filter(Boolean).length;
+			const isProjectPairPath = (fromPath, toPath) => {
+				const fromDepth = getPathDepth(fromPath);
+				const toDepth = getPathDepth(toPath);
+				return (toDepth >= 2 && getParentPath(toPath) === fromPath) || (fromDepth >= 2 && getParentPath(fromPath) === toPath);
+			};
+
+			try {
+				const fromEntry = navigation.activation?.from;
+				if(fromEntry === null || fromEntry === undefined) {return;}
+
+				const fromPath = normalizePath(new URL(fromEntry.url).pathname);
+				const currentPath = normalizePath(window.location.pathname);
+				const fromNavIndex = getNavIndex(fromPath);
+				const currentNavIndex = getNavIndex(currentPath);
+				if(fromNavIndex !== -1 && currentNavIndex !== -1 && fromNavIndex !== currentNavIndex) {document.documentElement.dataset.transitionDirection = currentNavIndex > fromNavIndex ? 'left' : 'right';}
+				if(!isProjectPairPath(fromPath, currentPath)) {return;}
+
+				const selector = getParentPath(currentPath) === fromPath
+					? '.row.top .left > img'
+					: getParentPath(fromPath) === currentPath ? `.project[href="${escapeAttribute(fromPath)}"] .image img` : null;
+				if(selector === null) {return;}
+
+				document.documentElement.classList.add('project-transition');
+				const style = document.createElement('style');
+				style.id = 'project-transition-style';
+				style.textContent = `${selector}{view-transition-name:project-image;}`;
+				document.head.appendChild(style);
+			} catch(err) {}
+		})();
+	</script>
+
 	<link rel="stylesheet" href="/assets/css/default.css">
 	<link rel="stylesheet" href="/assets/font/casiebarie.css">
 

@@ -68,6 +68,94 @@ body {
   margin-bottom: 10px;
   min-height: calc(100vh - 10em);
   place-items: center;
+  view-transition-name: page;
+}
+
+.project-transition #page {view-transition-name: none;}
+@view-transition {navigation: auto;}
+::view-transition-old(root) {animation: none;}
+::view-transition-new(root) {animation: none;}
+:root.project-transition::view-transition-old(root) {animation: project-page-fade-out .35s ease both;}
+:root.project-transition::view-transition-new(root) {animation: project-page-fade-in .45s ease .06s both;}
+::view-transition-old(page) {animation: page-slide-left-out .45s cubic-bezier(.4, 0, .2, 1) both;}
+::view-transition-new(page) {animation: page-slide-left-in .45s cubic-bezier(.4, 0, .2, 1) both;}
+:root[data-transition-direction='right']::view-transition-old(page) {animation-name: page-slide-right-out;}
+:root[data-transition-direction='right']::view-transition-new(page) {animation-name: page-slide-right-in;}
+:root[data-transition-direction='left']::view-transition-old(page) {animation-name: page-slide-left-out;}
+:root[data-transition-direction='left']::view-transition-new(page) {animation-name: page-slide-left-in;}
+
+::view-transition-group(page) {
+  overflow: clip;
+  z-index: 1;
+}
+
+::view-transition-group(project-image) {
+  animation-duration: .55s;
+  animation-timing-function: cubic-bezier(.4, 0, .2, 1);
+  overflow: clip;
+  z-index: 2;
+}
+
+::view-transition-group(site-nav) {z-index: 10;}
+::view-transition-image-pair(project-image) {isolation: auto;}
+
+::view-transition-old(project-image),
+::view-transition-new(project-image) {
+  animation: none;
+  border-radius: 10px;
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+@keyframes project-page-fade-out {
+  from {opacity: 1;}
+  to {opacity: .88;}
+}
+
+@keyframes project-page-fade-in {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+@keyframes page-slide-left-out {
+  from {transform: translateX(0);}
+  to {transform: translateX(-100vw);}
+}
+
+@keyframes page-slide-left-in {
+  from {transform: translateX(100vw);}
+  to {transform: translateX(0);}
+}
+
+@keyframes page-slide-right-out {
+  from {transform: translateX(0);}
+  to {transform: translateX(100vw);}
+}
+
+@keyframes page-slide-right-in {
+  from {transform: translateX(-100vw);}
+  to {transform: translateX(0);}
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: .001ms !important;
+  }
+
+  ::view-transition-old(root),
+  ::view-transition-new(root),
+  ::view-transition-old(page),
+  ::view-transition-new(page),
+  ::view-transition-group(page),
+  ::view-transition-group(project-image),
+  ::view-transition-old(project-image),
+  ::view-transition-new(project-image) {animation: none !important;}
 }
 
 #down-button {
