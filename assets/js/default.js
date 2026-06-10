@@ -68,6 +68,7 @@ function getProjectCardImageForPath(path) {
 }
 function getProjectHeroImage() {return document.querySelector('.row.top .left > img');}
 function clearPageTransitionDirection() {document.documentElement.removeAttribute('data-transition-direction');}
+function clearSamePageTransition() {document.documentElement.classList.remove('same-page-transition');}
 
 function getParentPath(path) {
     const segments = path.split('/').filter(Boolean);
@@ -90,6 +91,7 @@ function clearProjectTransitionNames() {
 window.addEventListener('pageswap', async event => {
     if(reducedMotion.matches || event.viewTransition === null || event.activation === null || event.activation.from === null) {return;}
 
+    clearSamePageTransition();
     clearProjectTransitionNames();
     clearPageTransitionDirection();
 

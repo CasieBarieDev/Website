@@ -71,12 +71,17 @@ body {
   view-transition-name: page;
 }
 
+.same-page-transition #page,
 .project-transition #page {view-transition-name: none;}
 @view-transition {navigation: auto;}
 ::view-transition-old(root) {animation: none;}
 ::view-transition-new(root) {animation: none;}
+:root.same-page-transition::view-transition-old(root) {animation: none;}
+:root.same-page-transition::view-transition-new(root) {animation: none;}
 :root.project-transition::view-transition-old(root) {animation: project-page-fade-out .35s ease both;}
 :root.project-transition::view-transition-new(root) {animation: project-page-fade-in .45s ease .06s both;}
+ :root.same-page-transition::view-transition-old(page) {animation: none;}
+ :root.same-page-transition::view-transition-new(page) {animation: none;}
 ::view-transition-old(page) {animation: page-slide-left-out .45s cubic-bezier(.4, 0, .2, 1) both;}
 ::view-transition-new(page) {animation: page-slide-left-in .45s cubic-bezier(.4, 0, .2, 1) both;}
 :root[data-transition-direction='right']::view-transition-old(page) {animation-name: page-slide-right-out;}

@@ -17,6 +17,7 @@
 	<meta name="theme-color" content="#000000">
 	<link rel="license" href="https://github.com/CasieBarieDev/Website/blob/main/LICENSE">
 	<link rel="icon" href="/assets/images/logo.webp">
+	<meta name="nav-paths" content='[{% for item in site.navigation %}{{ item.url | relative_url | jsonify }}{% unless forloop.last %},{% endunless %}{% endfor %}]'>
 
 	<script>
 		(function() {
@@ -24,8 +25,8 @@
 
 			function normalizePath(path) {return path.replace(/\/index\.html$/, '/').replace(/\/$/, '') || '/';}
 			function escapeAttribute(value) {return value.replace(/\\/g, '\\\\').replace(/"/g, '\\"');}
-			const navElement = document.querySelector('nav.site-nav');
-			const navPaths = navElement === null ? [] : JSON.parse(navElement.dataset.navPaths).map(normalizePath);
+			const navPathsMeta = document.querySelector('meta[name="nav-paths"]');
+			const navPaths = navPathsMeta === null ? [] : JSON.parse(navPathsMeta.content).map(normalizePath);
 			function getParentPath(path) {
 				const segments = path.split('/').filter(Boolean);
 				if(segments.length <= 1) {return '/';}
@@ -70,10 +71,16 @@
 				const fromNavIndex = getNavIndex(fromPath);
 				const currentNavIndex = getNavIndex(currentPath);
 
+				document.documentElement.classList.remove('same-page-transition');
 				document.documentElement.classList.remove('project-transition');
 				document.documentElement.removeAttribute('data-transition-direction');
 				const existingStyle = document.getElementById('project-transition-style');
 				if(existingStyle !== null) {existingStyle.remove();}
+
+				if(fromPath === currentPath) {
+					document.documentElement.classList.add('same-page-transition');
+					return;
+				}
 
 				if(fromNavIndex !== -1 && currentNavIndex !== -1 && fromNavIndex !== currentNavIndex) {document.documentElement.dataset.transitionDirection = currentNavIndex > fromNavIndex ? 'left' : 'right';}
 				if(!isProjectPairPath(fromPath, currentPath)) {return;}
