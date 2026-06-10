@@ -26,7 +26,7 @@
 
 // Body styling
 body {
-  background: black linear-gradient($bg-color-1 0%, $bg-color-1 100%) fixed;
+  background: $bg-color-1;
   box-sizing: border-box;
   color: $font-color;
   font-family: monospace;
@@ -430,6 +430,7 @@ a {
 }
 
 // Media Queries for Mobile
+@media (max-width: 768px) {#down-button {display: none;}}
 @media (max-width: 600px) {
   .coll {
     font-size: clamp(1rem, 5vw, 1.3rem);
