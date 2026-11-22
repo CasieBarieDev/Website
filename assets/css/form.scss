@@ -6,103 +6,104 @@
 .grecaptcha-badge { visibility: hidden; }
 
 form {
-  font-size: 13px;
-  border-radius: 16px;
-  margin: auto;
-  max-width: 50em;
-  padding: 20px 10px 10px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: .95rem;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 42rem;
+  color-scheme: dark;
+  font-size: .9375rem;
+  line-height: 1.32;
+  text-align: left;
 
   h3 {
-    margin-bottom: 1em;
-    margin-left: .5em;
+    margin: 0;
+    padding-bottom: 0;
+    font-size: 1.125rem;
   }
 
   .form-status {
-    margin-top: 10px;
-    font-size: 0.9rem;
+    font-size: .9rem;
     opacity: 0;
-    min-height: 1em;
-    transition: opacity 0.4s ease;
+    transition: opacity .4s ease;
+
+    &:empty { display: none; }
+  }
+
+  .snippet pre {
+    max-width: 100%;
+    overflow-x: auto;
   }
 
   #captchamsg {
-    padding-top: 5px;
-    font-size: 0.7em;
-    text-align: left;
+    font-size: .75rem;
+    line-height: 1.35;
 
     a {
-      display: inline-block;
-      padding: 6px 8px;
-      margin: -6px -8px;
+      text-decoration: underline;
+      text-underline-offset: .15em;
     }
   }
 
   .form {
-    color: $font-color;
-    margin-bottom: 26px;
-    position: relative;
-    transition: color .3s ease;
+    display: grid;
+    gap: .3rem;
+    min-width: 0;
 
-    &:has(.input:disabled) {display: none;}
+    &:has(.input:disabled) { display: none; }
 
     label {
-      left: 8px;
-      padding: 0 2px;
-      position: absolute;
-      top: -10px;
-      transform: translateY(-50%);
-      transition: top .3s ease;
+      grid-row: 1;
+      color: $font-color-highlight;
+      font-weight: bold;
 
-      .required {color: $font-color-gray;}
+      .required { color: $font-color-gray; }
     }
 
-    textarea {
-      max-height: 110px;
-      min-height: 110px;
-      overflow: hidden;
-      resize: vertical;
-    }
+    &:has(.input:required) .required { color: $close-color; }
+    &:has(.input.invalid) label { color: $close-color; }
+    &:has(.input:focus-visible) label { color: $primary-color; }
 
     .count {
-      display: inline-block;
-      text-align: right;
+      float: right;
       visibility: hidden;
-      padding-left: 20px;
+      padding-inline-start: .5rem;
       color: $font-color-gray;
+      font-weight: normal;
+    }
 
-      .active{
-        visibility: visible;
-      }
+    &:focus-within .count { visibility: visible; }
+
+    &:has(input[type="checkbox"]:enabled) {
+      display: flex;
+      align-items: center;
+      gap: .55rem;
+
+      label { cursor: pointer; }
     }
   }
 
   .input {
-    background: transparent;
-    border: 2px solid $gray-color;
-    border-radius: 9px;
-    box-sizing: border-box;
-    color: $font-color;
-    padding: 8px;
-    transition: border-color .3s ease, background-color .3s ease;
     width: 100%;
+    min-width: 0;
+    min-height: 2.7rem;
+    box-sizing: border-box;
+    padding: .55rem .75rem;
+    border: 1px solid $card-border-color;
+    border-radius: .65rem;
+    background-color: $badge-bg-color;
+    color: $font-color;
+    font: inherit;
+    transition: border-color .2s ease, box-shadow .2s ease;
 
-    &:focus {
-      outline: none;
-      & ~ label .count {visibility: visible;}
-      & ~ label {color: $secondary-color !important;}
+    &.valid { border-color: color-mix(in srgb, $primary-color 45%, $card-border-color); }
+    &.invalid { border-color: $close-color; }
+
+    &:focus-visible {
+      outline: 2px solid $primary-color;
+      outline-offset: 2px;
     }
-
-    &.invalid {
-      border-color: $close-color;
-      ~ label {color: $close-color;}
-    }
-
-    &.valid {
-      border-color: $primary-color;
-      ~ label {color: $primary-color;}
-    }
-
-    &:required ~ label .required {color: $close-color;}
 
     option, optgroup {
       background: $bg-color-1;
@@ -110,66 +111,114 @@ form {
     }
   }
 
+  select.input {
+    appearance: none;
+    padding-inline-end: 2rem;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='m1 1 5 5 5-5' fill='none' stroke='%23d2d2d2' stroke-linecap='round' stroke-width='1.5'/%3E%3C/svg%3E");
+    background-position: right .75rem center;
+    background-repeat: no-repeat;
+  }
+
+  textarea.input {
+    min-height: 7rem;
+    resize: vertical;
+  }
+
   .form-inline {
     display: grid;
-    gap: 16px;
-    grid-template-columns: 1fr .1fr 1fr;
+    align-items: end;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    gap: .6rem;
 
-    p {
+    > p {
+      align-self: end;
+      margin-bottom: .65rem;
       color: $font-color-gray;
-      margin-top: 10px;
+      font-size: .75rem;
       text-align: center;
     }
 
-    .form:has(.input:disabled) ~ p {display: none;}
+    &:has(> p:empty) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      > p { display: none; }
+    }
 
-    @media screen and (max-width: 700px) {
-      gap: unset;
-      grid-template-columns: 1fr;
+    &:has(> .form .input:disabled) {
+      grid-template-columns: minmax(0, 1fr);
+      > p { display: none; }
+    }
 
-      .or {display: none;}
+    &:not(:has(> .form > .input:enabled)) { display: none; }
+
+    @media (max-width: 600px) {
+      grid-template-columns: minmax(0, 1fr);
+
+      > p { margin-bottom: 0; }
     }
   }
 
   input[type="checkbox"] {
     appearance: none;
+    width: 1.2rem;
+    min-height: 0;
+    height: 1.2rem;
+    padding: 0;
+    flex: none;
+    border-radius: .3rem;
     cursor: pointer;
-    transition: background-color .3s ease, border-color .3s ease;
 
     &:checked {
       background-color: $primary-color;
       border-color: $primary-color;
-      box-shadow: inset 0 0 0 4px $bg-color-1;
+      box-shadow: inset 0 0 0 3px $badge-bg-color;
     }
-
-    ~ label:hover {cursor: pointer;}
   }
 
   button {
-    background: transparent;
-    border: 2px solid $gray-color;
-    border-radius: 9px;
-    color: $font-color-gray;
-    padding: 10px 30px;
-    transition: all .3s;
     width: 100%;
+    min-height: 2.75rem;
+    padding: .55rem .9rem;
+    border: 1px solid $card-border-color;
+    border-radius: .65rem;
+    background: $bg-color-2;
+    color: $font-color-gray;
+    font: inherit;
+    font-weight: bold;
+    transition: background-color .2s ease, border-color .2s ease;
 
-    &.enabled {
+    &.enabled:not(:disabled) {
       border-color: $primary-color;
+      background: color-mix(in srgb, $primary-color 14%, $bg-color-2);
       color: $primary-color;
+      cursor: pointer;
 
-      &:hover {
-        border-color: $secondary-color;
-        cursor: pointer;
-      }
+      &:hover { background: color-mix(in srgb, $primary-color 25%, $bg-color-2); }
     }
 
-    &:not(.enabled) {cursor: no-drop;}
+    &:focus-visible {
+      outline: 2px solid $primary-color;
+      outline-offset: 2px;
+    }
+
+    &:not(.enabled), &:disabled { cursor: not-allowed; }
   }
 }
 
+#placeholders form {
+  box-sizing: border-box;
+  margin-top: .85rem;
+  padding: clamp(.8rem, 2.2vw, 1.15rem);
+  border: 1px solid $panel-border-color;
+  border-radius: 1rem;
+  background: $panel-bg-color;
+}
+
+#placeholders .result-container {
+  #result, #preview { overflow-wrap: anywhere; }
+}
+
 @keyframes shake {
-  0%, 100% {transform: translateX(5px);}
-  10%, 30%, 50%, 70%, 90% {transform: translateX(-5px);}
-  20%, 40%, 60%, 80% {transform: translateX(5px);}
+  0%, 100% { transform: translateX(5px); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+  20%, 40%, 60%, 80% { transform: translateX(5px); }
 }

@@ -2,15 +2,27 @@
 title: Hear the Painting
 layout: default
 description: Turn paintings into sound experiences with this interactive school project.
+permalink: /projects/hear-the-painting/
+portfolio:
+  category: games
+  order: 80
+  image: /assets/images/projects/hear-the-painting.webp
+  summary: Explore art through sound
+  status: Released
+  contact_topic: Hear The Painting
+redirect_from:
+  - /other/hearthepainting/
+  - /other/hearthepainting
 ---
 
 <div class="row top" id="top">
 	<div class="left">
-		<img src="/assets/images/other/hearthepainting.webp" alt="Hear the Painting" fetchpriority="high" width="1024" height="1024"/>
+		<img src="{{ page.portfolio.image }}" alt="Hear the Painting" fetchpriority="high" width="1024" height="1024"/>
 	</div>
 	<div class="right text">
 		<h1>Hear the Painting</h1>
-		<a href="https://github.com/CasieBarie/HearThePainting" class="shield" target="_blank"><img src="https://img.shields.io/github/license/CasieBarie/HearThePainting?label=GitHub&logo=github&style=plastic" alt="Github" height="20" width="119"></a>
+		{% include project-badges.html portfolio=page.portfolio %}
+		<a href="https://github.com/CasieBarie/HearThePainting" class="shield" target="_blank"><img src="https://img.shields.io/github/license/CasieBarie/HearThePainting?label=GitHub&amp;logo=github&amp;style=flat&amp;labelColor=0b1016&amp;color=36405b&amp;logoColor=b9c9f6" alt="Github" height="20" width="119"></a>
 		<p>For my study, I explored the idea of describing a painting using senses other than sight, focusing specifically on sound.</p><br>
 		<p class="gray">I envisioned a scenario where blind individuals visiting a museum could touch a painting while hearing sounds that bring the artwork to life. To illustrate this concept, I created a small webpage as a proof of concept.</p><br>
 		<p class="gray">Note: The webpage is in Dutch and is not optimized for small screens.</p>

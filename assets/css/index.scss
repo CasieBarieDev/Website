@@ -1,43 +1,74 @@
 ---
 ---
 
-.languages {
+@use "variables" as *;
+
+#enjoying > .text > ul {
+  margin-block: 0 1rem;
+
+  > li + li { margin-block-start: .45rem; }
+}
+
+.tech-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 3.65rem), 1fr));
+  gap: .5rem;
+
   a {
-    display: inline-block;
-    margin: 1.5em .5em 1em 0;
+    display: grid;
+    min-height: 3.65rem;
+    place-items: center;
     position: relative;
+    border: 1px solid $panel-border-color;
+    border-radius: .55rem;
+    background: $panel-bg-color;
+    transition: border-color .2s ease-out, background .2s ease-out;
 
     .tooltip {
+      background: $badge-bg-color;
       border-radius: 5px;
       font-size: .7em;
       font-weight: bold;
       left: 50%;
       opacity: 0;
-      padding: 5px 8px;
+      padding: .2rem .4rem;
+      pointer-events: none;
       position: absolute;
-      top: -10px;
-      transform: translateX(-50%);
-      transition: opacity .3s ease, top .3s ease;
+      bottom: calc(100% + .25rem);
+      transform: translate(-50%, .15rem);
+      transition: opacity .2s ease-out, transform .2s ease-out;
       visibility: hidden;
       white-space: nowrap;
     }
 
-    &:hover .tooltip {
-      opacity: 1;
-      top: -1.8em;
-      visibility: visible;
+    &:hover, &:focus-visible {
+      border-color: currentColor;
+      background: color-mix(in srgb, currentColor 9%, #{$badge-bg-color});
+      z-index: 1;
+
+      .tooltip {
+        opacity: 1;
+        transform: translate(-50%, 0);
+        visibility: visible;
+      }
+    }
+
+    &:focus-visible {
+      outline: 2px solid currentColor;
+      outline-offset: 2px;
     }
 
     img {
       border-radius: 0;
       display: block;
-      height: 3em;
-      margin: 0 auto;
-      width: 3em;
+      height: auto;
+      width: min(70%, 2.45rem);
+      aspect-ratio: 1;
+      object-fit: contain;
     }
   }
 
   // Language-specific icon colors
-  $icon-colors: ("java": #ed8b00, "dart": #00c5b4, "python": #4584b6, "html5": #e34f26, "css3": #1172b8, "js": #f0db4f, "json": #939393, "flutter": #2eb7f5, "spigot": #db8522, "jda": #9348d8, "jekyll": #d70000, "sass": #d06da1, "sqlite": #4ea9e0, "intellij": #f43463, "maven": #c82038, "github": #e6edf3, "trello": #126ae4, "android": #95cf00, "arduino": #2e989c, "davinci": #ff8000);
+  $icon-colors: ("java": #ed8b00, "dart": #00c5b4, "c": #03599c, "python": #4584b6, "html5": #e34f26, "css3": #1172b8, "js": #f0db4f, "json": #939393, "flutter": #2eb7f5, "homeassistant": #18bcf2, "spigot": #db8522, "jda": #9348d8, "jekyll": #d70000, "sass": #d06da1, "sqlite": #4ea9e0, "intellij": #f43463, "maven": #c82038, "github": #e6edf3, "android": #95cf00, "arduino": #2e989c, "davinci": #ff8000);
   @each $name, $color in $icon-colors {a:has(.#{$name}) {color: $color;}}
 }

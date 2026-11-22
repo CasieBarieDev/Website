@@ -1,6 +1,6 @@
-$primary-color: rgb(40, 155, 255);
-$secondary-color: rgb(255, 80, 155);
-$close-color: rgb(255, 92, 92);
+$primary-color: #2ed3f2;
+$secondary-color: #ff509b;
+$close-color: #ff5c5c;
 
 // Font colors
 $font-color: rgb(255, 255, 255);
@@ -11,10 +11,15 @@ $font-color-invert-highlight: rgb(75, 75, 75);
 $font-color-title: rgb(255, 255, 255);
 
 // Background colors
-$bg-color-1: rgb(28, 28, 28);
-$bg-color-2: rgb(42, 42, 42);
+$bg-color-1: #101419;
+$bg-color-2: #1a222c;
+$page-overlay-color: rgba(0, 0, 0, .5);
+$panel-bg-color: rgba(255, 255, 255, .02);
+$panel-border-color: rgba(255, 255, 255, .05);
+$badge-bg-color: #0b1016;
+$card-border-color: #2c3845;
 $gray-color: rgb(175, 175, 175);
-$footer-bg-color: rgb(0, 0, 0);
+$footer-bg-color: #000000;
 
 // Layout spacing
 $list-padding: 1em;

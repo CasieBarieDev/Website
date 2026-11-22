@@ -114,19 +114,25 @@ submitBtn.addEventListener("click", async () => {
     submitBtn.textContent = "Sending...";
     showStatus("", "");
 
-    const token = await grecaptcha.enterprise.execute('6LeHyfYrAAAAAKSqIGfSItFsaG8tjpcv6JP_rmDh', { action: 'submit' });
-    const PROXY_URL = "https://websitecontactform.barcas2004.workers.dev/";
-    const data = {
-        name: document.getElementById("name").value.trim(),
-        email: document.getElementById("email").value.trim(),
-        discord: document.getElementById("discord").value.trim(),
-        topic: document.getElementById("topics").value,
-        message: document.getElementById("message").value.trim(),
-        honeypot: form.querySelector("[name='honeypot']").value,
-        token
-    }; if(data.honeypot) {showStatus("❌ Failed to send message. Please try again.", "#ef4444"); return;}
-
     try {
+        const honeypot = form.querySelector("[name='honeypot']").value;
+        if (honeypot) {
+            showStatus("❌ Failed to send message. Please try again.", "#ef4444");
+            return;
+        }
+
+        const token = await grecaptcha.enterprise.execute('6LeHyfYrAAAAAKSqIGfSItFsaG8tjpcv6JP_rmDh', { action: 'submit' });
+        const PROXY_URL = "https://websitecontactform.barcas2004.workers.dev/";
+        const data = {
+            name: document.getElementById("name").value.trim(),
+            email: document.getElementById("email").value.trim(),
+            discord: document.getElementById("discord").value.trim(),
+            topic: document.getElementById("topics").value,
+            message: document.getElementById("message").value.trim(),
+            honeypot,
+            token
+        };
+
         const res = await fetch(PROXY_URL, {
             method: "POST",
             headers: { "Content-Type": "application/json" },

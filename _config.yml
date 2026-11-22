@@ -1,6 +1,6 @@
 title: CasieBarie Development
 description: >-
-  Developer portfolio of CasieBarie. Explore Minecraft plugins, Discord bots, and creative projects.
+  Personal portfolio of CasieBarie, featuring Zuipse!, interactive projects, and tools built for Home Assistant.
 author:
   name: Cas Barnard
   email: casiebarie@gmail.com
@@ -25,20 +25,16 @@ navigation:
   - title: HOME
     url: /
   - title: ZUIPSE!
-    url: /zuipse
-  - title: MINECRAFT PROJECTS
-    url: /minecraft/
-  - title: DISCORD BOTS
-    url: /discord/
-  - title: OTHER PROJECTS
-    url: /other/
+    url: /zuipse/
+  - title: PROJECTS
+    url: /projects/
   - title: ABOUT ME
     url: /aboutme
 
 seo:
   type: "website"
   name: "CasieBarie Development"
-  description: "Developer portfolio of CasieBarie. Explore Minecraft plugins, Discord bots, and creative projects."
+  description: "Personal portfolio of CasieBarie, featuring Zuipse!, interactive projects, and tools built for Home Assistant."
   url: "https://www.casiebarie.dev"
   logo: "/assets/images/logo.webp"
   twitter:

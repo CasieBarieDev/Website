@@ -4,15 +4,23 @@ layout: default
 description: A fun party app with unique challenges.
 redirect_from:
  - /zuipseapp
+ - /zuipseapp/
+permalink: /zuipse/
+portfolio:
+  category: games
+  order: 10
+  image: /assets/images/zuipse.webp
+  summary: Party games for friends
+  status: In Development
 ---
 
 <div class="row top" id="top">
 	<div class="left">
-		<img src="/assets/images/other/zuipse.webp" alt="Zuipse!" fetchpriority="high" width="1024" height="1024"/>
+		<img src="{{ page.portfolio.image }}" alt="Zuipse!" fetchpriority="high" width="1024" height="1024"/>
 	</div>
 	<div class="right text">
 		<h1>Zuipse!</h1>
-		<p><b class="red">In Development</b></p><br>
+		{% include project-badges.html portfolio=page.portfolio %}
 		<p>Play, Sip, Repeat!<br><br>Zuipse! is an upcoming mobile game that brings the party to your phone. Jump into a mix of chaotic drinking games, play together in multiplayer or pass the device around, and see who can keep up when things get wild. Take your drinks, follow the game, and turn every round into a fun experience with friends.</p><br>
 		<p class="gray">Join our community and be among the first to experience this exciting party!</p><br>
 	</div>

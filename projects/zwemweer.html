@@ -1,0 +1,60 @@
+---
+title: Zwemweer
+layout: default
+permalink: /projects/zwemweer/
+description: A custom Home Assistant card that brings swimming advice, water quality, and pool schedules into one dashboard.
+portfolio:
+  category: home-assistant
+  order: 40
+  image: /assets/images/projects/zwemweer.webp
+  summary: Weather for swimming
+  status: Personal · No Release
+---
+
+<div class="row top" id="top">
+    <div class="left">
+        <img src="{{ page.portfolio.image | relative_url }}" alt="Zwemweer logo" fetchpriority="high" width="1254" height="1254">
+    </div>
+    <div class="right text">
+        <h1>{{ page.title | escape }}</h1>
+        {% include project-badges.html portfolio=page.portfolio %}
+        <p>Is the water warm enough? What do the latest quality measurements say? When can I go swimming? I built Zwemweer to bring those answers together in Home Assistant.</p><br>
+        <p class="gray">A compact dashboard badge shows the main status. Opening it reveals swimming advice, water conditions, and pool schedules in a custom interface for desktop and mobile.</p>
+    </div>
+</div>
+
+<span id="down-button"><span></span></span>
+
+<section class="row scrollto" id="swim-planning" aria-labelledby="swim-planning-heading">
+    <div class="left text">
+        <h2 id="swim-planning-heading">Before Heading Out</h2>
+        <p>The outdoor overview brings water and air temperatures together with water quality, bacteria readings, and measurement dates. Seeing when a reading was taken is just as useful as seeing the reading itself.</p><br>
+        <p class="gray">On a cold day, I can check the outdoor advice and then switch to the pool schedule to find a suitable swim time. The schedule also highlights restrictions, such as swimming lessons that may affect lane availability.</p>
+    </div>
+    <div class="empty"></div>
+</section>
+
+<section class="row" id="home-assistant" aria-labelledby="home-assistant-heading">
+    <div class="empty"></div>
+    <div class="right text">
+        <h2 id="home-assistant-heading">Connected to Home Assistant</h2>
+        <p>Zwemweer reads its measurements, advice, and schedule data from Home Assistant entities. Tapping a reading or status opens the associated entity details, keeping the underlying information within reach.</p><br>
+        <p class="gray">A sensor can provide the preferred location. If that value is unavailable, the card falls back to a choice based on the season and outdoor swimming advice. Missing measurements and schedule data older than three hours are shown explicitly.</p>
+    </div>
+</section>
+
+<section class="row bottom" id="dashboard-card" aria-labelledby="dashboard-card-heading">
+    <div class="left text">
+        <h2 id="dashboard-card-heading">Built for Both Screens</h2>
+        <p>On desktop, the outdoor overview and pool schedule sit side by side. On mobile, they become swipeable tabs with smooth transitions. The popup keeps a consistent height, while the longer schedule scrolls independently.</p><br>
+        <ul class="gray">
+            <li>A custom JavaScript web component uses Shadow DOM to keep the card’s styles contained.</li>
+            <li>The badge and detail view share the same status calculation to keep their advice consistent.</li>
+            <li>Container queries adapt the layout to the space available inside the dashboard.</li>
+            <li>Targeted DOM updates preserve existing elements as readings change.</li>
+            <li>Transitions respect the device’s reduced-motion preference.</li>
+        </ul><br>
+        <p class="gray">I built Zwemweer for personal use and don’t plan to release it.</p>
+    </div>
+    <div class="empty"></div>
+</section>

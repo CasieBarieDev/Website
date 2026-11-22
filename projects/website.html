@@ -1,16 +1,28 @@
 ---
 title: Website
 layout: default
-description: The code behind this very site!
+description: The code and tools behind my portfolio.
+permalink: /projects/website/
+portfolio:
+  category: apps-web
+  order: 90
+  image: /assets/images/projects/website.webp
+  summary: Behind this portfolio
+  title: This Portfolio
+  contact_topic: This Website
+redirect_from:
+  - /other/website/
+  - /other/website
 ---
 
 <div class="row top" id="top">
 	<div class="left">
-		<img src="/assets/images/other/website.webp" alt="Website" fetchpriority="high" width="1024" height="1024"/>
+		<img src="{{ page.portfolio.image }}" alt="Website" fetchpriority="high" width="1024" height="1024"/>
 	</div>
 	<div class="right text">
 		<h1>Website</h1>
-		<a href="https://github.com/CasieBarieDev/Website" class="shield" target="_blank"><img src="https://img.shields.io/github/license/CasieBarieDev/Website?label=GitHub&logo=github&style=plastic" alt="Github" height="20" width="119"></a>
+		{% include project-badges.html portfolio=page.portfolio %}
+		<a href="https://github.com/CasieBarieDev/Website" class="shield" target="_blank"><img src="https://img.shields.io/github/license/CasieBarieDev/Website?label=GitHub&amp;logo=github&amp;style=flat&amp;labelColor=0b1016&amp;color=36405b&amp;logoColor=b9c9f6" alt="Github" height="20" width="119"></a>
 		<p>This project serves as the official online portfolio and information hub for CasieBarie Development, showcasing my projects, services and expertise.</p>
 	</div>
 </div>
@@ -19,10 +31,10 @@ description: The code behind this very site!
 	<div class="left text">
 		<h2>Features</h2>
 		<ul class="gray">
-			<li><b>Optimized Performance:</b><ul class="none"><li>The site is optimized based on <a href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Fwww.casiebarie.dev%2F" title="Pagespeed Insights">Pagespeed Insights <i class="icon-arrow-up-right-from-square"></i></a> recommendations to ensure fast loading times and smooth interactions.</li></ul></li>
-			<li><b>Responsive Design</b><ul class="none"><li>Optimized for various devices, including mobile phones, tablets and desktops.</li></ul></li>
-			<li><b>Project Portfolio</b><ul class="none"><li>Showcases my completed projects with detailed descriptions and images.</li></ul></li>
-			<li><b>About Me Page</b><ul class="none"><li>Provides insight into the background, skills and experience of CasieBarie.</li></ul></li>
+			<li><b>Performance</b><ul class="none"><li>The site is optimized based on <a href="https://pagespeed.web.dev/analysis?url=https%3A%2F%2Fwww.casiebarie.dev%2F" title="PageSpeed Insights">PageSpeed Insights <i class="icon-arrow-up-right-from-square"></i></a> recommendations to ensure fast loading times and smooth interactions.</li></ul></li>
+			<li><b>Responsive Design</b><ul class="none"><li>The layout adapts to phones, tablets, and desktops.</li></ul></li>
+			<li><b>Project Portfolio</b><ul class="none"><li>Project pages cover finished work and work in progress, with images and technical details.</li></ul></li>
+			<li><b>About Me Page</b><ul class="none"><li>A short introduction to my background and interests.</li></ul></li>
 			<li><b>Contact Form</b><ul class="none"><li>Enables visitors to reach out directly from the site using a backend-powered form with spam protection and reCAPTCHA verification.</li></ul></li>
 			<li><b>Automatic Lowercase URL</b><ul class="none"><li>If a page is not found, the 404 page will first attempt to lowercase the URL.</li></ul></li>
 		</ul>
@@ -51,11 +63,11 @@ description: The code behind this very site!
 				<ul class="none gray"><li>Styling for responsive and visually appealing designs.</li></ul>
 			</li>
 			<li>
-				<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" title="Javascript" class="white">Javascript <i class="icon-arrow-up-right-from-square"></i></a>
+				<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" title="JavaScript" class="white">JavaScript <i class="icon-arrow-up-right-from-square"></i></a>
 				<ul class="none gray"><li>Adds interactivity and dynamic elements.</li></ul>
 			</li>
 		</ul>
-		<h3>Tools & Hosting</h3>
+		<h3>Tools &amp; Hosting</h3>
 		<ul>
 			<li>
 				<a href="https://workers.cloudflare.com/" title="Cloudflare Workers" class="white">Cloudflare Workers <i class="icon-arrow-up-right-from-square"></i></a>

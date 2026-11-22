@@ -1,0 +1,45 @@
+@use "sass:color";
+@use "variables" as *;
+
+.project-badges {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  gap: .3rem;
+  margin: .25rem 0 .65rem;
+
+  span {
+    padding: .1rem .35rem;
+    border: 1px solid currentColor;
+    border-radius: .3rem;
+    background: $badge-bg-color;
+    color: $font-color-highlight;
+    font: 600 .75rem/1.25 system-ui, sans-serif;
+    white-space: nowrap;
+  }
+
+  .project-category { color: var(--category-color, #{$primary-color}); }
+  .in-development { color: $close-color; }
+  .released { color: #85dc9a; }
+  .personal-no-release { color: #dfbc91; }
+}
+
+[data-category="games"], [data-filter="games"] {
+  --category-color: #{$primary-color};
+}
+
+[data-category="home-assistant"], [data-filter="home-assistant"] {
+  --category-color: #{color.mix(#92baff, $primary-color, 65%)};
+}
+
+[data-category="apps-web"], [data-filter="apps-web"] {
+  --category-color: #{color.mix(#a7d9b3, $primary-color, 70%)};
+}
+
+[data-category="discord"], [data-filter="discord"] {
+  --category-color: #{color.mix(#c5a8fa, $primary-color, 80%)};
+}
+
+[data-category="minecraft"], [data-filter="minecraft"] {
+  --category-color: #{color.mix(#f2ce94, $primary-color, 90%)};
+}

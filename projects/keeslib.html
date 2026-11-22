@@ -4,22 +4,35 @@ layout: default
 description: A helpful utility library that supports my plugins.
 highlight: true
 form: true
+permalink: /projects/keeslib/
+portfolio:
+  category: minecraft
+  order: 110
+  image: /assets/images/projects/keeslib.webp
+  summary: Minecraft plugin library
+  status: Released
+redirect_from:
+  - /minecraft/keeslib/
+  - /minecraft/keeslib
 ---
 
 <div class="row top" id="top">
 	<div class="left">
-		<img src="/assets/images/minecraft/keeslib.webp" alt="Logo" fetchpriority="high" width="1254" height="1254"/>
+		<img src="{{ page.portfolio.image }}" alt="Logo" fetchpriority="high" width="1254" height="1254"/>
 	</div>
 	<div class="right text">
 		<h1>KeesLib</h1>
+		{% include project-badges.html portfolio=page.portfolio %}
+		<div class="shield-group">
+			<a href="https://central.sonatype.com/artifact/dev.casiebarie/KeesLib" class="shield" target="_blank" title="Maven Release"><img alt="Maven Release" src="https://img.shields.io/maven-central/v/dev.casiebarie/KeesLib?logo=apachemaven&amp;label=Maven%20Central&amp;style=flat&amp;labelColor=0b1016&amp;color=3e385e&amp;logoColor=c6b4f4" height="20" width="151"></a>
+			<a href="https://javadoc.io/doc/dev.casiebarie/KeesLib" class="shield" target="_blank" title="Javadocs"><img alt="Javadocs" src="https://img.shields.io/badge/Javadocs-%20-A33333?logo=readthedocs&amp;style=flat&amp;labelColor=0b1016&amp;color=2c5149&amp;logoColor=9fe1c6" height="20" width="87"></a>
+			<a href="https://github.com/CasieBarieDev/KeesLib/releases" class="shield" target="_blank" title="Github"><img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/CasieBarieDev/KeesLib?label=Size&amp;logo=Github&amp;style=flat&amp;labelColor=0b1016&amp;color=36405b&amp;logoColor=b9c9f6" height="20" width="107"></a>
+			<a href="https://github.com/CasieBarieDev/KeesLib/blob/main/LICENSE" class="shield" target="_blank" title="Licence"><img alt="GitHub" src="https://img.shields.io/github/license/CasieBarieDev/KeesLib?label=License&amp;logo=Github&amp;style=flat&amp;labelColor=0b1016&amp;color=36405b&amp;logoColor=b9c9f6" height="20" width="123"></a>
+		</div>
 		<p>
-			<a href="https://central.sonatype.com/artifact/dev.casiebarie/KeesLib" class="shield" target="_blank" title="Maven Release"><img alt="Maven Release" src="https://img.shields.io/maven-central/v/dev.casiebarie/KeesLib?logo=apachemaven&label=Maven%20Central" height="20" width="151"></a>
-			<a href="https://javadoc.io/doc/dev.casiebarie/KeesLib" class="shield" target="_blank" title="Javadocs"><img alt="Javadocs" src="https://img.shields.io/badge/Javadocs-%20-A33333?logo=readthedocs&logoColor=FFFFFF" height="20" width="87"></a>
-			<a href="https://github.com/CasieBarieDev/KeesLib/releases" class="shield" target="_blank" title="Github"><img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/CasieBarieDev/KeesLib?color=red&label=Size&logo=Github" height="20" width="107"></a>
-			<a href="https://github.com/CasieBarieDev/KeesLib/blob/main/LICENSE" class="shield" target="_blank" title="Licence"><img alt="GitHub" src="https://img.shields.io/github/license/CasieBarieDev/KeesLib?label=License&logo=Github" height="20" width="123"></a><br><br>
-			<br>This is a library I use for my plugins to make my life easier. But you can use it too! How? Just take a look!<br><br>
+			KeesLib is a utility library I built to share common code across my Minecraft plugins. You can use it in your own plugins, too.<br><br>
 		</p>
-		<p class="gray">The library includes handy methods for checking Bukkit versions and verifying if certain dependencies are enabled on the server. Plus, it features an excellent UpdateChecker!</p>
+		<p class="gray">It can check Bukkit versions and enabled dependencies, and includes an update checker.</p>
 	</div>
 </div>
 <span id="down-button"><span></span></span>
@@ -110,7 +123,7 @@ form: true
 </div>
 <div class="row bottom" id="updatechecker">
 	<div class="left">
-		<img src="/assets/images/minecraft/uc.webp" class="modal-image" alt="Updatechecker Preview" width="2048" height="768"/>
+		<img src="/assets/images/projects/keeslib-update-checker.webp" class="modal-image" alt="Updatechecker Preview" width="2048" height="768"/>
 		<div class="modal">
 			<img class="modal-content" alt="" src="">
 			<div class="modal-caption"></div>
@@ -118,8 +131,9 @@ form: true
 	</div>
 	<div class="right text">
 		<h2>Update Checker</h2>
-		<p>This library also has a fancy Update Checker. The ultimate tool for ensuring your plugin users are always up-to-date with the latest features, bug fixes, and improvements.</p><br>
-		<p class="gray">Initialize the update checker and specify your Spigot resourceId: <pre><code class="lang-java copy">keeslib.updateChecker(@Nonnull Integer recourceId)</code></pre><br>
+		<p>The update checker lets users know when a new version of your plugin is available.</p><br>
+		<p class="gray">Initialize the update checker with your Spigot resource ID:</p>
+		<pre><code class="lang-java copy">keeslib.updateChecker(@Nonnull Integer resourceId)</code></pre><br>
 		<p class="gray">You can customize your update checker using these methods:</p><br>
 		<ul>
 			<li><pre><code class="lang-java copy">.setPluginName(@Nonnull String name)</code></pre></li>
@@ -133,36 +147,42 @@ form: true
 			<li><pre><code class="lang-java copy">.setPermission(@Nonnull String permission)</code></pre></li>
 			<li><pre><code class="lang-java copy">.setUpdateFrequency(@Nonnull Long frequency, @Nonnull TimeUnit timeUnit)</code></pre></li>
 		</ul>
-		<p class="gray">After the customization you start the updatechecker by calling: <pre><code class="lang-java copy">.startChecking();</code></pre>
+		<p class="gray">After customizing it, start the update checker:</p>
+		<pre><code class="lang-java copy">.startChecking();</code></pre>
 	</div>
-
 </div>
 
 <script>
-	if(document.readyState !== 'loading') {snipped();
-	} else {document.addEventListener('DOMContentLoaded', snipped);}
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', setupSnippets);
+	} else {
+		setupSnippets();
+	}
 
-	function snipped() {
+	async function setupSnippets() {
 		const snippets = document.querySelectorAll('.snippet');
-		snippets.forEach(snippet => snippet.style.display = 'none');
-		document.getElementById('build1').style.display = 'block';
-		document.getElementById('buildlangselect').addEventListener('change', function () {
-			snippets.forEach(snippet => snippet.style.display = 'none');
-			const selected = document.getElementById(this.value);
-			if(selected) {selected.style.display = 'block';}
-		});
+		const buildTool = document.getElementById('buildlangselect');
+		const showSelected = () => {
+			snippets.forEach(snippet => {
+				snippet.hidden = snippet.id !== buildTool.value;
+			});
+		};
+		showSelected();
+		buildTool.addEventListener('change', showSelected);
 
-		fetch("https://api.github.com/repos/CasieBarieDev/KeesLib/releases/latest")
-			.then(response => response.json())
-			.then(data => {
-				snippets.forEach(snippet => {
-					const code = snippet.querySelector('code');
-					if(code) {
-						code.textContent = code.textContent.replace('{VERSION}', data.tag_name);
-						Prism.highlightElement(code);
-					}
-				});
-			}
-		);
+		try {
+			const response = await fetch('https://api.github.com/repos/CasieBarieDev/KeesLib/releases/latest');
+			if (!response.ok) return;
+			const { tag_name: version } = await response.json();
+			if (typeof version !== 'string' || !version) return;
+
+			snippets.forEach(snippet => {
+				const code = snippet.querySelector('code');
+				code.textContent = code.textContent.replace('{VERSION}', version.replace(/^v(?=\d)/, ''));
+				window.Prism?.highlightElement(code);
+			});
+		} catch {
+			// Keep the version placeholder when the release lookup is unavailable.
+		}
 	}
 </script>

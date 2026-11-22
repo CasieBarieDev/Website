@@ -1,16 +1,27 @@
 ---
 title: Tic Tac Toe
 layout: default
-description: Play classic Tic-Tac-Toe in python.
+description: Play classic tic-tac-toe in the Python console.
+permalink: /projects/tic-tac-toe/
+portfolio:
+  category: games
+  order: 130
+  image: /assets/images/projects/tic-tac-toe.webp
+  summary: Python console game
+  status: Released
+redirect_from:
+  - /other/tictactoe/
+  - /other/tictactoe
 ---
 
 <div class="row top" id="top">
 	<div class="left">
-		<img src="/assets/images/other/tictactoe.webp" alt="Tic Tac Toe" fetchpriority="high" width="1024" height="1024"/>
+		<img src="{{ page.portfolio.image }}" alt="Tic Tac Toe" fetchpriority="high" width="1024" height="1024"/>
 	</div>
 	<div class="right text">
 		<h1>Tic Tac Toe</h1>
-		<a href="https://github.com/CasieBarie/TicTacToe" class="shield" target="_blank"><img src="https://img.shields.io/github/license/CasieBarie/TicTacToe?label=GitHub&logo=github&style=plastic" alt="Github" height="20" width="119"></a>
+		{% include project-badges.html portfolio=page.portfolio %}
+		<a href="https://github.com/CasieBarie/TicTacToe" class="shield" target="_blank"><img src="https://img.shields.io/github/license/CasieBarie/TicTacToe?label=GitHub&amp;logo=github&amp;style=flat&amp;labelColor=0b1016&amp;color=36405b&amp;logoColor=b9c9f6" alt="Github" height="20" width="119"></a>
 		<p>A beginner-friendly implementation of the classic two-player game, Tic-Tac-Toe. Developed as my very first Python project, this simple game allows players to enjoy a straightforward and nostalgic experience directly in the console.</p><br>
 		<p class="gray">This project serves as a great introduction to Python programming, showcasing fundamental concepts like loops, conditionals, and basic input/output operations. It's also a fun way to practice problem-solving and game logic development.</p><br>
 		<p class="gray">Please note, as this is an older project, it may have some bugs or limitations. Despite this, it remains a charming example of early coding efforts.</p><br>

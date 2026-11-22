@@ -2,16 +2,27 @@
 title: LightTiles
 layout: default
 description: An Android app that controls Philips Hue lights from the control panel.
+permalink: /projects/lighttiles/
+portfolio:
+  category: apps-web
+  order: 50
+  image: /assets/images/projects/lighttiles.webp
+  summary: Philips Hue quick controls
+  status: Personal · No Release
+redirect_from:
+  - /other/lighttiles/
+  - /other/lighttiles
 ---
 
 <div class="row top" id="top">
 	<div class="left">
-		<img src="/assets/images/other/lighttiles.webp" alt="LigthTiles" fetchpriority="high" width="1024" height="1024"/>
+		<img src="{{ page.portfolio.image }}" alt="LightTiles" fetchpriority="high" width="1024" height="1024"/>
 	</div>
 	<div class="right text">
 		<h1>LightTiles</h1>
-		<p>LightTiles is an intuitive Android app that enhances your quick settings by adding custom tiles to control your <a class="white" href="https://www.philips-hue.com/" target="_blank" title="Philips Hue">Philips Hue <i class="icon-arrow-up-right-from-square"></i></a> lights directly from the notification shade.</p><br>
-		<p class="gray">With LightTiles, you can easily turn your Hue lights on or off without needing to open any apps, making smart home lighting control faster and more convenient.</p>
+		{% include project-badges.html portfolio=page.portfolio %}
+		<p>LightTiles adds custom tiles to Android Quick Settings so you can control your <a class="white" href="https://www.philips-hue.com/" target="_blank" title="Philips Hue">Philips Hue <i class="icon-arrow-up-right-from-square"></i></a> lights directly from the notification shade.</p><br>
+		<p class="gray">I built it so I could turn my Hue lights on or off without opening the Hue app.</p>
 	</div>
 </div>
 <span id="down-button"><span></span></span>
@@ -26,7 +37,7 @@ description: An Android app that controls Philips Hue lights from the control pa
 			<li><b>No Additional App Needed</b><ul class="none"><li>Simplify your smart home experience by avoiding any app launches.</li></ul></li>
 		</ul>
 		<br>
-		<p>Please note that this app is not publicly available. Since Android has introduced more efficient ways to control your home, I do not plan to release it in the future.</p>
+		<p>I built this for personal use. Android now offers other ways to control smart home devices, so I don’t plan to release LightTiles.</p>
 	</div>
 	<div class="empty"></div>
 </div>

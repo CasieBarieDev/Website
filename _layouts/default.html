@@ -119,6 +119,8 @@
 
 	<link rel="stylesheet" href="/assets/css/default.css">
 	<link rel="stylesheet" href="/assets/font/casiebarie.css">
+	<link rel="stylesheet" href="{{ 'assets/css/header.css' | relative_url }}">
+	<link rel="stylesheet" href="{{ 'assets/css/footer.css' | relative_url }}">
 
 	{% if page.stylesheet %}
 	<link rel="stylesheet" href="{{ '/assets/css/' | append: page.stylesheet }}">
@@ -138,7 +140,7 @@
 <body>
 <div id="body">
 	{% include header.html %}
-	<main id="page" role="main">
+	<main id="page" role="main"{% if page.portfolio %} class="project-detail" data-category="{{ page.portfolio.category | escape }}"{% endif %}>
 		{{ content }}
 	</main>
 	{% include footer.html %}

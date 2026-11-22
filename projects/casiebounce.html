@@ -5,25 +5,34 @@ description: A Minecraft plugin that adds bouncy blocks for fun and creative mov
 highlight: true
 form: true
 script: casiebounce.js
+permalink: /projects/casiebounce/
+portfolio:
+  category: minecraft
+  order: 70
+  image: /assets/images/projects/casiebounce.webp
+  summary: Bouncy Minecraft blocks
+  status: Released
+redirect_from:
+  - /minecraft/casiebounce/
+  - /minecraft/casiebounce
 ---
 
 <div class="row top" id="top">
 	<div class="left">
-		<img src="/assets/images/minecraft/casiebounce.webp" alt="CasieBounce" fetchpriority="high" width="1001" height="1001"/>
+		<img src="{{ page.portfolio.image }}" alt="CasieBounce" fetchpriority="high" width="1001" height="1001"/>
 	</div>
 	<div class="right text">
 		<h1>CasieBounce</h1>
-		<p>
-			<a href="https://www.spigotmc.org/resources/.90967/" class="shield" title="Spigot Download" target="_blank"><img src="https://img.shields.io/spiget/downloads/90967?label=Download&logo=spigotmc&logoColor=FFFFFF" alt="Downloads" height="20" width="117"></a>
-			<a href="https://www.spigotmc.org/resources/.90967/updates/" class="shield" title="Spigot Updates" target="_blank"><img src="https://img.shields.io/spiget/version/90967?label=Version&logo=spigotmc&logoColor=FFFFFF" alt="Version" height="20" width="127"></a>
-			<a href="https://www.spigotmc.org/resources/.90967/reviews/" class="shield" title="Spigot Reviews" target="_blank"><img src="https://img.shields.io/spiget/stars/90967?label=Rating&logo=spigotmc&logoColor=FFFFFF" alt="Rating" height="20" width="103"></a>
-			<a href="https://github.com/CasieBarieDev/CasieBounce" class="shield" title="Github" target="_blank"><img src="https://img.shields.io/github/license/casiebariedev/CasieBounce?label=GitHub&logo=github" alt="Github" height="20" width="119"></a>
-			<a href="https://trello.com/b/f83jne7k/%E2%9C%A8-casiebounce-%E2%9C%A8" class="shield" title="Trello" target="_blank"><img src="https://img.shields.io/badge/Trello-%20-51e898?logo=trello&logoColor=white" alt="Trello" height="20" width="69"></a>
-			<a href="https://bstats.org/plugin/bukkit/CasieBounce/13216" class="shield" title="bStats" target="_blank"><img alt="bStats Servers" src="https://img.shields.io/bstats/servers/13216?color=pink&label=Servers&logo=bricks&logoColor=FFFFFF" height="20" width="87"></a>
-			<a href="https://bstats.org/plugin/bukkit/CasieBounce/13216" class="shield" title="bStats" target="_blank"><img alt="bStats Players" src="https://img.shields.io/bstats/players/13216?color=hotpink&label=Players&logo=bricks&logoColor=FFFFFF" height="20" width="83"></a>
-			<br><br><br>
-		</p>
-		<p>The innovative plugin that adds a whole new dimension to movement and exploration!<br><br></p>
+		{% include project-badges.html portfolio=page.portfolio %}
+		<div class="shield-group">
+			<a href="https://www.spigotmc.org/resources/.90967/" class="shield" title="Spigot Download" target="_blank"><img src="https://img.shields.io/spiget/downloads/90967?label=Download&amp;logo=spigotmc&amp;style=flat&amp;labelColor=0b1016&amp;color=57402c&amp;logoColor=f1bb81" alt="Downloads" height="20" width="117"></a>
+			<a href="https://www.spigotmc.org/resources/.90967/updates/" class="shield" title="Spigot Updates" target="_blank"><img src="https://img.shields.io/spiget/version/90967?label=Version&amp;logo=spigotmc&amp;style=flat&amp;labelColor=0b1016&amp;color=57402c&amp;logoColor=f1bb81" alt="Version" height="20" width="127"></a>
+			<a href="https://www.spigotmc.org/resources/.90967/reviews/" class="shield" title="Spigot Reviews" target="_blank"><img src="https://img.shields.io/spiget/stars/90967?label=Rating&amp;logo=spigotmc&amp;style=flat&amp;labelColor=0b1016&amp;color=57402c&amp;logoColor=f1bb81" alt="Rating" height="20" width="103"></a>
+			<a href="https://github.com/CasieBarieDev/CasieBounce" class="shield" title="Github" target="_blank"><img src="https://img.shields.io/github/license/casiebariedev/CasieBounce?label=GitHub&amp;logo=github&amp;style=flat&amp;labelColor=0b1016&amp;color=36405b&amp;logoColor=b9c9f6" alt="Github" height="20" width="119"></a>
+			<a href="https://bstats.org/plugin/bukkit/CasieBounce/13216" class="shield" title="bStats" target="_blank"><img alt="bStats Servers" src="https://img.shields.io/bstats/servers/13216?label=Servers&amp;logo=bricks&amp;style=flat&amp;labelColor=0b1016&amp;color=533648&amp;logoColor=eeb0d7" height="20" width="87"></a>
+			<a href="https://bstats.org/plugin/bukkit/CasieBounce/13216" class="shield" title="bStats" target="_blank"><img alt="bStats Players" src="https://img.shields.io/bstats/players/13216?label=Players&amp;logo=bricks&amp;style=flat&amp;labelColor=0b1016&amp;color=533648&amp;logoColor=eeb0d7" height="20" width="83"></a>
+		</div>
+		<p>The innovative plugin that adds a whole new dimension to movement and exploration!</p>
 		<p class="gray">
 			Designed for fun and excitement, CasieBounce allows players to experience the thrill of bouncing across terrains, leaping to incredible heights, and exploring the world like never before. Whether you’re building a parkour challenge, creating a fun mini-game, or just want to add some extra flair to your server, CasieBounce is the perfect addition.
 		</p>
@@ -86,33 +95,32 @@ script: casiebounce.js
 <div class="row" id="configuration">
 	<div class="empty"></div>
 	<div class="right text">
-		<h2>Configuartion</h2>
+		<h2>Configuration</h2>
 		<h3>General Settings</h3>
 		<ul class="gray">
 			<li><b>WorldGuardFlags: </b><code class="lang-java">Boolean</code><ul class="none"><li>Toggles the use of WorldGuard flags.</li><li>Once enabled, a full server restart is required to register the flags in WorldGuard.</li></ul></li>
 		</ul>
 		<br>
 		<h3>Default Settings</h3>
-		<p>These settings will get used when WorldGuard is not enabled or when the setting is not specified in the region:<br><br></p>
+		<p>These defaults apply when WorldGuard is disabled or when the region has no override:</p>
 		<ul class="gray">
 			<li><b>BounceForce: </b><code class="lang-java">Double</code><ul class="none"><li>Determines the amount of force applied when bouncing.</li></ul></li>
 			<li><b>BounceSound: </b><code class="lang-java">String</code><ul class="none"><li>Specifies the sound to play when bouncing.</li><li>Use <code>CUSTOM:</code> at the start for custom sounds.</li><li>Set to <code class="copy">NONE</code> to disable the sound.</li></ul></li>
 			<li><b>BouncePrize: </b><code class="lang-java">String</code><ul class="none"><li>Defines a prize for players each time they bounce.</li><li>Format: <code>MONEY@{VALUE}</code> or <code>ITEM@{VALUE}</code> or <code>PERMISSION@{VALUE}</code>.</li><li>Set to <code class="copy">NONE</code> to disable</li></ul></li>
 			<li><b>StopWhenCrouch: </b><code class="lang-java">Boolean</code><ul class="none"><li>Specifies whether bouncing stops when crouching.</li></ul></li>
 			<li><b>FallDamage: </b><code class="lang-java">Boolean</code><ul class="none"><li>Enables or disables fall damage while bouncing.</li></ul></li>
-			<li><b>DeathMessage: </b><code class="lang-java">String</code><ul class="none"><li>Sets the death message displayed when a player dies due to bouncing.</li><li><code>&</code> and <code>#hex</code> codes are supported)</li></ul></li>
+			<li><b>DeathMessage: </b><code class="lang-java">String</code><ul class="none"><li>Sets the death message displayed when a player dies due to bouncing.</li><li><code>&amp;</code> and <code>#hex</code> color codes are supported.</li></ul></li>
 			<li><b>RequirePermission: </b><code class="lang-java">Boolean</code><ul class="none"><li>Whether players need the permission <code class="copy">cb.bounce</code> to bounce.</li></ul></li>
 			<li><b>BounceBlocks: </b><code class="lang-java">List</code><ul class="none"><li>A list of blocks where players can bounce.</li></ul></li>
-			<li><b>IsBlockBlacklist: </b><code class="lang-java">Boolean</code><ul class="none"><li>Defines whether the BounceBlocks list acts as a blacklist.</li><li>When <code class="lang-java">true</code> players can bounce on every block except those in the BounceBlocks list.</li></ul></li>
+			<li><b>IsBlockBlacklist: </b><code class="lang-java">Boolean</code><ul class="none"><li>Defines whether the BounceBlocks list acts as a blacklist.</li><li>When set to <code class="lang-java">true</code>, players can bounce on every block except those in the BounceBlocks list.</li></ul></li>
 		</ul>
 	</div>
 </div>
 <div class="row bottom" id="placeholders">
 	<div class="left text">
 		<h2>Placeholders</h2>
-		<p>If you have <a href="https://www.spigotmc.org/resources/placeholderapi.6245/" target="_blank" title="PlaceholderAPI" class="white">PlaceholderAPI <i class="icon-arrow-up-right-from-square"></i></a> installed, you can enhance your server experience by accessing detailed bounce statistics through placeholders.<br><br></p>
-		<p class="gray">With these placeholders, you can display bounce-related data in creative and dynamic ways. For example, you can create leaderboards to highlight top bouncers, making it simple to track and celebrate player achievements across your server.<br><br></p>
-		<br>
+		<p>If you have <a href="https://www.spigotmc.org/resources/placeholderapi.6245/" target="_blank" title="PlaceholderAPI" class="white">PlaceholderAPI <i class="icon-arrow-up-right-from-square"></i></a> installed, you can enhance your server experience by accessing detailed bounce statistics through placeholders.</p>
+		<p class="gray">For example, you can display a leaderboard of the players who have bounced the most. Use the generator to build a placeholder and preview its output.</p>
 		<form>
 			<h3>Generator</h3>
 			<div class="form">

@@ -1,0 +1,62 @@
+---
+title: Super Slimme Apparaten
+layout: default
+permalink: /projects/super-slimme-apparaten/
+description: My Home Assistant extension for energy-aware EV charging, dishwasher scheduling, lighting, and heating control.
+portfolio:
+  category: home-assistant
+  order: 30
+  image: /assets/images/projects/ssa.webp
+  summary: Smart appliance control
+  status: Personal · No Release
+---
+
+<div class="row top" id="top">
+    <div class="left">
+        <img src="{{ page.portfolio.image }}" alt="Super Slimme Apparaten project artwork" fetchpriority="high" width="1254" height="1254">
+    </div>
+    <div class="right text">
+        <h1>{{ page.title | escape }}</h1>
+        {% include project-badges.html portfolio=page.portfolio %}
+        <p>Super Slimme Apparaten (SSA) is my own Home Assistant integration for smarter appliance planning and everyday home control. It combines EV charging, dishwasher scheduling, lighting, and heating in one system.</p><br>
+        <p class="gray">I built SSA to move beyond fixed schedules and separate automations. Instead of choosing exactly when an appliance should start, I can tell it when something needs to be ready. SSA uses electricity prices, expected solar production, and other planned demand to work out a suitable schedule.</p>
+    </div>
+</div>
+
+<span id="down-button"><span></span></span>
+
+<section class="row scrollto" id="smart-charging" aria-labelledby="smart-charging-heading">
+    <div class="left text">
+        <h2 id="smart-charging-heading">Ready When It Matters</h2>
+        <p>For EV charging, I set a ready-by time and let SSA choose the charging periods. It can split a charge into several favorable time slots before the deadline.</p><br>
+        <p class="gray">The dashboard shows the planned charging blocks, explains the choice, and suggests when a later ready-by time could reduce the estimated cost. I can also start charging immediately or pause it manually.</p>
+    </div>
+    <div class="empty"></div>
+</section>
+
+<section class="row" id="shared-energy" aria-labelledby="shared-energy-heading">
+    <div class="empty"></div>
+    <div class="right text">
+        <h2 id="shared-energy-heading">Planning Around Shared Energy</h2>
+        <p>The car and dishwasher share the same available solar power. SSA takes their existing reservations into account, so each appliance’s plan considers what the others are already expected to use.</p><br>
+        <p class="gray">Planning combines published electricity tariffs with price and solar forecasts. Because forecasts can change, SSA accounts for uncertainty in predicted prices and can update the schedule as new information becomes available.</p>
+    </div>
+</section>
+
+<section class="row" id="home-controls" aria-labelledby="home-controls-heading">
+    <div class="left text">
+        <h2 id="home-controls-heading">One Place for Everyday Control</h2>
+        <p>SSA runs inside Home Assistant and builds on its existing device connections. Alongside appliance planning, it provides lighting controls and temperature and preset controls for Toon heating.</p><br>
+        <p class="gray">For example, temporary heating switches Toon to Comfort until the target temperature is reached, for up to one hour, and then returns to the Home preset. The dashboard separately shows the heating setting, whether the boiler is heating, and whether hot water is active.</p>
+    </div>
+    <div class="empty"></div>
+</section>
+
+<section class="row bottom" id="in-use" aria-labelledby="in-use-heading">
+    <div class="empty"></div>
+    <div class="right text">
+        <h2 id="in-use-heading">Built for Daily Use</h2>
+        <p>SSA is a personal project that I use at home. Its core features are implemented, including appliance planning, shared solar allocation, charging history, lighting control, and Toon heating control.</p><br>
+        <p class="gray">Charging history shows recorded energy use, costs, and estimated savings compared with charging immediately. Status messages and notifications help explain what is happening when a device is waiting, finishes, or reports a problem. I continue to refine the experience through everyday use.</p>
+    </div>
+</section>

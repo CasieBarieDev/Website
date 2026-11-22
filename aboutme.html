@@ -1,7 +1,7 @@
 ---
 title: About Me
 layout: default
-description: Learn about CasieBarie, a developer specializing in Minecraft plugins, Discord bots, and other creative coding projects.
+description: Meet Cas Barnard, a software developer and theater technician from the Netherlands.
 form: true
 recaptcha: true
 script: aboutme.js
@@ -9,12 +9,13 @@ script: aboutme.js
 
 <div class="row top" id="top">
 	<div class="left">
-		<img src="/assets/images/aboutme/profilepic.webp" alt="Myself" fetchpriority="high" width="1800" height="1800"/>
+		<img class="about-photo" src="/assets/images/aboutme/profilepic.webp" alt="Myself" fetchpriority="high" width="1800" height="1800"/>
 	</div>
 	<div class="right text">
 		<h1>About Me</h1>
-		<p>Hello! I'm Cas Barnard, a <span id="age" content="calcage()"></span>-year-old software developer from the Netherlands, driven by a passion for technology and innovation. My journey into the world of coding started at a young age, and I've been captivated by the endless possibilities it offers ever since.</p><br>
-		<p class="gray">If you want to know more about me you can ask below or join the <a href="https://discord.gg/ZptCBHeHyg" target="_blank" title="Discord Server">Discord Server <i class="icon-arrow-up-right-from-square"></i></a>.</p>
+		<p>Hi, I’m Cas Barnard, a <span id="age"></span>-year-old software developer and theater technician from the Netherlands. I started coding when I was young, and I still enjoy turning a small idea into something people can play with or use.</p><br>
+		<p class="gray">I build games for friends and family, tools for my smart home, and the occasional Discord bot or Minecraft plugin. You can see what I’ve made on the <a href="{{ '/projects/' | relative_url }}">Projects page <i class="icon-arrow-up-right-from-square" aria-hidden="true"></i></a>.</p><br>
+		<p class="gray">If you have a question about me or one of my projects, use the form below or join the <a href="https://discord.gg/ZptCBHeHyg" target="_blank" title="Discord Server">Discord Server <i class="icon-arrow-up-right-from-square"></i></a>.</p>
 	</div>
 </div>
 <span id="down-button"><span></span></span>
@@ -27,7 +28,7 @@ script: aboutme.js
         <p class="gray">And through it all, I’m lucky to have an amazing girlfriend who supports me and shares many of my interests. Whether it’s work, hobbies, or everyday life, having someone by my side makes everything even better.</p>
 	</div>
 	<div class="right">
-		<img src="/assets/images/aboutme/billy.webp" alt="Billy" width="1254" height="1254"/>
+		<img class="about-photo billy-photo" src="/assets/images/aboutme/billy.webp" alt="Billy" width="1254" height="1254"/>
 	</div>
 </div>
 <div class="row bottom" id="contact">
@@ -53,26 +54,19 @@ script: aboutme.js
 			<div class="form">
 				<select class="input" id="topics" name="Topic" required>
 					<option value="" selected disabled hidden></option>
-                    <option value="This Website">This Website</option>
-                    <option value="About Me (CasieBarie)">About Me (CasieBarie)</option>
-                    <option value="Zuipse!">Zuipse!</option>
-					<optgroup label="Minecraft Projects">
-						<option value="CasieBounce">CasieBounce</option>
-						<option value="CasieAttractionOperate">CasieAttractionOperate</option>
-						<option value="Ziplines">Ziplines</option>
-						<option value="KeesLib">KeesLib</option>
-					</optgroup>
-					<optgroup label="Discord Bots">
-						<option value="KeesieBernie">KeesieBernie</option>
-						<option value="InOsso">InOsso</option>
-						<option value="LucasBot">LucasBot</option>
-					</optgroup>
-					<optgroup label="Other Projects">
-						<option value="Tic Tac Toe">Tic Tac Toe</option>
-						<option value="Hear The Painting">Hear The Painting</option>
-						<option value="LightTiles">LightTiles</option>
-						<option value="Secret Santa">Secret Santa</option>
-					</optgroup>
+					<option value="About Me (CasieBarie)">About Me (CasieBarie)</option>
+					{% assign projects = site.pages | where_exp: "project", "project.portfolio" | sort: "portfolio.order" %}
+					{% for category in site.data.project_categories %}
+						{% assign matching = projects | where: "portfolio.category", category[0] %}
+						{% if matching.size > 0 %}
+							<optgroup label="{{ category[1] | escape }}">
+								{% for project in matching %}
+									{% assign title = project.portfolio.title | default: project.title %}
+									<option value="{{ project.portfolio.contact_topic | default: title | escape }}">{{ title | escape }}</option>
+								{% endfor %}
+							</optgroup>
+						{% endif %}
+					{% endfor %}
 					<option value="Other">Other</option>
 				</select>
 				<label for="topics"><span class="required">* </span>Topic</label>

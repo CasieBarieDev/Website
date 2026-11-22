@@ -1,0 +1,58 @@
+---
+title: Projects
+layout: default
+permalink: /projects/
+description: Explore CasieBarie’s projects, including Zuipse!, interactive games, Home Assistant tools, and earlier Minecraft plugins and Discord bots.
+stylesheet: projects.css
+script: projects.js
+redirect_from:
+  - /discord/
+  - /discord
+  - /minecraft/
+  - /minecraft
+  - /other/
+  - /other
+---
+
+{% assign projects = site.pages | where_exp: "project", "project.portfolio" | sort: "portfolio.order" %}
+
+<div class="row top" id="top">
+  <div class="left">
+    <img src="/assets/images/projects/projects.webp" alt="" fetchpriority="high" width="1254" height="1254">
+  </div>
+  <div class="right text">
+    <h1>Projects</h1>
+    <p>A collection of things I’ve built, from games for friends and family to tools I use at home. Some started as a way to make a get-together more fun. Others grew out of everyday problems at home.</p><br>
+    <p class="gray">You’ll find party games and Home Assistant tools alongside Android apps, Discord bots, and Minecraft plugins. The project pages show what each one does and link to source code or downloads where available.</p><br>
+    <p class="gray">Browse the full collection below, or filter it by category.</p>
+  </div>
+</div>
+<span id="down-button"><span></span></span>
+
+<div class="portfolio scrollto" id="project-list">
+  <div class="portfolio-filters" role="group" aria-label="Project categories" hidden>
+    <button type="button" data-filter="all" aria-pressed="true">All</button>
+    {% for category in site.data.project_categories %}
+      {% assign matching = projects | where: "portfolio.category", category[0] %}
+      {% if matching.size > 0 %}
+        <button type="button" data-filter="{{ category[0] }}" aria-pressed="false">{{ category[1] | escape }}</button>
+      {% endif %}
+    {% endfor %}
+  </div>
+
+  <div class="projects">
+    {% for project in projects %}
+      {% assign details = project.portfolio %}
+      <a class="project" href="{{ project.url | relative_url }}" data-category="{{ details.category }}">
+        <div class="image">
+          <img src="{{ details.image }}" alt="" width="300" height="300">
+        </div>
+        <div class="project-text">
+          <h2>{{ details.title | default: project.title | escape }}</h2>
+          <p>{{ details.summary | escape }}</p>
+        </div>
+        {% include project-badges.html portfolio=details %}
+      </a>
+    {% endfor %}
+  </div>
+</div>

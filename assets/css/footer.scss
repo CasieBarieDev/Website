@@ -3,6 +3,8 @@
 
 @use "variables" as *;
 
+footer > svg > path { fill: $footer-bg-color; }
+
 #footer {
   background-color: $footer-bg-color;
   cursor: default;
@@ -47,7 +49,7 @@
     }
 
     // Social icon colors using SCSS map
-    $social-colors: (1: #e6edf3, 2: #db8522, 3: #cc181e, 4: #ec0075, 5: #51e898, 6: #5865F2);
+    $social-colors: (1: #e6edf3, 2: #db8522, 3: #cc181e, 4: #ec0075, 5: #5865F2);
     @each $i, $color in $social-colors {
       a:nth-child(#{$i}):hover,
       a:nth-child(#{$i}):hover .tooltip {

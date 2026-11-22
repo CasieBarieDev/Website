@@ -1,0 +1,7 @@
+{% assign badge_project = include.portfolio %}
+<div class="project-badges" data-category="{{ badge_project.category | escape }}">
+  <span class="project-category">{{ site.data.project_categories[badge_project.category] | escape }}</span>
+  {% if badge_project.status %}
+    <span class="project-status {{ badge_project.status | slugify }}">{{ badge_project.status | escape }}</span>
+  {% endif %}
+</div>

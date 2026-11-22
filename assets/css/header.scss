@@ -55,7 +55,7 @@ nav.site-nav {
       transform: translate(-50%, -50%);
 
       li {
-        font-size: clamp(1ex, 7vw, 10ex);
+        font-size: clamp(1ex, 10vw, 10ex);
         margin: 1.75vw 0;
         text-wrap: nowrap;
         transition: transform .5s ease-in-out;
