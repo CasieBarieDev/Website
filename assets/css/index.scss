@@ -3,6 +3,23 @@
 
 @use "variables" as *;
 
+.github-stats-heading {
+  align-items: baseline;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem 1.2rem;
+  justify-content: space-between;
+  margin-bottom: .7rem;
+
+  a {font-size: .8em;}
+}
+
+#github img {
+  display: block;
+  width: min(100%, 467px);
+  height: auto;
+}
+
 #enjoying > .text > ul {
   margin-block: 0 1rem;
 
@@ -25,16 +42,14 @@
     transition: border-color .2s ease-out, background .2s ease-out;
 
     .tooltip {
-      background: $badge-bg-color;
-      border-radius: 5px;
       font-size: .7em;
       font-weight: bold;
       left: 50%;
       opacity: 0;
-      padding: .2rem .4rem;
       pointer-events: none;
       position: absolute;
-      bottom: calc(100% + .25rem);
+      bottom: calc(100% + .4rem);
+      text-shadow: 0 1px 3px $bg-color-1, 0 0 6px $bg-color-1;
       transform: translate(-50%, .15rem);
       transition: opacity .2s ease-out, transform .2s ease-out;
       visibility: hidden;

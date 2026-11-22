@@ -3,62 +3,76 @@
 
 @use "variables" as *;
 
-footer > svg > path { fill: $footer-bg-color; }
+footer > svg {
+  display: block;
+  width: 100%;
+  height: min(11.8vw, 9rem);
+
+  path {fill: $footer-bg-color;}
+}
 
 #footer {
   background-color: $footer-bg-color;
-  cursor: default;
-  margin-top: -5px;
-  padding-bottom: 50px;
+  padding: 1rem 1rem 1.5rem;
+  text-align: center;
 
   .socials {
-    color: $gray-color;
-    padding-bottom: 10px;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    gap: clamp(.25rem, 1.5vw, 1.2rem);
+    margin: 0 auto .85rem;
 
     a {
-      animation: shine 5s infinite linear;
-      color: inherit;
-      display: inline-block;
-      font-size: 34px;
-      height: 40px;
-      margin: 0 8px;
-      opacity: .75;
+      display: grid;
+      place-items: center;
       position: relative;
-      text-align: center;
-      transition: all .5s;
-      width: 40px;
+      width: clamp(2.75rem, 11vw, 3.4rem);
+      height: clamp(2.75rem, 13vw, 3.4rem);
+      color: #999;
+      border-radius: .4rem;
+      text-decoration: none;
+      transition: color .2s ease;
 
-      .tooltip {
-        font-size: .5em;
-        font-weight: bold;
-        left: 50%;
-        opacity: 0;
-        position: absolute;
-        top: -10px;
-        transform: translateX(-50%);
-        transition: opacity .3s ease, top .3s ease;
-        visibility: hidden;
+      i {
+        font-size: clamp(1.75rem, 7vw, 2.15rem);
+        line-height: 1;
+        transition: transform .2s ease;
       }
 
-      &:hover .tooltip {
-        opacity: 1;
-        top: -30px;
-        visibility: visible;
+      .tooltip {
+        position: absolute;
+        inset-inline-start: 50%;
+        bottom: 100%;
+        opacity: 0;
+        visibility: hidden;
+        transform: translate(-50%, .2rem);
+        transition: opacity .2s ease, transform .2s ease, visibility .2s;
+        font: 600 .8rem monospace;
+        text-shadow: 0 1px 3px $footer-bg-color, 0 0 6px $footer-bg-color;
+        white-space: nowrap;
+        pointer-events: none;
+      }
+
+      &:focus-visible {
+        outline: 1px solid currentColor;
+        outline-offset: 1px;
+      }
+
+      &:is(:hover, :focus-visible) {
+        i {transform: translateY(-2px);}
+
+        .tooltip {
+          opacity: 1;
+          visibility: visible;
+          transform: translate(-50%, 0);
+        }
       }
     }
 
-    // Social icon colors using SCSS map
-    $social-colors: (1: #e6edf3, 2: #db8522, 3: #cc181e, 4: #ec0075, 5: #5865F2);
+    $social-colors: (1: #e6edf3, 2: #eb9c52, 3: #f47777, 4: #f67eb4, 5: #9a9fff, 6: #71b7ed);
     @each $i, $color in $social-colors {
-      a:nth-child(#{$i}):hover,
-      a:nth-child(#{$i}):hover .tooltip {
+      a:nth-child(#{$i}):is(:hover, :focus-visible) {
         color: $color;
-        text-shadow: 0 0 10px $color, 0 0 20px $color, 0 0 30px $color;
-      }
-
-      a:nth-child(#{$i}) {
-        animation-delay: #{.1 * $i}s;
       }
     }
   }
@@ -104,59 +118,50 @@ footer > svg > path { fill: $footer-bg-color; }
     &:hover {box-shadow: inset 0 0 7px #ffd277, 0 0 7px #77530a, 0 0 7px #ffd277;}
   }
 
-  .copyright {
-    color: $gray-color;
-    font-size: 15px;
-    font-weight: bolder;
-    margin-top: 10px;
-
-    .wrap div {
-      left: 0;
-      margin: auto;
-      position: absolute;
-      right: 0;
-      text-align: center;
-      width: fit-content;
-    }
-
-    .two {opacity: 0;}
-
-    .one,
-    .two {transition: opacity .5s linear;}
-
-    &:hover {
-      cursor: no-drop;
-
-      .one {opacity: 0;}
-      .two {opacity: 1;}
-    }
-  }
-
-  .madewith {
-    color: $gray-color;
-    font-size: 10px;
-    left: 0;
-    margin: 25px auto;
-    position: absolute;
-    right: 0;
-    text-align: center;
-    width: fit-content;
+  .footer-meta {
+    display: grid;
+    justify-items: center;
+    gap: .4rem;
+    box-sizing: border-box;
+    width: min(100%, 29rem);
+    margin-inline: auto;
+    border-top: 1px solid $panel-border-color;
+    padding: .75rem .5rem 0;
+    color: $font-color-gray;
+    font-size: .875rem;
 
     a {
-      white-space: nowrap;
-      color: $gray-color;
       display: inline-flex;
-      gap: 5px;
+      align-items: center;
+      gap: .25rem;
+      color: #898989;
+      font-size: .72rem;
+      text-decoration: none;
 
-      img {max-width: 10px;}
+      &:hover, &:focus-visible {color: $primary-color;}
+
+      img {opacity: .65;}
     }
   }
-}
 
-// Keyframes for animations
-@keyframes shine {
-  0%, 20%, 100% {transform: scale(1);}
-  10% {transform: scale(1.2);}
+  .copyright {
+    display: grid;
+    cursor: no-drop;
+
+    span {
+      grid-area: 1 / 1;
+      transition: opacity .5s linear;
+    }
+
+    span:last-child, &:hover span:first-child {opacity: 0;}
+    &:hover span:last-child {opacity: 1;}
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .donate {animation: none;}
+    .copyright span {transition: none;}
+    .socials :is(a, i, .tooltip) {transition: none;}
+  }
 }
 
 @keyframes shinen {

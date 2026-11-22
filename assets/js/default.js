@@ -27,15 +27,9 @@ function toggle() {
     } else {unlockScroll();}
 }
 
-function updateHeaderState() {
-    if(siteNav !== null) {
-        siteNav.classList.toggle('scrolled', window.scrollY > 8);
-    }
-}
-
 function syncMenuStateForViewport() {
     if(menuToggle === null) {return;}
-    if(window.matchMedia('(min-width: 769px)').matches && menuToggle.checked) {
+    if(window.matchMedia('(min-width: 885px)').matches && menuToggle.checked) {
         menuToggle.checked = false;
         if(!scrollEnabled) {unlockScroll();}
     }
@@ -163,10 +157,8 @@ if(downButton !== null) {
     });
 }
 
-window.addEventListener('scroll', updateHeaderState);
 window.addEventListener('resize', syncMenuStateForViewport);
 window.addEventListener('hashchange', () => {scrollToHashTarget();});
-updateHeaderState();
 syncMenuStateForViewport();
 
 if(window.location.hash.length > 1) {window.requestAnimationFrame(() => scrollToHashTarget());}
@@ -195,11 +187,10 @@ function copy() {
     document.querySelectorAll('.copy').forEach(copyElement => {
         const text = copyElement.cloneNode(true);
         text.querySelectorAll('*').forEach(child => child.remove());
-        const textContent = copyElement.dataset.copyText ?? text.textContent;
         copyElement.setAttribute('title', 'Copy');
         copyElement.style.cursor = 'pointer';
         copyElement.addEventListener('click', () => {
-            navigator.clipboard.writeText(textContent)
+            navigator.clipboard.writeText(copyElement.dataset.copyText ?? text.textContent)
                 .then(() => {copyElement.style.cursor = 'auto';})
                 .catch(err => {console.error('Failed to copy text:', err);}
             );

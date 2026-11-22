@@ -176,10 +176,15 @@ redirect_from:
 			const { tag_name: version } = await response.json();
 			if (typeof version !== 'string' || !version) return;
 
+			const release = version.replace(/^v(?=\d)/, '');
 			snippets.forEach(snippet => {
 				const code = snippet.querySelector('code');
-				code.textContent = code.textContent.replace('{VERSION}', version.replace(/^v(?=\d)/, ''));
-				window.Prism?.highlightElement(code);
+				code.dataset.copyText = (code.dataset.copyText ?? code.textContent).replaceAll('{VERSION}', release);
+				const tokens = document.createTreeWalker(code, NodeFilter.SHOW_TEXT);
+				while (tokens.nextNode()) {
+					const text = tokens.currentNode;
+					text.data = text.data.replaceAll('{VERSION}', release);
+				}
 			});
 		} catch {
 			// Keep the version placeholder when the release lookup is unavailable.
