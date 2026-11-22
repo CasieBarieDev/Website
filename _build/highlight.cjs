@@ -3,7 +3,7 @@ const path = require('node:path');
 const { JSDOM } = require('jsdom');
 
 const scriptPath = '/assets/js/highlight.js';
-const scriptSelector = `script[src="${scriptPath}"]`;
+const scriptSelector = `script[src="${scriptPath}"], script[src^="${scriptPath}?"]`;
 
 async function highlightSite(destination) {
     const prismFile = path.join(destination, scriptPath.slice(1));

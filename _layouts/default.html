@@ -1,3 +1,7 @@
+{%- assign asset_version = '' -%}
+{%- if jekyll.environment == 'production' -%}
+	{%- assign asset_version = site.time | date: '%s%L' | prepend: '?v=' -%}
+{%- endif -%}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -117,17 +121,17 @@
 		})();
 	</script>
 
-	<link rel="stylesheet" href="/assets/css/default.css">
-	<link rel="stylesheet" href="{{ 'assets/css/footer.css' | relative_url }}">
+	<link rel="stylesheet" href="/assets/css/default.css{{ asset_version }}">
+	<link rel="stylesheet" href="{{ 'assets/css/footer.css' | relative_url | append: asset_version }}">
 
 	{% if page.stylesheet %}
-	<link rel="stylesheet" href="{{ '/assets/css/' | append: page.stylesheet }}">
+	<link rel="stylesheet" href="{{ '/assets/css/' | append: page.stylesheet | append: asset_version }}">
 	{% endif %}
 	{% if page.highlight %}
-	<link rel="stylesheet" href="/assets/css/highlight.css">
+	<link rel="stylesheet" href="/assets/css/highlight.css{{ asset_version }}">
 	{% endif %}
 	{% if page.form %}
-	<link rel="stylesheet" href="/assets/css/form.css">
+	<link rel="stylesheet" href="/assets/css/form.css{{ asset_version }}">
 	{% endif %}
 	{% if page.recaptcha %}
 	<script src="https://www.google.com/recaptcha/enterprise.js?render=6LeHyfYrAAAAAKSqIGfSItFsaG8tjpcv6JP_rmDh" defer></script>
@@ -148,12 +152,12 @@
 		<li></li>
 	{% endfor %}
 </ul>
-<script src="/assets/js/default.js"></script>
+<script src="/assets/js/default.js{{ asset_version }}"></script>
 {% if page.highlight %}
-	<script src="/assets/js/highlight.js"></script>
+	<script src="/assets/js/highlight.js{{ asset_version }}"></script>
 {% endif %}
 {% if page.script %}
-	<script src="{{ page.script | prepend: '/assets/js/' }}"></script>
+	<script src="{{ page.script | prepend: '/assets/js/' | append: asset_version }}"></script>
 {% endif %}
 </body>
 </html>
