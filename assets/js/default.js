@@ -195,7 +195,7 @@ function copy() {
     document.querySelectorAll('.copy').forEach(copyElement => {
         const text = copyElement.cloneNode(true);
         text.querySelectorAll('*').forEach(child => child.remove());
-        const textContent = text.textContent;
+        const textContent = copyElement.dataset.copyText ?? text.textContent;
         copyElement.setAttribute('title', 'Copy');
         copyElement.style.cursor = 'pointer';
         copyElement.addEventListener('click', () => {

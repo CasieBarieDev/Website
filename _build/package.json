@@ -1,0 +1,7 @@
+{
+  "name": "casiebarie-website-build",
+  "private": true,
+  "devDependencies": {
+    "jsdom": "^29.0.0"
+  }
+}

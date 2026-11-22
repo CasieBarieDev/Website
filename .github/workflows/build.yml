@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout Repository
         id: checkout
@@ -32,6 +32,19 @@ jobs:
         run: bundle exec jekyll build
         env:
           JEKYLL_ENV: ${{ inputs.production && 'production' || 'development' }}
+
+      - name: Setup Node.js
+        if: ${{ inputs.production }}
+        uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+
+      - name: Highlight code in production HTML
+        if: ${{ inputs.production }}
+        id: highlight
+        run: |
+          npm ci --prefix _build
+          node _build/highlight.cjs
 
       - name: Minify JS/CSS/HTML
         if: ${{ inputs.production }}
@@ -64,6 +77,7 @@ jobs:
           echo "$([[ '${{ steps.pages.outcome }}' == 'success' ]] && echo '✅ Setup GitHub Pages' || echo '❌ Setup GitHub Pages')" >> $GITHUB_STEP_SUMMARY
           echo "$([[ '${{ steps.jekyll.outcome }}' == 'success' ]] && echo '✅ Jekyll Build' || echo '❌ Jekyll Build')" >> $GITHUB_STEP_SUMMARY
           if [ "${{ inputs.production }}" = "true" ]; then
+            echo "$([[ '${{ steps.highlight.outcome }}' == 'success' ]] && echo '✅ Highlight Code' || echo '❌ Highlight Code')" >> $GITHUB_STEP_SUMMARY
             echo "$([[ '${{ steps.minify.outcome }}' == 'success' ]] && echo '✅ Minify Assets' || echo '❌ Minify Assets')" >> $GITHUB_STEP_SUMMARY
             echo "$([[ '${{ steps.upload.outcome }}' == 'success' ]] && echo '✅ Upload Artifact' || echo '❌ Upload Artifact')" >> $GITHUB_STEP_SUMMARY
           fi
@@ -75,6 +89,7 @@ jobs:
           steps.ruby.outcome != 'success' ||
           steps.pages.outcome != 'success' ||
           steps.jekyll.outcome != 'success' ||
+          (inputs.production && steps.highlight.outcome != 'success') ||
           (inputs.production && steps.minify.outcome != 'success') ||
           (inputs.production && steps.upload.outcome != 'success')
         run: |

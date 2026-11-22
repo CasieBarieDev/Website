@@ -1,6 +1,7 @@
 ---
 ---
 
+@use 'sass:meta';
 @use 'variables' as *;
 @use 'project-badges';
 
@@ -641,3 +642,7 @@ a {
   0%, 100% {border-radius: 0; opacity: 1; transform: translateY(0) rotate(0deg);}
   100% {border-radius: 50%; opacity: 0; transform: translateY(-1000px) rotate(720deg);}
 }
+
+// Keep the cascade order of the former separate stylesheets.
+@include meta.load-css('icon-font');
+@include meta.load-css('site-navigation');
