@@ -27,8 +27,8 @@ redirect_from:
 		<p class="gray">Since this bot is designed for friends who speak Dutch, all the images shown on this page will be in Dutch.</p>
 	</div>
 </div>
-<span id="down-button"><span></span></span>
-<div class="row scrollto" id="features">
+{% include scroll-down.html target="features" %}
+<div class="row scrollto" id="features" tabindex="-1">
 	<div class="left text">
 		<h2>Features</h2>
 		<ul>
@@ -50,10 +50,13 @@ redirect_from:
 		</ul>
 	</div>
 	<div class="right">
-		<img src="/assets/images/projects/inosso-music-preview.webp" class="modal-image" alt="Music Preview" width="813" height="640"/>
-		<div class="modal">
-			<img class="modal-content" alt="" src="">
-			<div class="modal-caption"></div>
-		</div>
+		<button type="button" class="modal-trigger" aria-label="Enlarge Music Preview" aria-haspopup="dialog">
+			<img src="/assets/images/projects/inosso-music-preview.webp" class="modal-image" alt="Music Preview" width="813" height="640"/>
+		</button>
+		<dialog class="modal" aria-labelledby="music-preview-caption">
+			<button type="button" class="modal-close" aria-label="Close image">×</button>
+			<img class="modal-content" alt="">
+			<div class="modal-caption" id="music-preview-caption">Music Preview</div>
+		</dialog>
 	</div>
 </div>

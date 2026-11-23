@@ -35,8 +35,8 @@ redirect_from:
 		<p class="gray">It can check Bukkit versions and enabled dependencies, and includes an update checker.</p>
 	</div>
 </div>
-<span id="down-button"><span></span></span>
-<div class="row scrollto" id="setup">
+{% include scroll-down.html target="setup" %}
+<div class="row scrollto" id="setup" tabindex="-1">
 	<div class="left text">
 		<h2>Setup</h2>
 		<form>
@@ -123,11 +123,14 @@ redirect_from:
 </div>
 <div class="row bottom" id="updatechecker">
 	<div class="left">
-		<img src="/assets/images/projects/keeslib-update-checker.webp" class="modal-image" alt="Updatechecker Preview" width="2048" height="768"/>
-		<div class="modal">
-			<img class="modal-content" alt="" src="">
-			<div class="modal-caption"></div>
-		</div>
+		<button type="button" class="modal-trigger" aria-label="Enlarge Updatechecker Preview" aria-haspopup="dialog">
+			<img src="/assets/images/projects/keeslib-update-checker.webp" class="modal-image" alt="Updatechecker Preview" width="2048" height="768"/>
+		</button>
+		<dialog class="modal" aria-labelledby="update-checker-caption">
+			<button type="button" class="modal-close" aria-label="Close image">×</button>
+			<img class="modal-content" alt="">
+			<div class="modal-caption" id="update-checker-caption">Updatechecker Preview</div>
+		</dialog>
 	</div>
 	<div class="right text">
 		<h2>Update Checker</h2>

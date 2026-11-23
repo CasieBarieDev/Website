@@ -28,8 +28,8 @@ redirect_from:
 		<p class="gray">Note: The webpage is in Dutch and is not optimized for small screens.</p>
 	</div>
 </div>
-<span id="down-button"><span></span></span>
-<div class="row scrollto" id="webpage">
+{% include scroll-down.html target="webpage" %}
+<div class="row scrollto" id="webpage" tabindex="-1">
 	<div class="center text">
 		{% assign embedded_project_url = 'https://casiebarie.github.io/HearThePainting/' %}
 		{% capture frame_attributes %}width="100%" height="1800" title="School Project Webpage" style="border: none;"{% endcapture %}

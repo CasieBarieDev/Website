@@ -139,23 +139,21 @@ document.addEventListener('click', event => {
     const samePath = normalizedPath(targetUrl) === normalizedPath(currentUrl);
     const sameSearch = targetUrl.search === currentUrl.search;
     const sameHash = targetUrl.hash === currentUrl.hash;
+    if(link.id === 'down-button' && samePath && sameSearch && targetUrl.hash) {
+        const target = document.getElementById(targetUrl.hash.slice(1));
+        if(target === null) {return;}
+        event.preventDefault();
+        if(!sameHash) {history.pushState(history.state, '', targetUrl.hash);}
+        target.focus({preventScroll: true});
+        scrollToTarget(target, !reducedMotion.matches);
+        return;
+    }
+
     if(samePath && sameSearch && sameHash) {
         event.preventDefault();
         reloadFromTop();
     }
 }, true);
-
-const downButton = document.getElementById('down-button');
-if(downButton !== null) {
-    downButton.addEventListener('click', () => {
-       scrollToTarget(document.querySelector('.scrollto'));
-    });
-
-    window.addEventListener('scroll', () => {
-       if(window.scrollY >= 10) {downButton.style.opacity = '0';
-       } else {downButton.style.opacity = '1';}
-    });
-}
 
 window.addEventListener('resize', syncMenuStateForViewport);
 window.addEventListener('hashchange', () => {scrollToHashTarget();});
@@ -165,21 +163,47 @@ if(window.location.hash.length > 1) {window.requestAnimationFrame(() => scrollTo
 
 document.querySelectorAll('form, input, select, textarea').forEach(el => el.setAttribute('autocomplete', 'off'));
 
-document.querySelectorAll('.modal-image').forEach(image => {
-    const modal = image.nextElementSibling;
-    const modalImg = modal.querySelector('.modal-content');
-    const caption = modal.querySelector('.modal-caption');
-    modalImg.src = image.src;
-    caption.textContent = image.alt;
+const downButton = document.getElementById('down-button');
+if(downButton !== null) {
+    const updateDownButton = () => {
+        if(!scrollEnabled) {return;}
+        const bottom = downButton.getBoundingClientRect().bottom;
+        const startsInView = bottom + window.scrollY <= window.innerHeight;
+        downButton.classList.toggle('is-dismissed', window.scrollY >= 10 && (startsInView || bottom <= 0));
+    };
+    window.addEventListener('scroll', updateDownButton, {passive: true});
+    window.addEventListener('resize', updateDownButton);
+    window.addEventListener('pageshow', updateDownButton);
+    updateDownButton();
+}
 
-    image.addEventListener('click', () => {
-        modal.style.display = 'block';
-        toggle();
+document.querySelectorAll('.modal-trigger').forEach(trigger => {
+    const image = trigger.querySelector('.modal-image');
+    const modal = trigger.nextElementSibling;
+    const modalImg = modal.querySelector('.modal-content');
+
+    trigger.addEventListener('click', () => {
+        modalImg.src = image.src;
+        modal.showModal();
+        lockScroll();
     });
 
-    modal.addEventListener('click', () => {
-        modal.style.display = 'none';
-        toggle();
+    modal.addEventListener('click', event => {
+        if(event.target === modalImg && modalImg.naturalWidth > 0) {
+            // object-fit can leave empty space inside the image element.
+            const {left, top, width, height} = modalImg.getBoundingClientRect();
+            const scale = Math.min(width / modalImg.naturalWidth, height / modalImg.naturalHeight);
+            const imageWidth = modalImg.naturalWidth * scale;
+            const imageHeight = modalImg.naturalHeight * scale;
+            const insideImage = Math.abs(event.clientX - left - width / 2) <= imageWidth / 2 &&
+                Math.abs(event.clientY - top - height / 2) <= imageHeight / 2;
+            if(insideImage) {return;}
+        }
+        modal.close();
+    });
+    modal.addEventListener('close', () => {
+        unlockScroll();
+        trigger.focus({preventScroll: true});
     });
 });
 

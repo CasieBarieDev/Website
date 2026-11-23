@@ -166,26 +166,42 @@ body {
 }
 
 #down-button {
+  display: grid;
+  min-height: 3.25rem;
+  min-width: 44px;
+  place-items: center;
   position: relative;
-  top: -5em;
-  transition: all .3s;
+  top: -.35rem;
+  color: $font-color-gray;
+  text-decoration: none;
 
-  &:hover span {
-    cursor: pointer;
-    opacity: .8;
+  transition: opacity .2s ease, color .2s ease;
+
+  &:is(:hover, :focus-visible) {color: $font-color-highlight;}
+
+  &.is-dismissed:not(:focus-visible) {
+    opacity: 0;
+    pointer-events: none;
   }
 
-  span {
-    border-bottom: .3em solid $font-color-gray;
-    border-left: .3em solid $font-color-gray;
-    box-sizing: border-box;
-    height: 2em;
-    left: 50%;
-    transition: all .3s;
-    margin-left: -1.6vh;
-    position: absolute;
+  &:focus-visible {
+    outline: 2px solid $primary-color;
+    outline-offset: 2px;
+  }
+
+  .scroll-down-arrow {
+    width: .85rem;
+    height: .85rem;
+    border-bottom: .15rem solid currentColor;
+    border-left: .15rem solid currentColor;
     transform: rotate(-45deg);
-    width: 2em;
+  }
+
+  @media (prefers-reduced-motion: reduce) {transition: none;}
+
+  @media (min-width: 769px) {
+    top: -5rem;
+    margin-block-end: -3.25rem;
   }
 }
 
@@ -308,13 +324,20 @@ body {
 }
 
 #page.project-detail > .row:not(.top) > .text,
-#personal > .text {
+#personal > .text,
+.coll-content-text {
   > p, > ul, > ol {
     max-inline-size: 68ch;
     text-wrap: pretty;
   }
 
   > :is(ul, ol) > li + li { margin-block-start: .3em; }
+}
+
+.text {
+  .accent-green {color: #85dc9a;}
+  .accent-red {color: $close-color;}
+  .accent-blue {color: #92baff;}
 }
 
 // Headings
@@ -460,32 +483,75 @@ a {
 }
 
 // Modal styling
-.modal-image:hover,
-.modal:hover {cursor: pointer;}
+.modal-trigger {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: .75rem;
+  background: none;
+  cursor: pointer;
+}
 
 .modal {
-  background-color: rgba(0, 0, 0, 0.9);
-  display: none;
+  background: transparent;
+  border: 0;
+  box-sizing: border-box;
+  inset: 0;
   height: 100%;
-  left: 0;
-  overflow: hidden;
-  padding-top: 50px;
+  margin: 0;
+  max-width: none;
+  max-height: none;
+  padding: 4rem 1rem 1rem;
   position: fixed;
-  top: 0;
   width: 100%;
-  z-index: 50;
+
+  &::backdrop {background: rgba(0, 0, 0, .9);}
+
+  @media (prefers-reduced-motion: no-preference) {
+    transition: opacity .2s ease, display .2s allow-discrete, overlay .2s allow-discrete;
+
+    &:not([open]) {opacity: 0;}
+
+    &::backdrop {
+      transition: background-color .2s ease, display .2s allow-discrete, overlay .2s allow-discrete;
+    }
+
+    &:not([open])::backdrop {background-color: transparent;}
+  }
+}
+
+.modal-close {
+  position: absolute;
+  inset: .75rem .75rem auto auto;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: $font-color-gray;
+  font: 2rem/1 monospace;
+  cursor: pointer;
+
+  &:hover {color: $close-color;}
+
+  &:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+  }
 }
 
 .modal-content,
 .modal-caption {
-  animation: zoom .6s;
   display: block;
   margin: auto;
+
+  @media (prefers-reduced-motion: no-preference) {animation: zoom .6s;}
 }
 
 .modal-content {
-  max-width: 95vw;
-  max-height: 95vh;
+  max-width: 100%;
+  max-height: calc(100dvh - 7rem);
   width: auto;
   height: auto;
   object-fit: contain;
@@ -504,9 +570,19 @@ a {
 }
 
 // Collapsible
+.coll-heading {padding-bottom: 0;}
+
 .coll {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: start;
+  text-decoration: inherit;
   cursor: pointer;
-  padding-bottom: 0;
 
   &.coll-active .coll-icon::after {transform: rotate(180deg);}
   &.coll-active .coll-icon::before {transform: rotate(90deg) scale(0);}
@@ -557,8 +633,6 @@ a {
 
 // Media Queries for Mobile
 @media (max-width: 768px) {
-  #down-button { display: none; }
-
   #page > .row {
     box-sizing: border-box;
     width: min(92%, 42rem);

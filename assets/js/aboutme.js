@@ -68,17 +68,20 @@ function validateInput(e) {
     } checkForm();
 }
 
-function validateEmailDiscord() {
+function syncContactRequirements() {
     const emailValid = emailInput.value.trim() && emailInput.checkValidity();
     const discordValid = discordInput.value.trim() && discordInput.checkValidity();
     emailInput.required = !discordValid;
     discordInput.required = !emailValid;
-    validateInput({ target: this });
 }
 
-inputs.forEach(i => i.addEventListener("input", validateInput));
-emailInput.addEventListener("input", validateEmailDiscord);
-discordInput.addEventListener("input", validateEmailDiscord);
+inputs.forEach(input => {
+    input.addEventListener("input", event => {
+        if(input === emailInput || input === discordInput) {syncContactRequirements();}
+        validateInput(event);
+    });
+});
+syncContactRequirements();
 
 // Status message functions
 let statusClearTimeout = null;
@@ -97,6 +100,7 @@ function showStatus(message, color) {
 // Reset function
 function resetForm() {
     form.reset();
+    syncContactRequirements();
     inputs.forEach(i => validateInput({ target: i }));
     checkForm();
 }

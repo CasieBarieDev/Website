@@ -12,10 +12,11 @@ stylesheet: index.css
 		<h1>Welcome!</h1>
 		<p>I'm CasieBarie, a developer with a love for coding and creating innovative solutions. What started as a passion has grown into a fulfilling journey of learning and building projects that I am excited to share with you.</p>
 		<p class="gray">I invite you to explore my portfolio and see the projects I've been working on. Each one represents a step in my journey as a developer, filled with learning experiences and creative challenges.</p>
+		<p><a href="{{ '/projects/' | relative_url }}">View all projects <i class="icon-arrow-up-right-from-square" aria-hidden="true"></i></a></p>
 	</div>
 </div>
-<span id="down-button"><span></span></span>
-<div class="row scrollto" id="enjoying">
+{% include scroll-down.html target="enjoying" %}
+<div class="row scrollto" id="enjoying" tabindex="-1">
 	<div class="left text">
 		<h2>What I Enjoy Creating</h2>
 		<ul class="gray">
@@ -23,7 +24,6 @@ stylesheet: index.css
             <li><b>Smart Home Tools</b><br>I use Home Assistant to build integrations and dashboards that make my home easier to control and keep track of.</li>
             <li><b>Apps &amp; Web Projects</b><br>When I have an idea I want to try or a small problem to solve, I often turn it into an app or a website.</li>
 		</ul>
-        <a href="{{ '/projects/' | relative_url }}">View all projects <i class="icon-arrow-up-right-from-square" aria-hidden="true"></i></a>
 	</div>
 	<div class="empty"></div>
 </div>

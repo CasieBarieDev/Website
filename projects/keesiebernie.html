@@ -25,11 +25,11 @@ redirect_from:
 		<p class="gray">Stay tuned for updates as I progress towards releasing KeesieBernie.</p><br>
 	</div>
 </div>
-<span id="down-button"><span></span></span>
-<div class="row scrollto" id="termsofservice">
+{% include scroll-down.html target="termsofservice" %}
+<div class="row scrollto" id="termsofservice" tabindex="-1">
 	<div class="center-left text">
-		<h2 class="coll">Terms of Service <span class="coll-icon"></span></h2>
-		<div class="coll-content">
+		<h2 class="coll-heading"><button type="button" class="coll" aria-expanded="false" aria-controls="terms-content">Terms of Service <span class="coll-icon" aria-hidden="true"></span></button></h2>
+		<div class="coll-content" id="terms-content" inert>
 			<div class="coll-content-text">
 				<p class="gray">
 					Effective Date: 06-09-2024<br>
@@ -92,8 +92,8 @@ redirect_from:
 </div>
 <div class="row bottom" id="privacypolicy">
 	<div class="center-left text">
-		<h2 class="coll">Privacy Policy <span class="coll-icon"></span></h2>
-		<div class="coll-content">
+		<h2 class="coll-heading"><button type="button" class="coll" aria-expanded="false" aria-controls="privacy-content">Privacy Policy <span class="coll-icon" aria-hidden="true"></span></button></h2>
+		<div class="coll-content" id="privacy-content" inert>
 			<div class="coll-content-text">
 				<p class="gray">
 					Effective Date: 06-09-2024<br>
@@ -180,16 +180,13 @@ redirect_from:
 <script>
 	document.querySelectorAll('.coll').forEach(button => {
 		button.addEventListener('click', () => {
-			const content = button.nextElementSibling;
-			if(content.classList.contains('expanded')) {
-				content.style.maxHeight = null;
-				content.classList.remove('expanded');
-				button.classList.remove('coll-active');
-			} else {
-				content.style.maxHeight = content.scrollHeight + 'px';
-				content.classList.add('expanded');
-				button.classList.add('coll-active');
-			}
+			const content = document.getElementById(button.getAttribute('aria-controls'));
+			const expanded = button.getAttribute('aria-expanded') === 'false';
+			content.style.maxHeight = expanded ? content.scrollHeight + 'px' : '';
+			content.classList.toggle('expanded', expanded);
+			content.inert = !expanded;
+			button.classList.toggle('coll-active', expanded);
+			button.setAttribute('aria-expanded', String(expanded));
 		});
 	});
 </script>
