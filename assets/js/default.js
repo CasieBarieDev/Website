@@ -167,9 +167,14 @@ const downButton = document.getElementById('down-button');
 if(downButton !== null) {
     const updateDownButton = () => {
         if(!scrollEnabled) {return;}
+        const scrollY = window.scrollY;
+        if(scrollY < 10) {
+            downButton.classList.remove('is-dismissed');
+            return;
+        }
         const bottom = downButton.getBoundingClientRect().bottom;
-        const startsInView = bottom + window.scrollY <= window.innerHeight;
-        downButton.classList.toggle('is-dismissed', window.scrollY >= 10 && (startsInView || bottom <= 0));
+        const startsInView = bottom + scrollY <= window.innerHeight;
+        downButton.classList.toggle('is-dismissed', startsInView || bottom <= 0);
     };
     window.addEventListener('scroll', updateDownButton, {passive: true});
     window.addEventListener('resize', updateDownButton);

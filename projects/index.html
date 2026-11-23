@@ -15,6 +15,10 @@ redirect_from:
 ---
 
 {% assign projects = site.pages | where_exp: "project", "project.portfolio" | sort: "portfolio.order" %}
+{% assign statuses = projects | map: "portfolio" | map: "status" | compact | uniq | sort %}
+{% assign released_status = statuses | where_exp: "item", "item == 'Released'" %}
+{% assign other_statuses = statuses | where_exp: "item", "item != 'Released'" %}
+{% assign statuses = released_status | concat: other_statuses %}
 
 <div class="row top" id="top">
   <div class="left">
@@ -30,28 +34,61 @@ redirect_from:
 {% include scroll-down.html target="project-list" label="Browse projects" %}
 
 <div class="portfolio scrollto" id="project-list" tabindex="-1">
-  <div class="portfolio-filters" role="group" aria-label="Project categories" hidden>
-    <button type="button" data-filter="all" aria-pressed="true">All</button>
-    {% for category in site.data.project_categories %}
-      {% assign matching = projects | where: "portfolio.category", category[0] %}
-      {% if matching.size > 0 %}
-        <button type="button" data-filter="{{ category[0] }}" aria-pressed="false">{{ category[1] | escape }}</button>
+  <div class="portfolio-filters" hidden>
+    <div class="portfolio-filter-row" role="group" aria-label="Project filters">
+      <button type="button" data-filter="all" aria-pressed="true">All</button>
+      {% for category in site.data.project_categories %}
+        {% assign category_key = category[0] %}
+        {% assign matching = projects | where: "portfolio.category", category_key %}
+        {% if matching.size > 0 %}
+          <button type="button" data-filter="{{ category[0] }}" aria-pressed="false">
+            {% include project-category-icon.html category=category_key decorative=true %}
+            {{ category[1] | escape }}
+          </button>
+        {% endif %}
+      {% endfor %}
+      {% if statuses.size > 0 %}
+        <div class="portfolio-status-picker">
+          {% include project-status-icon.html status="all" decorative=true %}
+          {% for project_status in statuses %}
+            {% include project-status-icon.html status=project_status decorative=true hidden=true %}
+          {% endfor %}
+          <select class="portfolio-status-filter" aria-label="Project status">
+            <button type="button"><selectedcontent></selectedcontent></button>
+            <option value="all">
+              {% include project-status-icon.html status="all" decorative=true %}
+              <span>All statuses</span>
+            </option>
+            {% for project_status in statuses %}
+              <option value="{{ project_status | slugify }}">
+                {% include project-status-icon.html status=project_status decorative=true %}
+                <span>{{ project_status | escape }}</span>
+              </option>
+            {% endfor %}
+          </select>
+        </div>
       {% endif %}
-    {% endfor %}
+    </div>
   </div>
+  <p class="portfolio-empty gray" role="status" hidden>No projects match these filters.</p>
 
   <div class="projects">
     {% for project in projects %}
       {% assign details = project.portfolio %}
-      <a class="project" href="{{ project.url | relative_url }}" data-category="{{ details.category }}">
+      <a class="project" href="{{ project.url | relative_url }}" data-category="{{ details.category }}"{% if details.status %} data-status="{{ details.status | slugify }}"{% endif %}>
+        <div class="project-meta">
+          {% include project-category-icon.html category=details.category %}
+          {% if details.status %}
+            {% include project-status-icon.html status=details.status %}
+          {% endif %}
+        </div>
         <div class="image">
-          <img src="{{ details.image }}" alt="" width="300" height="300">
+          <img src="{{ details.image }}" alt="" width="300" height="300"{% if forloop.index > 5 %} loading="lazy"{% endif %}>
         </div>
         <div class="project-text">
           <h2>{{ details.title | default: project.title | escape }}</h2>
           <p>{{ details.summary | escape }}</p>
         </div>
-        {% include project-badges.html portfolio=details %}
       </a>
     {% endfor %}
   </div>

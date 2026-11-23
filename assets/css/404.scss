@@ -11,7 +11,7 @@
 }
 
 .description {
-  box-shadow: 10px 10px 20px black !important;
+  box-shadow: $panel-shadow;
   margin: auto;
   max-width: max-content;
 }

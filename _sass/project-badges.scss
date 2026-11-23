@@ -8,7 +8,10 @@
   gap: .3rem;
   margin: .25rem 0 .65rem;
 
-  span {
+  > span {
+    display: inline-flex;
+    align-items: center;
+    gap: .3rem;
     padding: .1rem .35rem;
     border: 1px solid currentColor;
     border-radius: .3rem;
@@ -18,7 +21,23 @@
     white-space: nowrap;
   }
 
-  .project-category { color: var(--category-color, #{$primary-color}); }
+  .project-card-icon {inline-size: .85rem; block-size: .85rem;}
+}
+
+.project-card-icon {
+  display: grid;
+  place-items: center;
+  inline-size: 1rem;
+  block-size: 1rem;
+
+  svg {display: block; inline-size: 100%;}
+  .icon-discord {font-size: inherit;}
+}
+
+.project-badges .project-category,
+.project-category-icon {color: var(--category-color, #{$primary-color});}
+
+:is(.project-badges, .project-meta, .portfolio-status-picker) {
   .in-development { color: $close-color; }
   .released { color: #85dc9a; }
   .personal-no-release { color: #dfbc91; }

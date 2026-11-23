@@ -1,0 +1,20 @@
+{% assign category_label = site.data.project_categories[include.category] %}
+<span class="project-card-icon project-category-icon" {% if include.decorative %}aria-hidden="true"{% else %}role="img" aria-label="{{ category_label | escape }}"{% endif %}>
+  {% if include.category == 'discord' %}
+    <i class="icon-discord" aria-hidden="true"></i>
+  {% else %}
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      {% case include.category %}
+        {% when 'games' %}
+          <path d="M7 7h10a4 4 0 0 1 3.9 3.2l1.1 5.2a2.5 2.5 0 0 1-4.3 2.2L15 15H9l-2.7 2.6A2.5 2.5 0 0 1 2 15.4l1.1-5.2A4 4 0 0 1 7 7Z M7 10v4m-2-2h4m6-1h.01m3 2h.01"/>
+        {% when 'home-assistant' %}
+          <path d="m3 11 9-8 9 8v9H3Z m9 6v-4m-2 2h4"/>
+        {% when 'apps-web' %}
+          <rect x="3" y="4" width="18" height="16" rx="2"/>
+          <path d="M3 8h18m-11 3-2 3 2 3m4-6 2 3-2 3"/>
+        {% when 'minecraft' %}
+          <path d="m12 3 8 4.5v9L12 21l-8-4.5v-9L12 3Zm0 9 8-4.5m-8 4.5L4 7.5m8 4.5v9"/>
+      {% endcase %}
+    </svg>
+  {% endif %}
+</span>

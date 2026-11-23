@@ -1,7 +1,13 @@
 {% assign badge_project = include.portfolio %}
 <div class="project-badges" data-category="{{ badge_project.category | escape }}">
-  <span class="project-category">{{ site.data.project_categories[badge_project.category] | escape }}</span>
+  <span class="project-category">
+    {% include project-category-icon.html category=badge_project.category decorative=true %}
+    {{ site.data.project_categories[badge_project.category] | escape }}
+  </span>
   {% if badge_project.status %}
-    <span class="project-status {{ badge_project.status | slugify }}">{{ badge_project.status | escape }}</span>
+    <span class="project-status {{ badge_project.status | slugify }}">
+      {% include project-status-icon.html status=badge_project.status decorative=true %}
+      {{ badge_project.status | escape }}
+    </span>
   {% endif %}
 </div>

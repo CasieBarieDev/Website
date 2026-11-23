@@ -1,0 +1,18 @@
+{% assign status = include.status | slugify %}
+<span class="project-card-icon {{ status }}" {% if include.decorative %}aria-hidden="true"{% else %}role="img" aria-label="{{ include.status | escape }}"{% endif %}{% if include.hidden %} hidden{% endif %}>
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    {% case status %}
+      {% when 'all' %}
+        <path d="M4 6h16M7 12h10m-7 6h4"/>
+      {% when 'released' %}
+        <circle cx="12" cy="12" r="9"/>
+        <path d="m8 12 3 3 5-6"/>
+      {% when 'in-development' %}
+        <circle cx="12" cy="12" r="9"/>
+        <path d="M12 7v5l3 2"/>
+      {% when 'personal-no-release' %}
+        <rect x="5" y="10" width="14" height="11" rx="2"/>
+        <path d="M8 10V7a4 4 0 0 1 8 0v3m-4 5v2"/>
+    {% endcase %}
+  </svg>
+</span>
